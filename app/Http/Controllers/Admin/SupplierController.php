@@ -9,6 +9,6 @@ class SupplierController extends Controller
 {
     public function SupplierAll()
     {
-        
+         return view('admin.supplier.all');
     }
 }
