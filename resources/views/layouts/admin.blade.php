@@ -15,7 +15,16 @@
     <link rel="stylesheet" href="{{ asset('admin/vendors/base/vendor.bundle.base.css') }}">
     <!-- endinject -->
     <!-- plugin css for this page -->
-    <link rel="stylesheet" href="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+    <link href="{{ asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="{{ asset('backend/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
+        type="text/css" />
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
@@ -37,7 +46,7 @@
 
             <div class="main-panel">
                 <div class="content-wrapper">
-                    @yield('content')
+                    @yield('admin')
                 </div>
             </div>
         </div>
@@ -47,13 +56,13 @@
     <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page-->
-    <script src="{{ asset('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+    {{-- <script src="{{ asset('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script> --}}
     <!-- End plugin js for this page-->
     <!-- inject:js -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    {{-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script> --}}
     <script src="{{ asset('admin/js/off-canvas.js') }}"></script>
     <script src="{{ asset('admin/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('admin/js/template.js') }}"></script>
@@ -65,31 +74,59 @@
     <script src="{{ asset('admin/js/dataTables.bootstrap4.js') }}"></script>
     <!-- End custom js for this page-->
 
+
+    <!-- jquery.vectormap map -->
+    <script src="{{ asset('backend/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}">
+    </script>
+    <script src="{{ asset('backend/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js') }}">
+    </script>
+
+    <!-- Required datatable js -->
+    {{-- <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script> --}}
+
+    <!-- Responsive examples -->
+    <script src="{{ asset('backend/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}">
+    </script>
+
+    <script src="{{ asset('backend/assets/js/pages/dashboard.init.js') }}"></script>
+
+    <!-- App js -->
+    {{-- <script src="{{ asset('backend/assets/js/app.js') }}"></script> --}}
+
+    <!-- Required datatable js -->
+    {{-- <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script> --}}
+
+    <!-- Datatable init js -->
+    <script src="{{ asset('backend/assets/js/pages/datatables.init.js') }}"></script>
+
     <script src="{{ asset('admin/js/jquery.cookie.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
-        @if(Session::has('message'))
-        var type = "{{ Session::get('alert-type','info') }}"
-        switch(type){
-           case 'info':
-           toastr.info(" {{ Session::get('message') }} ");
-           break;
-       
-           case 'success':
-           toastr.success(" {{ Session::get('message') }} ");
-           break;
-       
-           case 'warning':
-           toastr.warning(" {{ Session::get('message') }} ");
-           break;
-       
-           case 'error':
-           toastr.error(" {{ Session::get('message') }} ");
-           break; 
-        }
-        @endif 
-       </script>
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'error':
+                    toastr.error(" {{ Session::get('message') }} ");
+                    break;
+            }
+        @endif
+    </script>
 
     @livewireScripts
 </body>
