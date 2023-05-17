@@ -7,35 +7,15 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                aria-controls="ui-basic">
-                <i class="mdi mdi-account-multiple menu-icon"></i>
-                <span class="menu-title">Manage Suppliers</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('supplier.all') }}">All Suppliers</a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                aria-controls="ui-basic">
-                <i class="mdi mdi-account-multiple menu-icon"></i>
-                <span class="menu-title">Manage Units</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('unit.all') }}">All Units</a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
+            <a class="nav-link" href="{{ route('supplier.all') }}">
                 <i class="mdi mdi-view-headline menu-icon"></i>
-                <span class="menu-title">Form elements</span>
+                <span class="menu-title">Manage Suppliers</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('unit.all') }}">
+                <i class="mdi mdi-view-headline menu-icon"></i>
+                <span class="menu-title">Manage Units</span>
             </a>
         </li>
         <li class="nav-item">

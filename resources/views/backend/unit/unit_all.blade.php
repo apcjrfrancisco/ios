@@ -19,16 +19,16 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <a class="btn btn-info btn-rounded btn-fw" style="float:right" href="{{ route('supplier.add') }}">Add Unit</a> <br>
+                            <a class="btn btn-info btn-rounded btn-fw" style="float:right" href="{{ route('unit.add') }}">Add Unit</a> <br>
                             <h4 class="card-title">All Units Data </h4>
 
                             <table id="datatable" class="table table-bordered table-striped dt-responsive nowrap"
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th>Sl</th>
+                                        <th width="10%">Sl</th>
                                         <th>Unit Name</th>
-                                        <th>Action</th>
+                                        <th width="20%">Action</th>
 
                                 </thead>
 
