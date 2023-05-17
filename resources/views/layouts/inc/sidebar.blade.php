@@ -19,6 +19,18 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('category.all') }}">
+                <i class="mdi mdi-view-headline menu-icon"></i>
+                <span class="menu-title">Manage Categories</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('brand.all') }}">
+                <i class="mdi mdi-view-headline menu-icon"></i>
+                <span class="menu-title">Manage Brands</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="pages/charts/chartjs.html">
                 <i class="mdi mdi-chart-pie menu-icon"></i>
                 <span class="menu-title">Charts</span>

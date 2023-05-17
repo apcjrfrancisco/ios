@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
@@ -48,5 +50,27 @@ Route::controller(UnitController::class)->group(function(){
     Route::get('/unit/edit/{id}', 'UnitEdit')->name('unit.edit');
     Route::post('/unit/update', 'UnitUpdate')->name('unit.update');
     Route::get('/unit/delete/{id}', 'UnitDelete')->name('unit.delete');
+
+});
+
+//Category
+Route::controller(CategoryController::class)->group(function(){
+    Route::get('/category/all', 'CategoryAll')->name('category.all');
+    Route::get('/category/add', 'CategoryAdd')->name('category.add');
+    Route::post('/category/store', 'CategoryStore')->name('category.store');
+    Route::get('/category/edit/{id}', 'CategoryEdit')->name('category.edit');
+    Route::post('/category/update', 'CategoryUpdate')->name('category.update');
+    Route::get('/category/delete/{id}', 'CategoryDelete')->name('category.delete');
+
+});
+
+//Brands
+Route::controller(BrandController::class)->group(function(){
+    Route::get('/brand/all', 'BrandAll')->name('brand.all');
+    Route::get('/brand/add', 'BrandAdd')->name('brand.add');
+    // Route::post('/category/store', 'CategoryStore')->name('category.store');
+    // Route::get('/category/edit/{id}', 'CategoryEdit')->name('category.edit');
+    // Route::post('/category/update', 'CategoryUpdate')->name('category.update');
+    // Route::get('/category/delete/{id}', 'CategoryDelete')->name('category.delete');
 
 });
