@@ -21,7 +21,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <a class="btn btn-info btn-rounded btn-fw" style="float:right" href="">Add Supplier</a> <br>
+                            <a class="btn btn-info btn-rounded btn-fw" style="float:right" href="{{ route('supplier.add') }}">Add Supplier</a> <br>
                             <h4 class="card-title">All Suppliers Data </h4>
 
                             <table id="datatable" class="table table-bordered table-striped dt-responsive nowrap"

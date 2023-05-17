@@ -13,4 +13,10 @@ class SupplierController extends Controller
         $suppliers = Supplier::latest()->get();
         return view('backend.supplier.supplier_all', compact('suppliers'));
     }
+
+    public function SupplierAdd()
+    {
+        return view('backend.supplier.supplier_add');
+        
+    }
 }
