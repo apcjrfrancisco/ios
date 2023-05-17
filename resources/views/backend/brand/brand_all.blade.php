@@ -41,12 +41,12 @@
                                     @foreach ($brands as $key => $item)
                                         <tr class="text-center">
                                             <td> {{ $key + 1 }} </td>
-                                            <td> {{ $item->category_id }} </td>
+                                            <td> {{ $item['category']['category_name'] }} </td>
                                             <td> {{ $item->brand_name }} </td>
                                             <td> {{ $item->brand_slug }} </td>
                                             <td> <img src="{{ asset($item->brand_image) }}" style="width: 120px; height:120px;"> </td>
                                             <td>
-                                                <a href="{{ route('category.edit', $item->id) }}" class="btn btn-info sm" title="Edit Data"> <i
+                                                <a href="{{ route('brand.edit', $item->id) }}" class="btn btn-info sm" title="Edit Data"> <i
                                                         class="far fa-edit"></i>
                                                 </a>
 

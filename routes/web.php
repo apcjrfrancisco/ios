@@ -68,8 +68,8 @@ Route::controller(CategoryController::class)->group(function(){
 Route::controller(BrandController::class)->group(function(){
     Route::get('/brand/all', 'BrandAll')->name('brand.all');
     Route::get('/brand/add', 'BrandAdd')->name('brand.add');
-    // Route::post('/category/store', 'CategoryStore')->name('category.store');
-    // Route::get('/category/edit/{id}', 'CategoryEdit')->name('category.edit');
+    Route::post('/brand/store', 'BrandStore')->name('brand.store');
+    Route::get('/brand/edit/{id}', 'BrandEdit')->name('brand.edit');
     // Route::post('/category/update', 'CategoryUpdate')->name('category.update');
     // Route::get('/category/delete/{id}', 'CategoryDelete')->name('category.delete');
 

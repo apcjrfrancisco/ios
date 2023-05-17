@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Brand;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class BrandController extends Controller
 {
@@ -19,5 +22,38 @@ class BrandController extends Controller
     {
         $categories = Category::all();
         return view('backend.brand.brand_add', compact('categories'));
+    }
+
+    public function BrandStore(Request $request)
+    {
+        $image = $request->file('brand_image');
+        $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+
+        Image::make($image)->resize(300, 300)->save('upload/brands/' . $name_gen);
+        $save_url = 'upload/brands/' . $name_gen;
+
+        Brand::insert([
+            'category_id' => $request->category_id,
+            'brand_name' => $request->brand_name,
+            'brand_slug' => strtolower(str_replace(' ', '-', $request->brand_name)),
+            'brand_image' => $save_url,
+            'created_by' => Auth::user()->id,
+            'created_at' => Carbon::now(),
+
+        ]);
+
+        $notification = array(
+            'message' => 'Brand Created',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('brand.all')->with($notification);
+    }
+
+    public function BrandEdit($id)
+    {
+        $category = Category::all();
+        $brand = Brand::findOrFail($id);
+        return view('backend.brand.brand_edit', compact('brand', 'category'));
     }
 }

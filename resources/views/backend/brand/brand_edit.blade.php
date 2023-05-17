@@ -11,7 +11,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">Add Brand </h4>
+                            <h4 class="card-title">Edit Brand </h4>
 
                             <form method="post" action="{{ route('brand.store') }}" enctype="multipart/form-data"
                                 id="myForm">
@@ -22,7 +22,7 @@
                                     <div class="col-sm-10">
                                         <select name="category_id" class="form-select" aria-label="Default select example">
                                             <option disabled>Select One Category</option>
-                                            @foreach ($categories as $item)
+                                            @foreach ($category as $item)
                                             <option value="{{$item->id}}">{{ $item->category_name }}</option>
                                             @endforeach
                                         </select>
@@ -32,7 +32,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Brand Name</label>
                                     <div class="col-sm-10 form-group">
-                                        <input name="brand_name" class="form-control" type="text">
+                                        <input name="brand_name" value="{{ $brand->brand_name }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -50,7 +50,7 @@
                                     <label for="example-text-input" class="col-sm-2 col-form-label"> </label>
                                     <div class="col-sm-10 form-group">
                                         <img id="showImage" width="200px" class="rounded avatar-lg"
-                                            src="{{ url('upload/no_image.jpg') }}" alt="Card image cap">
+                                            src="{{ asset($brand->brand_image) }}" alt="Card image cap">
                                     </div>
                                 </div>
                                 <!-- end row -->
