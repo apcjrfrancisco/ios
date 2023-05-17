@@ -45,8 +45,8 @@ Route::controller(UnitController::class)->group(function(){
     Route::get('/unit/all', 'UnitAll')->name('unit.all');
     Route::get('/unit/add', 'UnitAdd')->name('unit.add');
     Route::post('/unit/store', 'UnitStore')->name('unit.store');
-    // Route::get('/supplier/edit/{id}', 'SupplierEdit')->name('supplier.edit');
-    // Route::post('/supplier/update', 'SupplierUpdate')->name('supplier.update');
-    // Route::get('/supplier/delete/{id}', 'SupplierDelete')->name('supplier.delete');
+    Route::get('/unit/edit/{id}', 'UnitEdit')->name('unit.edit');
+    Route::post('/unit/update', 'UnitUpdate')->name('unit.update');
+    Route::get('/unit/delete/{id}', 'UnitDelete')->name('unit.delete');
 
 });

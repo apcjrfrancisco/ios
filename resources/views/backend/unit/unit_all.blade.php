@@ -40,11 +40,11 @@
                                             <td> {{ $key + 1 }} </td>
                                             <td> {{ $item->unit_name }} </td>
                                             <td>
-                                                <a href="{{ route('supplier.edit', $item->id) }}" class="btn btn-info sm" title="Edit Data"> <i
+                                                <a href="{{ route('unit.edit', $item->id) }}" class="btn btn-info sm" title="Edit Data"> <i
                                                         class="far fa-edit"></i>
                                                 </a>
 
-                                                <a href="{{ route('supplier.delete', $item->id) }}" class="btn btn-danger sm" title="Delete Data"
+                                                <a href="{{ route('unit.delete', $item->id) }}" class="btn btn-danger sm" title="Delete Data"
                                                     id="delete"> <i class="far fa-trash-alt"></i> </a>
 
                                             </td>
