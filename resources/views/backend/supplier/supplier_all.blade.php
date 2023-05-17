@@ -41,7 +41,7 @@
                                 <tbody>
 
                                     @foreach ($suppliers as $key => $item)
-                                        <tr>
+                                        <tr class="text-center">
                                             <td> {{ $key + 1 }} </td>
                                             <td> {{ $item->supplier_name }} </td>
                                             <td> {{ $item->supplier_phone }} </td>
@@ -50,12 +50,12 @@
                                                 {{ $item->supplier_city }}, {{$item->supplier_province}}, {{$item->supplier_zipcode}} </td>
 
                                             <td>
-                                                <a href="#" class="btn btn-info sm" title="Edit Data"> <i
-                                                        class="fas fa-edit"></i>
+                                                <a href="{{ route('supplier.edit', $item->id) }}" class="btn btn-info sm" title="Edit Data"> <i
+                                                        class="far fa-edit"></i>
                                                 </a>
 
-                                                <a href="#" class="btn btn-danger sm" title="Delete Data"
-                                                    id="delete"> <i class="fas fa-trash-alt"></i> </a>
+                                                <a href="{{ route('supplier.delete', $item->id) }}" class="btn btn-danger sm" title="Delete Data"
+                                                    id="delete"> <i class="far fa-trash-alt"></i> </a>
 
                                             </td>
 

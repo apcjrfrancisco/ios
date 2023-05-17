@@ -31,9 +31,10 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -56,11 +57,11 @@
     <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page-->
-    {{-- <script src="{{ asset('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script> --}}
+    <script src="{{ asset('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
     <!-- End plugin js for this page-->
     <!-- inject:js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
     {{-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script> --}}
     <script src="{{ asset('admin/js/off-canvas.js') }}"></script>
@@ -93,7 +94,7 @@
     <script src="{{ asset('backend/assets/js/pages/dashboard.init.js') }}"></script>
 
     <!-- App js -->
-    {{-- <script src="{{ asset('backend/assets/js/app.js') }}"></script> --}}
+    <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
     <!-- Required datatable js -->
     {{-- <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
@@ -129,6 +130,10 @@
             }
         @endif
     </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script src="{{ asset('backend/assets/js/code.js') }}"></script>
 
     @livewireScripts
 </body>

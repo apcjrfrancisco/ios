@@ -11,15 +11,17 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">Add Supplier </h4>
+                            <h4 class="card-title">Edit Supplier </h4>
 
-                            <form method="post" action="{{ route('supplier.store') }}" id="myForm">
+                            <form method="post" action="{{ route('supplier.update') }}" id="myForm">
                                 @csrf
+
+                                <input type="hidden" name="id" value="{{ $supplier->id }}">
 
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Supplier Name</label>
                                     <div class="col-sm-10 form-group">
-                                        <input name="supplier_name" class="form-control" type="text">
+                                        <input name="supplier_name" value="{{ $supplier->supplier_name }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -27,7 +29,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Supplier Mobile No.</label>
                                     <div class="col-sm-10 form-group">
-                                        <input name="supplier_phone" class="form-control" type="text">
+                                        <input name="supplier_phone" value="{{ $supplier->supplier_phone }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -35,7 +37,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Supplier Email</label>
                                     <div class="col-sm-10 form-group">
-                                        <input name="supplier_email" class="form-control" type="text">
+                                        <input name="supplier_email" value="{{ $supplier->supplier_email }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -43,7 +45,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Address Line 1</label>
                                     <div class="col-sm-10 form-group">
-                                        <input name="supplier_address1" class="form-control" type="text">
+                                        <input name="supplier_address1" value="{{ $supplier->supplier_address1 }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -51,7 +53,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Address Line 2</label>
                                     <div class="col-sm-10 form-group">
-                                        <input name="supplier_address2" class="form-control" type="text">
+                                        <input name="supplier_address2" value="{{ $supplier->supplier_address2 }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -59,7 +61,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">City</label>
                                     <div class="col-sm-10 form-group">
-                                        <input name="supplier_city" class="form-control" type="text">
+                                        <input name="supplier_city" value="{{ $supplier->supplier_city }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -67,7 +69,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Province</label>
                                     <div class="col-sm-10 form-group">
-                                        <input name="supplier_province" class="form-control" type="text">
+                                        <input name="supplier_province" value="{{ $supplier->supplier_province }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -75,12 +77,12 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Postal Code</label>
                                     <div class="col-sm-10 form-group">
-                                        <input name="supplier_zipcode" class="form-control" type="text">
+                                        <input name="supplier_zipcode" value="{{ $supplier->supplier_zipcode }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
 
-                                <input type="submit" class="btn btn-info waves-effect waves-light" value="Add Supplier">
+                                <input type="submit" class="btn btn-info waves-effect waves-light" value="Update">
                             </form>
 
 
