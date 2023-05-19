@@ -13,9 +13,11 @@
 
                             <h4 class="card-title">Edit Brand </h4>
 
-                            <form method="post" action="{{ route('brand.store') }}" enctype="multipart/form-data"
+                            <form method="post" action="{{ route('brand.update') }}" enctype="multipart/form-data"
                                 id="myForm">
                                 @csrf
+
+                                <input type="hidden" name="id" value="{{ $brand->id }}">
 
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Category Name</label>
@@ -23,7 +25,9 @@
                                         <select name="category_id" class="form-select" aria-label="Default select example">
                                             <option disabled>Select One Category</option>
                                             @foreach ($category as $item)
-                                            <option value="{{$item->id}}">{{ $item->category_name }}</option>
+                                                <option value="{{ $item->id }}"
+                                                    {{ $item->id == $brand->category_id ? 'selected' : '' }}>
+                                                    {{ $item->category_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -32,7 +36,8 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Brand Name</label>
                                     <div class="col-sm-10 form-group">
-                                        <input name="brand_name" value="{{ $brand->brand_name }}" class="form-control" type="text">
+                                        <input name="brand_name" value="{{ $brand->brand_name }}" class="form-control"
+                                            type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -55,7 +60,7 @@
                                 </div>
                                 <!-- end row -->
 
-                                <input type="submit" class="btn btn-info waves-effect waves-light" value="Add Brand">
+                                <input type="submit" class="btn btn-info waves-effect waves-light" value="Update">
                             </form>
 
 
@@ -80,9 +85,6 @@
                     brand_name: {
                         required: true,
                     },
-                    brand_image: {
-                        required: true,
-                    },
                 },
                 messages: {
                     category_id: {
@@ -90,9 +92,6 @@
                     },
                     brand_name: {
                         required: 'Please Enter A Brand',
-                    },
-                    brand_image: {
-                        required: 'Please Enter An Image',
                     },
                 },
                 errorElement: 'span',

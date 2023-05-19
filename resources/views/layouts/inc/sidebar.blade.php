@@ -8,26 +8,32 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('supplier.all') }}">
-                <i class="mdi mdi-view-headline menu-icon"></i>
+                <i class="fas fa-user-friends menu-icon"></i>
                 <span class="menu-title">Manage Suppliers</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('unit.all') }}">
-                <i class="mdi mdi-view-headline menu-icon"></i>
+                <i class="far fa-clipboard menu-icon"></i>
                 <span class="menu-title">Manage Units</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('category.all') }}">
-                <i class="mdi mdi-view-headline menu-icon"></i>
+                <i class="fas fa-sitemap menu-icon"></i>
                 <span class="menu-title">Manage Categories</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('brand.all') }}">
-                <i class="mdi mdi-view-headline menu-icon"></i>
+                <i class="fas fa-server menu-icon"></i>
                 <span class="menu-title">Manage Brands</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('product.all') }}">
+                <i class="far fa-file-alt menu-icon"></i>
+                <span class="menu-title">Manage Products</span>
             </a>
         </li>
         <li class="nav-item">
