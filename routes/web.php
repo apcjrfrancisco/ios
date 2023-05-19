@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DefaultController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UnitController;
 
@@ -86,11 +87,21 @@ Route::controller(ProductController::class)->group(function(){
     Route::post('/product/update', 'ProductUpdate')->name('product.update');
     Route::get('/product/delete/{id}', 'ProductDelete')->name('product.delete');
 
+
+});
+//Purchase
+Route::controller(PurchaseController::class)->group(function(){
+    Route::get('/purchase/all', 'PurchaseAll')->name('purchase.all');
+    // Route::get('/product/add', 'ProductAdd')->name('product.add');
+    // Route::post('/product/store', 'ProductStore')->name('product.store');
+    // Route::get('/product/edit/{id}', 'ProductEdit')->name('product.edit');
+    // Route::post('/product/update', 'ProductUpdate')->name('product.update');
+    // Route::get('/product/delete/{id}', 'ProductDelete')->name('product.delete');
+
 });
 
 //Defaults
 Route::controller(DefaultController::class)->group(function(){
     Route::get('/get-brand', 'GetBrand')->name('get-brand'); 
-    
 });
 
