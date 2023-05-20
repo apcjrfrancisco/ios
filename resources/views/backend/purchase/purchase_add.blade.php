@@ -76,8 +76,8 @@
                                 <div class="col-md-4">
                                     <div class="md-3">
                                         <label class="col-form-label"></label>
-                                        <input type="submit" class="btn btn-dark btn-rounded btn-fw"
-                                            style="margin-top: 40px" value="Add More">
+                                        <i class="btn btn-dark btn-rounded btn-fw fas fa-plus-circle addeventmore"
+                                            style="margin-top: 40px"> Add More</i>
                                     </div>
                                 </div> <!-- end div -->
 
@@ -95,6 +95,7 @@
                                         <tr>
                                             <th>Category</th>
                                             <th>Brand</th>
+                                            <th>Product Name</th>
                                             <th>Quantity</th>
                                             <th>Unit Price</th>
                                             <th width="15%">Total Price</th>
@@ -108,7 +109,7 @@
 
                                     <tbody>
                                         <tr>
-                                            <td colspan="4"></td>
+                                            <td colspan="5"></td>
                                             <td>
                                                 <input type="text" name="estimated_amount" value="0"
                                                     id="estimated_amount" class="form-control estimated_amount" readonly
@@ -177,6 +178,51 @@
 
         </tr>
 
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on("click", ".addeventmore", function() {
+                var date = $('#date').val();
+                var purchase_no = $('#purchase_no').val();
+                var supplier_id = $('#supplier_id').val();
+                var category_id = $('#category_id').val();
+                var category_name = $('#category_id').find('option:selected').text();
+                var brand_id = $('#brand_id').val();
+                var brand_name = $('#brand_id').find('option:selected').text();
+                var product_id = $('#product_id').val();
+                var product_name = $('#product_id').find('option:selected').text();
+
+                if (date == '') {
+                    $.notify("Date is required", {globalPosition: 'top right', className:'error'});
+                    return false;
+                }
+                if (purchase_no == '') {
+                    $.notify("Purchase No. is required", {globalPosition: 'top right', className:'error'});
+                    return false;
+                }
+                if (supplier_id == '') {
+                    $.notify("Supplier is required", {globalPosition: 'top right', className:'error'});
+                    return false;
+                }
+                if (category_id == '') {
+                    $.notify("Category is required", {globalPosition: 'top right', className:'error'});
+                    return false;
+                }
+                if (brand_id == '') {
+                    $.notify("Brand is required", {globalPosition: 'top right', className:'error'});
+                    return false;
+                }
+                if (product_id == '') {
+                    $.notify("Product is required", {globalPosition: 'top right', className:'error'});
+                    return false;
+                }
+
+                var source = $("document-template").html();
+                var template = Handlebars.compile(source);
+
+            });
+        });
     </script>
 
     <script type="text/javascript">
