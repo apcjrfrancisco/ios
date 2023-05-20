@@ -48,12 +48,12 @@
                                             <td> {{ $key + 1 }} </td>
                                             <td> {{ $item->purchase_no }} </td>
                                             <td> {{ $item->date }} </td>
-                                            <td> {{ $item->supplier_id }} </td>
-                                            <td> {{ $item->category_id }} </td>
-                                            <td> {{ $item->brand_id }} </td>
+                                            <td> {{ $item['supplier']['supplier_name'] }} </td>
+                                            <td> {{ $item['category']['category_name'] }} </td>
+                                            <td> {{ $item['brand']['brand_name'] }} </td>
                                             <td> {{ $item->buying_qty }} </td>
-                                            <td> {{ $item->product_id }} </td>
-                                            <td> <span class="btn btn-waring">Pending</span> </td>
+                                            <td> {{ $item['product']['product_name'] }} </td>
+                                            <td> <span class="btn btn-warning">Pending</span> </td>
                                             <td>
                                                 <a href="{{ route('product.delete', $item->id) }}" class="btn btn-danger sm"
                                                     title="Delete Data" id="delete"> <i class="far fa-trash-alt"></i>
