@@ -92,7 +92,7 @@
 
                                 <table class="table-sm table-bordered" width="100%" style="border-color: #ddd">
                                     <thead>
-                                        <tr>
+                                        <tr class="text-center">
                                             <th>Category</th>
                                             <th>Brand</th>
                                             <th>Product Name</th>
@@ -113,7 +113,7 @@
                                             <td>
                                                 <input type="text" name="estimated_amount" value="0"
                                                     id="estimated_amount" class="form-control estimated_amount" readonly
-                                                    style="background-color: #ddd">
+                                                    style="background-color: #ddd;">
                                             </td>
                                             <td></td>
                                         </tr>
@@ -140,7 +140,7 @@
 
     <script id="document-template" type="text/x-handlebars-template">
 
-        <tr class="delete_add_more_item" id="delete_add_more_item">
+        <tr class="delete_add_more_item text-center" id="delete_add_more_item">
             <input type="hidden" name="date[]" value="@{{date}}">
             <input type="hidden" name="purchase_no[]" value="@{{purchase_no}}">
             <input type="hidden" name="supplier_id[]" value="@{{supplier_id}}">
@@ -218,10 +218,48 @@
                     return false;
                 }
 
-                var source = $("document-template").html();
+                var source = $("#document-template").html();
                 var template = Handlebars.compile(source);
+                var data = {
+                    date: date,
+                    purchase_no: purchase_no,
+                    supplier_id: supplier_id,
+                    category_id: category_id,
+                    category_name: category_name,
+                    brand_id: brand_id,
+                    brand_name: brand_name,
+                    product_id: product_id,
+                    product_name: product_name
+                };
+                var html = template(data);
+                $('#addRow').append(html);
 
             });
+
+            $(document).on("click", ".removeeventmore", function(event){
+                $(this).closest(".delete_add_more_item").remove();
+                totalAmountPrice();
+            });
+
+            $(document).on('keyup click', '.unit_price, .buying_qty', function(){
+                var unit_price = $(this).closest("tr").find("input.unit_price").val();
+                var qty = $(this).closest("tr").find("input.buying_qty").val();
+                var total = unit_price * qty;
+                $(this).closest("tr").find("input.buying_price").val(total);
+                totalAmountPrice();
+            });
+
+            function totalAmountPrice() {
+                var sum = 0;
+                $(".buying_price").each(function(){
+                    var value = $(this).val();
+                    if (!isNaN(value) && value.length != 0) {
+                        sum += parseFloat(value);
+                    }
+                });
+                $('#estimated_amount').val(sum);
+            }
+
         });
     </script>
 
