@@ -21,4 +21,14 @@ class Category extends Model
     {
         return $this->hasMany(Product::class, 'category_id', 'id');
     }
+
+    /**
+     * Get all of the brands for the Category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function brands(): HasMany
+    {
+        return $this->hasMany(Brand::class, 'category_id', 'id');
+    }
 }
