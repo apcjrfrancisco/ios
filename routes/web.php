@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\DefaultController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
-use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Frontend\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +24,16 @@ use App\Http\Controllers\Admin\UnitController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+//Frontend
+Route::controller(FrontendController::class)->group(function(){
+    Route::get('/', 'Index')->name('index'); 
 });
+
 
 Auth::routes();
 
@@ -95,6 +104,8 @@ Route::controller(PurchaseController::class)->group(function(){
     Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
     Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
     Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
+    Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
+    Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
 
 });
 
@@ -103,5 +114,16 @@ Route::controller(DefaultController::class)->group(function(){
     Route::get('/get-brand', 'GetBrand')->name('get-brand'); 
     Route::get('/get-category', 'GetCategory')->name('get-category'); 
     Route::get('/get-product', 'GetProduct')->name('get-product'); 
+});
+
+//Slider
+Route::controller(SliderController::class)->group(function(){
+    Route::get('/slider/all', 'SliderAll')->name('slider.all');
+    Route::get('/slider/add', 'SliderAdd')->name('slider.add');
+    Route::post('/slider/store', 'SliderStore')->name('slider.store');
+    Route::get('/slider/edit/{id}', 'SliderEdit')->name('slider.edit');
+    Route::post('/slider/update', 'SliderUpdate')->name('slider.update');
+    Route::get('/slider/delete/{id}', 'SliderDelete')->name('slider.delete');
+
 });
 

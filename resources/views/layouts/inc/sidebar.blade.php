@@ -7,7 +7,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('supplier.all') }}">
+            <a class="nav-link" id="nav1" href="{{ route('supplier.all') }}">
                 <i class="fas fa-user-friends menu-icon"></i>
                 <span class="menu-title">Manage Suppliers</span>
             </a>
@@ -37,18 +37,35 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <i class="mdi mdi-account menu-icon"></i>
+            <a class="nav-link" data-bs-toggle="collapse" href="#reports" aria-expanded="false" aria-controls="auth">
+                <i class="fa-solid fa-folder-open menu-icon"></i>
                 <span class="menu-title">Reports</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="reports">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('purchase.all') }}"> All Purchases </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('purchase.pending')}}"> Pending Purchases </a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a> --}}
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                <i class="fa-solid fa-gear menu-icon"></i>
+                <span class="menu-title">Site Settings</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('purchase.all') }}"> Manage Purchases </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('slider.all') }}">Sliders</a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('purchase.pending')}}"> Pending Purchases </a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a> --}}
                     </li>
                 </ul>
             </div>
