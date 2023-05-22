@@ -32,6 +32,8 @@ use App\Http\Controllers\Frontend\FrontendController;
 //Frontend
 Route::controller(FrontendController::class)->group(function(){
     Route::get('/', 'Index')->name('index'); 
+    Route::get('/categories', 'Categories')->name('categories');
+    Route::get('/categories/{category_slug}', 'Products')->name('products');
 });
 
 
