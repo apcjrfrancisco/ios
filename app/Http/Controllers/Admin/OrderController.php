@@ -7,6 +7,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
@@ -17,7 +18,7 @@ class OrderController extends Controller
         $end_date = $request->end_date;
 
         $orders = Order::whereDate('created_at', '>=', $start_date)
-        ->whereDate('created_at', '<=', $end_date)->get();
+            ->whereDate('created_at', '<=', $end_date)->get();
 
         return view('backend.orders.orders_all', compact('orders'));
     }
@@ -64,5 +65,20 @@ class OrderController extends Controller
             );
             return redirect()->back()->with($notification);
         }
+    }
+
+    public function ViewInvoice(int $orderId)
+    {
+        $order = Order::findOrFail($orderId);
+        return view('backend.invoice.generate-invoice', compact('order'));
+    }
+
+    public function GenerateInvoice(int $orderId)
+    {
+        $order = Order::findOrFail($orderId);
+        $data = ['order' => $order];
+        $pdf = Pdf::loadView('backend.invoice.generate-invoice', $data);
+        $todayDate = Carbon::now()->format('m-d-Y');
+        return $pdf->download('TM-invoice-'.$order->name.'-'.$todayDate.'.pdf');
     }
 }

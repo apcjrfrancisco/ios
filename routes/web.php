@@ -157,6 +157,9 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/orders/{orderId}', 'OrderShow')->name('orders.view');
         Route::get('/filter', 'FilterOrder')->name('filter.order');
         Route::put('/orders/{orderId}', 'UpdateOrderStatus')->name('order.status');
+        Route::get('/invoice/{orderId}/generate', 'GenerateInvoice')->name('invoice.generate');
+        Route::get('/invoice/{orderId}', 'ViewInvoice')->name('invoice.view');
+        
         
     });
 });
