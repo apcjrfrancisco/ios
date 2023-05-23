@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -151,12 +152,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
 
     //Orders
-    Route::controller(SliderController::class)->group(function () {
+    Route::controller(AdminOrderController::class)->group(function () {
         Route::get('/orders', 'Orders')->name('orders');
-        Route::get('/slider/add', 'SliderAdd')->name('slider.add');
-        Route::post('/slider/store', 'SliderStore')->name('slider.store');
-        Route::get('/slider/edit/{id}', 'SliderEdit')->name('slider.edit');
-        Route::post('/slider/update', 'SliderUpdate')->name('slider.update');
-        Route::get('/slider/delete/{id}', 'SliderDelete')->name('slider.delete');
+        Route::get('/orders/{orderId}', 'OrderShow')->name('orders.view');
+        Route::get('/filter', 'FilterOrder')->name('filter.order');
+        Route::put('/orders/{orderId}', 'UpdateOrderStatus')->name('order.status');
+        
     });
 });
