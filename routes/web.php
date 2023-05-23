@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,12 @@ Route::controller(FrontendController::class)->group(function(){
     Route::get('/categories', 'Categories')->name('categories');
     Route::get('/categories/{category_slug}', 'Products')->name('products');
     Route::get('/categories/{category_slug}/{product_slug}', 'ProductView')->name('productView');
+    Route::get('/wishlist', 'Wishlist')->name('wishlist');
+});
+
+//Wishlist
+Route::controller(WishlistController::class)->group(function(){
+    Route::get('/wishlist', 'Wishlist')->name('wishlist');
 });
 
 

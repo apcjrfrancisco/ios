@@ -24,7 +24,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('wishlist') }}">
                                 <i class="fa fa-heart"></i> Wishlist (0)
                             </a>
                         </li>
@@ -91,27 +91,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('categories') }}">All Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">New Arrivals</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Featured Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Electronics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Fashions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Accessories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Appliances</a>
                     </li>
                 </ul>
             </div>
