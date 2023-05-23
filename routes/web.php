@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -41,6 +42,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/categories/{category_slug}', 'Products')->name('products');
     Route::get('/categories/{category_slug}/{product_slug}', 'ProductView')->name('productView');
     Route::get('/thank-you', 'ThankYou')->name('thank-you');
+    
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -159,7 +161,12 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::put('/orders/{orderId}', 'UpdateOrderStatus')->name('order.status');
         Route::get('/invoice/{orderId}/generate', 'GenerateInvoice')->name('invoice.generate');
         Route::get('/invoice/{orderId}', 'ViewInvoice')->name('invoice.view');
-        
-        
+    });
+
+    //Setting
+    Route::controller(SettingController::class)->group(function () {
+        Route::get('/footer/setting', 'FooterSetting')->name('footer.setting');
+        Route::get('/footer/add/{id}', 'FooterAdd')->name('footer.add');
+        Route::post('/footer/store', 'FooterStore')->name('footer.store');
     });
 });
