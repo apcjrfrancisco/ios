@@ -67,13 +67,23 @@
                                             </div>
                                         </div>
                                         <div class="col-md-1 my-auto">
-                                            <label class="price">${{ $item->product->selling_price * $item->quantity }} </label>
+                                            <label class="price">${{ $item->product->selling_price * $item->quantity }}
+                                            </label>
                                         </div>
                                         <div class="col-md-2 col-5 my-auto">
                                             <div class="remove">
-                                                <a href="" class="btn btn-danger btn-sm">
-                                                    <i class="fa fa-trash"></i> Remove
-                                                </a>
+                                                <button type="button" wire:loading.attr="disabled"
+                                                    wire:click="removeCartItem({{ $item->id }})"
+                                                    class="btn btn-danger btn-sm">
+                                                    <span wire:loading.remove
+                                                        wire:target="removeCartItem({{ $item->id }})">
+                                                        <i class="fa fa-trash"></i> Remove
+                                                    </span>
+                                                    <span wire:loading
+                                                        wire:target="removeCartItem({{ $item->id }})">
+                                                        <i class="fa fa-trash"></i> Removing...
+                                                    </span>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

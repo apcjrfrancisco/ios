@@ -56,6 +56,19 @@ class CartShow extends Component
         }
     }
 
+    public function removeCartItem(int $cartId)
+    {
+        Cart::where('user_id', Auth::user()->id)->where('id', $cartId)->delete();
+
+        $this->emit('CartAddedUpdated');
+
+        $this->dispatchBrowserEvent('message', [
+            'text' => 'Item Removed',
+            'type' => 'warning',
+            'status' => 200
+        ]);
+    }
+
     public function render()
     {
         $this->cart = Cart::where('user_id', Auth::user()->id)->get();
