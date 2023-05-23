@@ -25,13 +25,13 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('wishlist') }}">
-                                <i class="fa fa-heart"></i> Wishlist (0)
+                                <i class="fa fa-heart"></i> Wishlist (<livewire:frontend.wishlist-count />)
                             </a>
                         </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}"><i class="fa-sharp fa-solid fa-door-open"></i> {{ __('Login') }}</a>
                                 </li>
                             @endif
 

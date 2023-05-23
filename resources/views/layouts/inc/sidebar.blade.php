@@ -71,15 +71,9 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
-                <i class="mdi mdi-chart-pie menu-icon"></i>
-                <span class="menu-title">Charts</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
-                <i class="mdi mdi-grid-large menu-icon"></i>
-                <span class="menu-title">Tables</span>
+            <a class="nav-link" href="{{ route('index') }}">
+                <i class="fas fa-home menu-icon"></i>
+                <span class="menu-title">Go To eTorrecamps</span>
             </a>
         </li>
         <li class="nav-item">

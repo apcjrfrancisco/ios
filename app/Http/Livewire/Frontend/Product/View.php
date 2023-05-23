@@ -12,6 +12,7 @@ class View extends Component
 
     public $category;
     public $product;
+    public $quantityCount = 1;
 
     public function mount($category, $product)
     {
@@ -46,6 +47,7 @@ class View extends Component
                     'product_id' => $productId,
                     'created_at' => Carbon::now()
                 ]);
+                $this->emit('wishlistAddedUpdated');
 
                 $this->dispatchBrowserEvent('message', [
                     'text' => 'Added in Wishlist',
@@ -64,5 +66,18 @@ class View extends Component
             ]);
             return redirect()->route('login');
         }
+    }
+
+    public function decrementQuantity()
+    {
+        if ($this->quantityCount > 1) {
+            $this->quantityCount--;
+        }
+    }
+
+    public function incrementQuantity()
+    {
+
+        $this->quantityCount++;
     }
 }
