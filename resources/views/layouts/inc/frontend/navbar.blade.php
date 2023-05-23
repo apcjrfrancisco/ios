@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 my-auto d-none d-sm-none d-md-block d-lg-block">
-                    <h5 class="brand-name">eTorrecamps</h5>
+                    <h5 class="brand-name"><img src="{{ asset('upload/tmlogo.png') }}" width="40px" alt=""> eTorrecamps</h5>
                 </div>
                 <div class="col-md-5 my-auto">
                     <form role="search">
@@ -48,6 +48,9 @@
 
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @if (Auth::user()->role_as == '1')
+                                    <li><a class="dropdown-item" href="{{ url('/admin/dashboard') }}"><i class="fas fa-gauge"></i> Go To Dashboard</a></li>
+                                    @endif
                                     <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
                                     <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> My Orders</a>
                                     </li>

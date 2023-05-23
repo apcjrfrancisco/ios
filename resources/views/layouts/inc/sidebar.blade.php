@@ -46,8 +46,8 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('purchase.all') }}"> All Purchases </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('purchase.pending')}}"> Pending Purchases </a></li>
-                    {{-- <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('orders') }}"> All Orders </a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a> --}}
                     </li>
                 </ul>

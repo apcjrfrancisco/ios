@@ -1,0 +1,115 @@
+<?php
+
+namespace App\Http\Livewire\Frontend\Checkout;
+
+use App\Models\Cart;
+use App\Models\Order;
+use Livewire\Component;
+use App\Models\OrderItem;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+
+class CheckoutShow extends Component
+{
+    public $carts, $totalProductAmount = 0;
+
+    public $name, $email, $phone, $address1, $address2, $city, $province, $zip_code, $payment_mode = NULL;
+
+    public function rules()
+    {
+        return [
+            'name' => 'required|string|min:3|max:255',
+            'email' => 'required|email|min:3|max:255',
+            'phone' => 'required|string|min:11|max:16',
+            'address1' => 'required|string|min:3|max:255',
+            'address2' => 'string|min:3|max:255',
+            'city' => 'required|string|min:3|max:255',
+            'province' => 'required|string|min:3|max:255',
+            'zip_code' => 'required|string|min:3|max:5',
+        ];
+    }
+
+    public function placeOrder()
+    {
+        $this->validate();
+
+        $order = Order::create([
+            'user_id' => Auth::user()->id,
+            'tracking_no' => 'TM-' . Str::random(10),
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'address1' => $this->address1,
+            'address2' => $this->address2,
+            'city' => $this->city,
+            'province' => $this->province,
+            'zip_code' => $this->zip_code,
+            'status_message' => 'in progress',
+            'payment_mode' => $this->payment_mode,
+            'created_at' => Carbon::now(),
+        ]);
+
+        foreach ($this->carts as $item) {
+
+            $orderItems = OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $item->product_id,
+                'quantity' => $item->quantity,
+                'price' => $item->product->selling_price,
+                'total_price' => $item->product->selling_price * $item->quantity,
+            ]);
+
+            if ($item->product_id != NULL) {
+                $item->product()->where('id', $item->product_id)->decrement('quantity', $item->quantity);
+            } 
+        }
+        return $order;
+    }
+
+    public function codOrder()
+    {
+        $this->payment_mode = 'Cash on Delivery';
+        $codOrder = $this->placeOrder();
+
+        if ($codOrder) {
+
+            Cart::where('user_id', Auth::user()->id)->delete();
+
+            $this->dispatchBrowserEvent('message', [
+                'text' => 'Order Placed!',
+                'type' => 'success',
+                'status' => 200
+            ]);
+            return redirect()->to('thank-you');
+        } else {
+            $this->dispatchBrowserEvent('message', [
+                'text' => 'Something Went Wrong',
+                'type' => 'error',
+                'status' => 404
+            ]);
+        }
+    }
+
+    public function totalProductAmount()
+    {
+        $this->totalProductAmount = 0;
+        $this->carts = Cart::where('user_id', Auth::user()->id)->get();
+        foreach ($this->carts as $item) {
+            $this->totalProductAmount = +$item->product->selling_price * $item->quantity;
+        }
+        return $this->totalProductAmount;
+    }
+
+    public function render()
+    {
+
+        $this->name = Auth::user()->name;
+        $this->email = Auth::user()->email;
+
+        $this->totalProductAmount = $this->totalProductAmount();
+        return view('livewire.frontend.checkout.checkout-show', [
+            'totalProductAmount' => $this->totalProductAmount
+        ]);
+    }
+}

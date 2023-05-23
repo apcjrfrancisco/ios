@@ -12,7 +12,9 @@ use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\WishlistController;
 
 /*
@@ -37,6 +39,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/categories', 'Categories')->name('categories');
     Route::get('/categories/{category_slug}', 'Products')->name('products');
     Route::get('/categories/{category_slug}/{product_slug}', 'ProductView')->name('productView');
+    Route::get('/thank-you', 'ThankYou')->name('thank-you');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -45,8 +48,21 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/wishlist', 'Wishlist')->name('wishlist');
     });
 
+    //Cart
     Route::controller(CartController::class)->group(function () {
         Route::get('/cart', 'Cart')->name('cart');
+        // Route::get('/checkout', 'Checkout')->name('checkout');
+    });
+
+    //Checkout
+    Route::controller(CheckoutController::class)->group(function () {
+        Route::get('/checkout', 'Checkout')->name('checkout');
+    });
+
+    //UserOrders
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/orders', 'Orders')->name('orders');
+        Route::get('/orders/{id}', 'OrderShow')->name('orders.show');
     });
 });
 
@@ -127,6 +143,16 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     //Slider
     Route::controller(SliderController::class)->group(function () {
         Route::get('/slider/all', 'SliderAll')->name('slider.all');
+        Route::get('/slider/add', 'SliderAdd')->name('slider.add');
+        Route::post('/slider/store', 'SliderStore')->name('slider.store');
+        Route::get('/slider/edit/{id}', 'SliderEdit')->name('slider.edit');
+        Route::post('/slider/update', 'SliderUpdate')->name('slider.update');
+        Route::get('/slider/delete/{id}', 'SliderDelete')->name('slider.delete');
+    });
+
+    //Orders
+    Route::controller(SliderController::class)->group(function () {
+        Route::get('/orders', 'Orders')->name('orders');
         Route::get('/slider/add', 'SliderAdd')->name('slider.add');
         Route::post('/slider/store', 'SliderStore')->name('slider.store');
         Route::get('/slider/edit/{id}', 'SliderEdit')->name('slider.edit');
