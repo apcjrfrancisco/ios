@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Frontend\Product;
 
+use App\Models\Cart;
 use Livewire\Component;
 use App\Models\Wishlist;
 use Illuminate\Support\Carbon;
@@ -64,7 +65,6 @@ class View extends Component
                 'type' => 'info',
                 'status' => 401
             ]);
-            return redirect()->route('login');
         }
     }
 
@@ -79,5 +79,63 @@ class View extends Component
     {
 
         $this->quantityCount++;
+    }
+
+    public function addToCart(int $productId)
+    {
+        if (Auth::check()) {
+            if ($this->product->where('id', $productId)->exists()) {
+                if (Cart::where('user_id', Auth::user()->id)->where('product_id', $productId)->exists()) {
+                    $this->dispatchBrowserEvent('message', [
+                        'text' => 'Product Already Added',
+                        'type' => 'info',
+                        'status' => 600
+                    ]);
+                } else {
+                    if ($this->product->quantity > 0) {
+                        if ($this->product->quantity > $this->quantityCount) {
+                            // Insert to Cart
+                            Cart::insert([
+                                'user_id' => Auth::user()->id,
+                                'product_id' => $productId,
+                                'quantity' => $this->quantityCount,
+                                'created_at' => Carbon::now()
+                            ]);
+
+                            $this->dispatchBrowserEvent('message', [
+                                'text' => 'Added to Cart',
+                                'type' => 'success',
+                                'status' => 200
+                            ]);
+                        } else {
+                            $this->dispatchBrowserEvent('message', [
+                                'text' => 'Only ' . $this->product->quantity . ' are Available',
+                                'type' => 'info',
+                                'status' => 404
+                            ]);
+                        }
+                    } else {
+
+                        $this->dispatchBrowserEvent('message', [
+                            'text' => 'Out of Stock',
+                            'type' => 'info',
+                            'status' => 404
+                        ]);
+                    }
+                }
+            } else {
+                $this->dispatchBrowserEvent('message', [
+                    'text' => 'Product does not Exist',
+                    'type' => 'info',
+                    'status' => 404
+                ]);
+            }
+        } else {
+            $this->dispatchBrowserEvent('message', [
+                'text' => 'Please Login to Continue',
+                'type' => 'info',
+                'status' => 401
+            ]);
+        }
     }
 }
