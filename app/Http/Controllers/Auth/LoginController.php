@@ -44,7 +44,7 @@ class LoginController extends Controller
                 'message' => 'Welcome User',
                 'alert-type' => 'success'
             );
-            return redirect('/home')->with($notification);
+            return redirect('/')->with($notification);
         }
     }
 
