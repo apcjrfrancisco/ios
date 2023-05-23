@@ -102,6 +102,8 @@ class View extends Component
                                 'created_at' => Carbon::now()
                             ]);
 
+                            $this->emit('CartAddedUpdated');
+                            
                             $this->dispatchBrowserEvent('message', [
                                 'text' => 'Added to Cart',
                                 'type' => 'success',
