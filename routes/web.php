@@ -13,10 +13,12 @@ use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\OrderController;
+use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\Frontend\WishlistController;
 
 /*
@@ -65,6 +67,12 @@ Route::middleware(['auth'])->group(function () {
     //UserOrders
     Route::controller(OrderController::class)->group(function () {
         Route::get('/orders', 'Orders')->name('orders');
+        Route::get('/orders/{id}', 'OrderShow')->name('orders.show');
+    });
+
+    //Profile
+    Route::controller(FrontendUserController::class)->group(function () {
+        Route::get('/profile', 'Profile')->name('profile');
         Route::get('/orders/{id}', 'OrderShow')->name('orders.show');
     });
 });
@@ -169,4 +177,14 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/footer/add/{id}', 'FooterAdd')->name('footer.add');
         Route::post('/footer/store', 'FooterStore')->name('footer.store');
     });
+
+    //Users
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user/all', 'UserAll')->name('user.all');
+        Route::get('/user/add', 'UserAdd')->name('user.add');
+        Route::post('/user/store', 'UserStore')->name('user.store');
+        Route::get('/user/delete/{id}', 'UserDelete')->name('user.delete');
+    });
+
+
 });

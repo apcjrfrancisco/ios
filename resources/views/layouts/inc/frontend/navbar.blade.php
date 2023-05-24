@@ -51,7 +51,7 @@
                                     @if (Auth::user()->role_as == '1')
                                     <li><a class="dropdown-item" href="{{ url('/admin/dashboard') }}"><i class="fas fa-gauge"></i> Go To Dashboard</a></li>
                                     @endif
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fa fa-user"></i> Profile</a></li>
                                     <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> My Orders</a>
                                     </li>
                                     <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> My Wishlist</a>
