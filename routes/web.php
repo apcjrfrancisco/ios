@@ -66,14 +66,16 @@ Route::middleware(['auth'])->group(function () {
 
     //UserOrders
     Route::controller(OrderController::class)->group(function () {
-        Route::get('/orders', 'Orders')->name('orders');
+        Route::get('/user/orders', 'Orders')->name('user.orders');
         Route::get('/orders/{id}', 'OrderShow')->name('orders.show');
     });
 
     //Profile
     Route::controller(FrontendUserController::class)->group(function () {
         Route::get('/profile', 'Profile')->name('profile');
-        Route::get('/orders/{id}', 'OrderShow')->name('orders.show');
+        Route::post('/profile/update', 'ProfileUpdate')->name('profile.update');
+        Route::get('/change/password', 'ChangePassword')->name('change.password');
+        Route::post('/change/password/store', 'ChangePasswordStore')->name('change.passwordstore');
     });
 });
 
@@ -169,6 +171,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::put('/orders/{orderId}', 'UpdateOrderStatus')->name('order.status');
         Route::get('/invoice/{orderId}/generate', 'GenerateInvoice')->name('invoice.generate');
         Route::get('/invoice/{orderId}', 'ViewInvoice')->name('invoice.view');
+        Route::get('/invoice/{orderId}/mail', 'MailInvoice')->name('invoice.mail');
     });
 
     //Setting

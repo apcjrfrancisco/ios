@@ -81,4 +81,10 @@ class OrderController extends Controller
         $todayDate = Carbon::now()->format('m-d-Y');
         return $pdf->download('TM-invoice-'.$order->name.'-'.$todayDate.'.pdf');
     }
+
+    public function MailInvoice(int $orderId)
+    {
+        $order = Order::findOrFail($orderId);
+        
+    }
 }
