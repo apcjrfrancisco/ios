@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -187,6 +188,12 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/user/add', 'UserAdd')->name('user.add');
         Route::post('/user/store', 'UserStore')->name('user.store');
         Route::get('/user/delete/{id}', 'UserDelete')->name('user.delete');
+    });
+
+    //Users
+    Route::controller(StockController::class)->group(function () {
+        Route::get('/stock/report', 'StockReport')->name('stock.report');
+        Route::get('/stock/report/pdf', 'StockReportPdf')->name('stock.report.pdf');
     });
 
 

@@ -38,15 +38,15 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <style>
-            .sidebar .nav .nav-item.active{
-                background-color: #e9e9e9;
-            }
-        </style>
+    <style>
+        .sidebar .nav .nav-item.active {
+            background-color: #e9e9e9;
+        }
+    </style>
 
 </head>
 
-<body class="sidebar-icon-only">
+<body>
 
     <div class="container-scroller">
         @include('layouts.inc.navbar')
@@ -138,6 +138,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"
         integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+
+        }
+    </script>
 
     @livewireScripts
 </body>
