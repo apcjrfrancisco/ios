@@ -89,7 +89,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     //Supplier
     Route::controller(SupplierController::class)->group(function () {
-        Route::get('/supplier/all', 'SupplierAll')->name('supplier.all');
+        Route::get('/supplier', 'SupplierAll')->name('supplier');
         Route::get('/supplier/add', 'SupplierAdd')->name('supplier.add');
         Route::post('/supplier/store', 'SupplierStore')->name('supplier.store');
         Route::get('/supplier/edit/{id}', 'SupplierEdit')->name('supplier.edit');
@@ -99,7 +99,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     //Unit
     Route::controller(UnitController::class)->group(function () {
-        Route::get('/unit/all', 'UnitAll')->name('unit.all');
+        Route::get('/unit', 'UnitAll')->name('unit');
         Route::get('/unit/add', 'UnitAdd')->name('unit.add');
         Route::post('/unit/store', 'UnitStore')->name('unit.store');
         Route::get('/unit/edit/{id}', 'UnitEdit')->name('unit.edit');
@@ -109,7 +109,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     //Category
     Route::controller(CategoryController::class)->group(function () {
-        Route::get('/category/all', 'CategoryAll')->name('category.all');
+        Route::get('/category', 'CategoryAll')->name('category');
         Route::get('/category/add', 'CategoryAdd')->name('category.add');
         Route::post('/category/store', 'CategoryStore')->name('category.store');
         Route::get('/category/edit/{id}', 'CategoryEdit')->name('category.edit');
@@ -119,7 +119,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     //Brands
     Route::controller(BrandController::class)->group(function () {
-        Route::get('/brand/all', 'BrandAll')->name('brand.all');
+        Route::get('/brand', 'BrandAll')->name('brand');
         Route::get('/brand/add', 'BrandAdd')->name('brand.add');
         Route::post('/brand/store', 'BrandStore')->name('brand.store');
         Route::get('/brand/edit/{id}', 'BrandEdit')->name('brand.edit');
@@ -129,7 +129,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     //Products
     Route::controller(ProductController::class)->group(function () {
-        Route::get('/product/all', 'ProductAll')->name('product.all');
+        Route::get('/product', 'ProductAll')->name('product');
         Route::get('/product/add', 'ProductAdd')->name('product.add');
         Route::post('/product/store', 'ProductStore')->name('product.store');
         Route::get('/product/edit/{id}', 'ProductEdit')->name('product.edit');
@@ -138,7 +138,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
     //Purchase
     Route::controller(PurchaseController::class)->group(function () {
-        Route::get('/purchase/all', 'PurchaseAll')->name('purchase.all');
+        Route::get('/purchase', 'PurchaseAll')->name('purchase');
         Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
         Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
         Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
@@ -155,7 +155,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     //Slider
     Route::controller(SliderController::class)->group(function () {
-        Route::get('/slider/all', 'SliderAll')->name('slider.all');
+        Route::get('/slider', 'SliderAll')->name('slider');
         Route::get('/slider/add', 'SliderAdd')->name('slider.add');
         Route::post('/slider/store', 'SliderStore')->name('slider.store');
         Route::get('/slider/edit/{id}', 'SliderEdit')->name('slider.edit');
@@ -183,7 +183,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     //Users
     Route::controller(UserController::class)->group(function () {
-        Route::get('/user/all', 'UserAll')->name('user.all');
+        Route::get('/user', 'UserAll')->name('user');
         Route::get('/user/add', 'UserAdd')->name('user.add');
         Route::post('/user/store', 'UserStore')->name('user.store');
         Route::get('/user/delete/{id}', 'UserDelete')->name('user.delete');

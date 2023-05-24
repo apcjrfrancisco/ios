@@ -7,31 +7,31 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('supplier.all') }}">
+            <a class="nav-link" href="{{ route('supplier') }}">
                 <i class="fas fa-user-friends menu-icon"></i>
                 <span class="menu-title">Manage Suppliers</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('unit.all') }}">
+            <a class="nav-link" href="{{ route('unit') }}">
                 <i class="far fa-clipboard menu-icon"></i>
                 <span class="menu-title">Manage Units</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('category.all') }}">
+            <a class="nav-link" href="{{ route('category') }}">
                 <i class="fas fa-sitemap menu-icon"></i>
                 <span class="menu-title">Manage Categories</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('brand.all') }}">
+            <a class="nav-link" href="{{ route('brand') }}">
                 <i class="fas fa-server menu-icon"></i>
                 <span class="menu-title">Manage Brands</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="products" href="{{ route('product.all') }}">
+            <a class="nav-link" id="products" href="{{ route('product') }}">
                 <i class="far fa-file-alt menu-icon"></i>
                 <span class="menu-title">Manage Products</span>
             </a>
@@ -44,7 +44,7 @@
             </a>
             <div class="collapse" id="reports">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('purchase.all') }}"> All Purchases </a>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('purchase') }}"> All Purchases </a>
                     </li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('purchase.pending') }}"> Pending Purchases
                         </a></li>
@@ -60,7 +60,7 @@
             </a>
             <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('slider.all') }}">Sliders</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('slider') }}">Sliders</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('footer.setting') }}">Footer Setting</a>
                     </li>
                 </ul>
@@ -73,7 +73,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('user.all') }}">
+            <a class="nav-link" href="{{ route('user') }}">
                 <i class="fas fa-user-check menu-icon"></i>
                 <span class="menu-title">Users</span>
             </a>
