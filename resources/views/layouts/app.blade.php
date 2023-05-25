@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -43,9 +44,7 @@
         <main>
             @yield('content')
         </main>
-
         @include('layouts.inc.frontend.footer')
-
     </div>
 
     <!-- JavaScript -->
@@ -96,6 +95,7 @@
             }
         @endif
     </script>
+
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
     <script src="{{ asset('backend/assets/js/code.js') }}"></script>
@@ -105,6 +105,7 @@
         });
     </script>
     @livewireScripts
+
 
 </body>
 

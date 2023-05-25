@@ -1,4 +1,3 @@
-
 <div>
     <div class="footer-area">
         <div class="container">
@@ -52,7 +51,8 @@
                 <div class="col-md-4">
                     <div class="social-media">
                         Get Connected:
-                        <a href="{{ $appSetting->company_facebook }}" target="_blank" ><i class="fab fa-facebook-square"></i></a>
+                        <a href="{{ $appSetting->company_facebook }}" target="_blank"><i
+                                class="fab fa-facebook-square"></i></a>
                     </div>
                 </div>
             </div>
