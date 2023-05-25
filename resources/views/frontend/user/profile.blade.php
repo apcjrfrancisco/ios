@@ -39,37 +39,37 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="">Phone</label>
-                                                <input type="text" name="phone" value="{{ Auth::user()->userDetail->phone }}" class="form-control">
+                                                <input type="text" name="phone" value="{{ Auth::user()->userDetail->phone ?? '' }}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="">Address Line 1</label>
-                                                <input type="text" name="address1" value="{{ Auth::user()->userDetail->address1 }}" class="form-control">
+                                                <input type="text" name="address1" value="{{ Auth::user()->userDetail->address1 ?? '' }}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="">Address Line 2</label>
-                                                <input type="text" name="address2" value="{{ Auth::user()->userDetail->address2 }}" class="form-control">
+                                                <input type="text" name="address2" value="{{ Auth::user()->userDetail->address2 ?? '' }}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="">City</label>
-                                                <input type="text" name="city" value="{{ Auth::user()->userDetail->city }}" class="form-control">
+                                                <input type="text" name="city" value="{{ Auth::user()->userDetail->city ?? '' }}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="">Province</label>
-                                                <input type="text" name="province" value="{{ Auth::user()->userDetail->province }}" class="form-control">
+                                                <input type="text" name="province" value="{{ Auth::user()->userDetail->province ?? '' }}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="">Postal Code</label>
-                                                <input type="text" name="zip_code" value="{{ Auth::user()->userDetail->zip_code }}" class="form-control">
+                                                <input type="text" name="zip_code" value="{{ Auth::user()->userDetail->zip_code ?? '' }}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-12">

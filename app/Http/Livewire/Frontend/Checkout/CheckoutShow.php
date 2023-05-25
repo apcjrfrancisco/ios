@@ -63,7 +63,7 @@ class CheckoutShow extends Component
             ]);
 
             if ($item->product_id != NULL) {
-                
+
                 $item->product()->where('id', $item->product_id)->decrement('quantity', $item->quantity);
             }
         }

@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label>Email Address</label>
-                                    <input type="email" wire:model.defer="email" class="form-control"
+                                    <input type="email" wire:model.defer="email" readonly class="form-control"
                                         placeholder="Enter Email Address" />
                                     @error('email')
                                         <small class="text-danger">{{ $message }}</small>

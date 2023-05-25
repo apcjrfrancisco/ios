@@ -54,11 +54,6 @@ class OrderController extends Controller
                     $item->product()->where('id', $item->product_id)->increment('quantity', $item->quantity);
                 }
             }
-            $this->dispatchBrowserEvent('message', [
-                'text' => 'You Cancelled your Order',
-                'type' => 'info',
-                'status' => 404
-            ]);
             return redirect()->back();
         } else {
             return redirect()->back();
