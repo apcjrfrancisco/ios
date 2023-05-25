@@ -56,7 +56,7 @@ class UnitController extends Controller
             'message' => 'Unit Updated',  
             'alert-type' => 'info'
         );
-        return redirect()->route('unit.all')->with($notification);
+        return redirect()->route('unit')->with($notification);
     }
 
     public function UnitDelete($id)
@@ -67,7 +67,7 @@ class UnitController extends Controller
             'message' => 'Unit Deleted',  
             'alert-type' => 'info'
         );
-        return redirect()->route('unit.all')->with($notification);
+        return redirect()->route('unit')->with($notification);
     }
     
 }

@@ -47,7 +47,7 @@ class BrandController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('brand.all')->with($notification);
+        return redirect()->route('brand')->with($notification);
     }
 
     public function BrandEdit($id)
@@ -83,7 +83,7 @@ class BrandController extends Controller
                 'alert-type' => 'info'
             );
     
-            return redirect()->route('brand.all')->with($notification);
+            return redirect()->route('brand')->with($notification);
         } else {
             Brand::findOrFail($brand_id)->update([
                 'category_id' => $request->category_id,
@@ -99,7 +99,7 @@ class BrandController extends Controller
                 'alert-type' => 'info'
             );
     
-            return redirect()->route('brand.all')->with($notification);
+            return redirect()->route('brand')->with($notification);
         }
     }
 
@@ -116,6 +116,6 @@ class BrandController extends Controller
             'alert-type' => 'info'
         );
 
-        return redirect()->route('brand.all')->with($notification);
+        return redirect()->route('brand')->with($notification);
     }
 }

@@ -40,7 +40,7 @@ class SupplierController extends Controller
             'message' => 'Supplier Created',  
             'alert-type' => 'success'
         );
-        return redirect()->route('supplier.all')->with($notification);
+        return redirect()->route('supplier')->with($notification);
     }
 
     public function SupplierEdit($id)
@@ -70,7 +70,7 @@ class SupplierController extends Controller
             'message' => 'Supplier Updated',  
             'alert-type' => 'info'
         );
-        return redirect()->route('supplier.all')->with($notification);
+        return redirect()->route('supplier')->with($notification);
     }
 
     public function SupplierDelete($id)
@@ -81,6 +81,6 @@ class SupplierController extends Controller
             'message' => 'Supplier Deleted',  
             'alert-type' => 'info'
         );
-        return redirect()->route('supplier.all')->with($notification);
+        return redirect()->route('supplier')->with($notification);
     }
 }

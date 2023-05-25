@@ -19,9 +19,13 @@
                 <h4 class="text-primary">
                     <i class="fa fa-shopping-cart text-dark"></i> Order Details
                     <a href="{{ route('orders') }}" class="btn btn-danger btn-sm float-end mx-1">Back</a>
-                    <a href="{{ url('admin/invoice/'.$order->id.'/generate') }}" class="btn btn-primary btn-sm float-end mx-1">Download Invoice</a>
-                    <a href="{{ url('admin/invoice/'.$order->id) }}" target="_blank" class="btn btn-warning btn-sm float-end mx-1">View Invoice</a>
-                    <a href="{{ url('admin/invoice/'.$order->id.'/mail') }}" class="btn btn-info btn-sm float-end mx-1">Send Invoice</a>
+                    <a href="{{ url('admin/invoice/' . $order->id . '/generate') }}"
+                        class="btn btn-primary btn-sm float-end mx-1">Download Invoice</a>
+                    <a href="{{ url('admin/invoice/' . $order->id) }}" target="_blank"
+                        class="btn btn-warning btn-sm float-end mx-1">View Invoice</a>
+                    <a href="{{ url('admin/invoice/' . $order->id . '/mail') }}"
+                        class="btn btn-info btn-sm float-end mx-1">Send
+                        Invoice</a>
                 </h4>
                 <hr>
 
@@ -72,6 +76,11 @@
                             @php
                                 $totalAmount = 0;
                             @endphp
+
+                            @php
+                                $qty = 0;
+                            @endphp
+
                             @foreach ($order->orderItems as $item)
                                 <tr class="text-center">
                                     <td>{{ $item->id }}</td>
@@ -88,6 +97,7 @@
                                     <td>{{ $item->quantity }}</td>
                                     <td>{{ $item->price }}</td>
                                     <td class="fw-bold">{{ $item->total_price }}</td>
+
                                     @php
                                         $totalAmount += $item->total_price;
                                     @endphp
@@ -106,35 +116,83 @@
                 <div class="card-body">
                     <h4>Order Process</h4>
                     <hr>
+
+
+
+
                     <div class="row">
-                        <div class="col-md-5">
-                            <form action="{{ url('admin/orders/'. $order->id) }}" method="post">
-                                @csrf
-                                @method('PUT')
+                        @if ($order->status_message == 'cancelled')
+                            <div class="col-md-5" style="display:none">
+                                <form action="{{ url('admin/orders/' . $order->id) }}" method="post">
+                                    @csrf
+                                    @method('PUT')
 
-                                <label for="">Update Status</label>
-                                <div class="input-group">
-                                    <select name="order_status" class="form-select" id="">
-                                        <option value="" disabled>Select Order Status</option>
-                                        <option value="in progress"
-                                            {{ Request::get('status') == 'in progress' ? 'selected' : '' }}>In Progress
-                                        </option>
-                                        <option value="out for delivery"
-                                            {{ Request::get('status') == 'out for delivery' ? 'selected' : '' }}>Out for
-                                            Delivery</option>
-                                        <option value="completed"
-                                            {{ Request::get('status') == 'completed' ? 'selected' : '' }}>Completed</option>
-                                        <option value="cancelled"
-                                            {{ Request::get('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                    </select>
-                                    <button type="submit" class="btn btn-primary text-white">Update</button>
-                                </div>
+                                    <label for="">Update Status</label>
+                                    <div class="input-group">
+                                        <select name="order_status" class="form-select" id="">
+                                            <option value="" disabled>Select Order Status</option>
+                                            <option value="in progress"
+                                                {{ Request::get('order_status') == 'in progress' ? 'selected' : '' }}>In
+                                                Progress
+                                            </option>
+                                            <option value="out for delivery"
+                                                {{ Request::get('order_status') == 'out for delivery' ? 'selected' : '' }}>
+                                                Out for
+                                                Delivery</option>
+                                            <option value="completed"
+                                                {{ Request::get('order_status') == 'completed' ? 'selected' : '' }}>
+                                                Completed</option>
+                                            <option value="cancelled"
+                                                {{ Request::get('order_status') == 'cancelled' ? 'selected' : '' }}>
+                                                Cancelled</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary text-white">Update</button>
+                                    </div>
 
-                            </form>
-                        </div>
+                                </form>
+                            </div>
+                        @else
+                            <div class="col-md-5">
+
+                                <form action="{{ url('admin/orders/' . $order->id) }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <label for="">Update Status</label>
+                                    <div class="input-group">
+                                        <select name="order_status" class="form-select" id="">
+                                            <option value="" disabled>Select Order Status</option>
+                                            <option value="in progress"
+                                                {{ Request::get('order_status') == 'in progress' ? 'selected' : '' }}>In
+                                                Progress
+                                            </option>
+                                            <option value="out for delivery"
+                                                {{ Request::get('order_status') == 'out for delivery' ? 'selected' : '' }}>
+                                                Out for
+                                                Delivery</option>
+                                            <option value="completed"
+                                                {{ Request::get('order_status') == 'completed' ? 'selected' : '' }}>
+                                                Completed</option>
+                                            <option value="cancelled"
+                                                {{ Request::get('order_status') == 'cancelled' ? 'selected' : '' }}>
+                                                Cancelled</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary text-white">Update</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        @endif
+
                         <div class="col-md-7">
                             <br>
-                            <h4 class="mt-3">Order Status: <span class="text-uppercase text-success">{{ $order->status_message }}</span></h4>
+                            <h4 class="mt-3">Order Status:
+                                @if ($order->status_message == 'cancelled')
+                                    <span class="text-uppercase text-danger">{{ $order->status_message }}</span>
+                                @else
+                                    <span class="text-uppercase text-success">{{ $order->status_message }}</span>
+                                @endif
+                            </h4>
                         </div>
                     </div>
                 </div>

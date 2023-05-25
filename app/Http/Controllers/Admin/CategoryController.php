@@ -76,7 +76,7 @@ class CategoryController extends Controller
                 'alert-type' => 'info'
             );
 
-            return redirect()->route('category.all')->with($notification);
+            return redirect()->route('category')->with($notification);
         } else {
             Category::findOrFail($category_id)->update([
                 'category_name' => $request->category_name,
@@ -90,7 +90,7 @@ class CategoryController extends Controller
                 'alert-type' => 'info'
             );
 
-            return redirect()->route('category.all')->with($notification);
+            return redirect()->route('category')->with($notification);
         }
     }
 
@@ -107,6 +107,6 @@ class CategoryController extends Controller
             'alert-type' => 'info'
         );
 
-        return redirect()->route('category.all')->with($notification);
+        return redirect()->route('category')->with($notification);
     }
 }

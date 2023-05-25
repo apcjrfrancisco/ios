@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,6 @@ class StockController extends Controller
     public function StockReport()
     {
         $allData = Product::orderBy('supplier_id', 'ASC')->orderBy('category_id', 'ASC')->orderBy('brand_id', 'ASC')->get();
-
         return view('backend.stock.stock_report', compact('allData'));
     }
 

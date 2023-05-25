@@ -63,8 +63,9 @@ class CheckoutShow extends Component
             ]);
 
             if ($item->product_id != NULL) {
+                
                 $item->product()->where('id', $item->product_id)->decrement('quantity', $item->quantity);
-            } 
+            }
         }
         return $order;
     }
@@ -106,7 +107,7 @@ class CheckoutShow extends Component
         $this->totalProductAmount = 0;
         $this->carts = Cart::where('user_id', Auth::user()->id)->get();
         foreach ($this->carts as $item) {
-            $this->totalProductAmount = +$item->product->selling_price * $item->quantity;
+            $this->totalProductAmount += $item->product->selling_price * $item->quantity;
         }
         return $this->totalProductAmount;
     }

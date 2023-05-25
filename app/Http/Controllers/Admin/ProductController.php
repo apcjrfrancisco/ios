@@ -56,7 +56,7 @@ class ProductController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('product.all')->with($notification);
+        return redirect()->route('product')->with($notification);
     }
 
     public function ProductEdit($id)
@@ -99,7 +99,7 @@ class ProductController extends Controller
                 'alert-type' => 'info'
             );
 
-            return redirect()->route('product.all')->with($notification);
+            return redirect()->route('product')->with($notification);
         } else {
             Product::findOrFail($product_id)->update([
                 'supplier_id' => $request->supplier_id,
@@ -118,7 +118,7 @@ class ProductController extends Controller
                 'alert-type' => 'info'
             );
 
-            return redirect()->route('product.all')->with($notification);
+            return redirect()->route('product')->with($notification);
         }
     }
 
@@ -135,6 +135,6 @@ class ProductController extends Controller
             'alert-type' => 'info'
         );
 
-        return redirect()->route('product.all')->with($notification);
+        return redirect()->route('product')->with($notification);
     }
 }

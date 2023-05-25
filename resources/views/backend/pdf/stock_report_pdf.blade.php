@@ -89,6 +89,10 @@
                                                             </td>
                                                             <td class="text-center"><strong>Product Name </strong>
                                                             </td>
+                                                            <td class="text-center"><strong>In </strong>
+                                                            </td>
+                                                            <td class="text-center"><strong>Out </strong>
+                                                            </td>
                                                             <td class="text-center"><strong>Stock </strong>
                                                             </td>
 
@@ -99,6 +103,14 @@
                                                         <!-- foreach ($order->lineItems as $line) or some such thing here -->
 
                                                         @foreach ($allData as $key => $item)
+                                                            @php
+                                                                $in = App\Models\Purchase::where('category_id', $item->category_id)
+                                                                    ->where('product_id', $item->id)
+                                                                    ->where('status', '1')
+                                                                    ->sum('buying_qty');
+                                                                
+                                                                $out = $in - $item->quantity;
+                                                            @endphp
                                                             <tr class="text-center">
                                                                 <td> {{ $key + 1 }} </td>
                                                                 <td> {{ $item['supplier']['supplier_name'] }} </td>
@@ -106,6 +118,8 @@
                                                                 <td> {{ $item['brand']['brand_name'] }} </td>
                                                                 <td> {{ $item['unit']['unit_name'] }} </td>
                                                                 <td> {{ $item->product_name }} </td>
+                                                                <td> {{ $in }} </td>
+                                                                <td> {{ $out }} </td>
                                                                 <td> {{ $item->quantity }} </td>
 
 
@@ -121,7 +135,7 @@
                                             @endphp
                                             <i>Printing Time : {{ $date->format('F j, Y, g:i a') }}</i>
 
-                                            
+
                                         </div>
                                     </div>
 
@@ -136,8 +150,7 @@
     </div>
     <div class="d-print-none">
         <div class="float-end">
-            <button onclick="printDiv('printMe')"
-                class="btn btn-success waves-effect waves-light"><i
+            <button onclick="printDiv('printMe')" class="btn btn-success waves-effect waves-light"><i
                     class="fa fa-print"></i></button>
         </div>
     </div>

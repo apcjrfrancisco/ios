@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
+    public $orderItem;
 
     public function FilterOrder(Request $request)
     {
@@ -49,13 +52,22 @@ class OrderController extends Controller
 
     public function UpdateOrderStatus(int $orderId, Request $request)
     {
+
         $order = Order::where('id', $orderId)->first();
+        $this->orderItem = OrderItem::where('order_id', $order->id)->get();
 
         if ($order) {
             $order->update([
                 'status_message' => $request->order_status,
-                'updated_at' => Carbon::now()
+                'updated_at' => Carbon::now(),
             ]);
+
+            if ($order->status_message == 'cancelled') {
+                foreach ($this->orderItem as $item) {
+                    $item->product()->where('id', $item->product_id)->increment('quantity', $item->quantity);
+                }
+            }
+
             $notification = array(
                 'message' => 'Order Status Updated',
                 'alert-type' => 'success'
@@ -82,30 +94,28 @@ class OrderController extends Controller
         $data = ['order' => $order];
         $pdf = Pdf::loadView('backend.invoice.generate-invoice', $data);
         $todayDate = Carbon::now()->format('m-d-Y');
-        return $pdf->download('TM-invoice-'.$order->name.'-'.$todayDate.'.pdf');
+        return $pdf->download('TM-invoice-' . $order->name . '-' . $todayDate . '.pdf');
     }
 
     public function MailInvoice(int $orderId)
     {
         $order = Order::findOrFail($orderId);
         try {
-        Mail::to("$order->email")->send(new InvoiceOrderMailable($order));
+            Mail::to("$order->email")->send(new InvoiceOrderMailable($order));
 
-        $notification = array(
-            'message' => 'Invoice sent to '.$order->email,
-            'alert-type' => 'success'
-        );
+            $notification = array(
+                'message' => 'Invoice sent to ' . $order->email,
+                'alert-type' => 'success'
+            );
 
-        return redirect('/admin/orders/'.$orderId)->with($notification);
+            return redirect('/admin/orders/' . $orderId)->with($notification);
         } catch (\Exception $e) {
             $notification = array(
                 'message' => 'Something went wrong',
                 'alert-type' => 'error'
             );
-    
-            return redirect('/admin/orders/'.$orderId)->with($notification);
-        }
 
-        
+            return redirect('/admin/orders/' . $orderId)->with($notification);
+        }
     }
 }

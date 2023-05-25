@@ -20,7 +20,8 @@
                         <div class="card-body">
 
                             <a class="btn btn-info btn-rounded btn-fw" style="float:right"
-                                href="{{ route('stock.report.pdf') }}" target="_blank"> <i class="fa fa-print"></i> Stock Print</a> <br>
+                                href="{{ route('stock.report.pdf') }}" target="_blank"> <i class="fa fa-print"></i> Stock
+                                Print</a> <br>
                             <h4 class="card-title">All Stocks Data </h4>
 
                             <table id="datatable" class="table table-bordered table-striped dt-responsive nowrap"
@@ -33,6 +34,8 @@
                                         <th>Brand</th>
                                         <th>Unit</th>
                                         <th>Product Name</th>
+                                        <th>In</th>
+                                        <th>Out</th>
                                         <th>Stock</th>
 
                                 </thead>
@@ -40,7 +43,17 @@
 
                                 <tbody>
 
+
+
                                     @foreach ($allData as $key => $item)
+                                        @php
+                                            $in = App\Models\Purchase::where('category_id', $item->category_id)
+                                                ->where('product_id', $item->id)
+                                                ->where('status', '1')
+                                                ->sum('buying_qty');
+
+                                            $out = ($in - $item->quantity) ;
+                                        @endphp
                                         <tr class="text-center">
                                             <td> {{ $key + 1 }} </td>
                                             <td> {{ $item['supplier']['supplier_name'] }} </td>
@@ -48,6 +61,8 @@
                                             <td> {{ $item['brand']['brand_name'] }} </td>
                                             <td> {{ $item['unit']['unit_name'] }} </td>
                                             <td> {{ $item->product_name }} </td>
+                                            <td> {{ $in }} </td>
+                                            <td> {{ $out }} </td>
                                             <td> {{ $item->quantity }} </td>
                                         </tr>
                                     @endforeach
