@@ -38,6 +38,8 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <style>
         .sidebar .nav .nav-item.active {
             background-color: #e9e9e9;
@@ -46,7 +48,7 @@
 
 </head>
 
-<body>
+<body class="sidebar-icon-only">
 
     <div class="container-scroller">
         @include('layouts.inc.navbar')
@@ -132,6 +134,8 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script src="{{ asset('backend/assets/js/code.js') }}"></script>
     <script src="{{ asset('backend/assets/js/handlebars.js') }}"></script>

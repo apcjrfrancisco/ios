@@ -152,6 +152,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/get-brand', 'GetBrand')->name('get-brand');
         Route::get('/get-category', 'GetCategory')->name('get-category');
         Route::get('/get-product', 'GetProduct')->name('get-product');
+        Route::get('/get-product-category', 'GetProductCategory')->name('get-product-category');
     });
 
     //Slider
@@ -194,6 +195,9 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::controller(StockController::class)->group(function () {
         Route::get('/stock/report', 'StockReport')->name('stock.report');
         Route::get('/stock/report/pdf', 'StockReportPdf')->name('stock.report.pdf');
+        Route::get('/stock/supplier/wise', 'StockSupplierWise')->name('stock.supplier.wise');
+        Route::get('/supplier/wise/pdf', 'SupplierWisePdf')->name('supplier.wise.pdf');
+        Route::get('/product/wise/pdf', 'ProductWisePdf')->name('product.wise.pdf');
     });
 
 

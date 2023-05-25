@@ -50,7 +50,7 @@
                         </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('orders') }}"> All Orders </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('stock.report') }}"> Stock Report </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('orders') }}"> Supplier / Product Wise </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('stock.supplier.wise') }}"> Supplier / Product Wise </a></li>
                 </ul>
             </div>
         </li>
