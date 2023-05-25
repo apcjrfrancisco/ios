@@ -10,7 +10,7 @@
                         <div class="shadow bg-white p-3">
                             <h4 class="text-primary">
                                 Item Total Amount :
-                                <span class="float-end">${{ $totalProductAmount }}</span>
+                                <span class="float-end"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $totalProductAmount }}</span>
                             </h4>
                             <hr>
                             <small>* Tax and other charges are included</small>

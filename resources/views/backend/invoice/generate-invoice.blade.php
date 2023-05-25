@@ -189,16 +189,26 @@
                     <td>{{ $item->product->unit->unit_name }}</td>
                     <td>{{ $item->product->product_name }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td>{{ $item->price }}</td>
-                    <td class="fw-bold">{{ $item->total_price }}</td>
+                    <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->price }}</td>
+                    <td class="fw-bold"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->total_price }}</td>
                     @php
                         $totalAmount += $item->total_price;
+                        $vat = $totalAmount * 0.12;
+                        $without_vat = $totalAmount - ($totalAmount * 0.12);
                     @endphp
                 </tr>
             @endforeach
             <tr>
+                <td colspan="5" class="total-heading">Without VAT: </td>
+                <td colspan="1" class="total-heading text-center"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $without_vat }} </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="total-heading">VAT 12%: </td>
+                <td colspan="1" class="total-heading text-center"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $vat }} </td>
+            </tr>
+            <tr>
                 <td colspan="5" class="total-heading">Total Amount: </td>
-                <td colspan="1" class="total-heading text-center">{{ $totalAmount }}</td>
+                <td colspan="1" class="total-heading text-center"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $totalAmount }}</td>
             </tr>
         </tbody>
     </table>

@@ -79,7 +79,6 @@
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
-                                                            <td><strong>Sl </strong></td>
                                                             <td class="text-center"><strong>Order ID </strong></td>
                                                             <td class="text-center"><strong>Tracking No. </strong>
                                                             </td>
@@ -95,10 +94,14 @@
                                                     </thead>
                                                     <tbody>
                                                         <!-- foreach ($order->lineItems as $line) or some such thing here -->
-
+                                                        @php
+                                                            $total_amount = 0;
+                                                        @endphp
                                                         @forelse ($orders as $item)
                                                             @php
                                                                 $orderItem = App\Models\OrderItem::where('order_id', $item->id)->sum('total_price');
+                                                                $orderItemId = App\Models\OrderItem::where('order_id', $item->id)->first();
+                                                                $total_amount += $orderItemId->quantity * $orderItemId->price;
                                                             @endphp
                                                             <tr class="text-center">
                                                                 <td> {{ $item->id }} </td>
@@ -106,14 +109,22 @@
                                                                 <td> {{ $item->name }} </td>
                                                                 <td> {{ $item->payment_mode }} </td>
                                                                 <td> {{ $item->created_at->format('m/d/Y') }} </td>
-                                                                <td> {{ $orderItem }} </td>
-                                                                <td> {{ $item->status_message }} </td>
+                                                                <td><span
+                                                                        style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                                                    {{ $orderItem }} </td>
                                                             </tr>
                                                         @empty
                                                             <tr>
                                                                 <td colspan="8">No Orders Available</td>
                                                             </tr>
                                                         @endforelse
+                                                        <tr>
+                                                            <td colspan="8" style="font-size:30px">
+                                                                <strong> Total Amount: <span
+                                                                        style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                                                    {{ $total_amount }} </strong>
+                                                            </td>
+                                                        </tr>
 
                                                     </tbody>
                                                 </table>

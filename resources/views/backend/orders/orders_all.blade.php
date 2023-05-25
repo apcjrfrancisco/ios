@@ -67,7 +67,7 @@
                                             <td> {{ $item->name }} </td>
                                             <td> {{ $item->payment_mode }} </td>
                                             <td> {{ $item->created_at->format('m/d/Y') }} </td>
-                                            <td> {{ $orderItem }} </td>
+                                            <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $orderItem }} </td>
                                             <td> {{ $item->status_message }} </td>
                                             <td><a href="{{ url('admin/orders/' . $item->id) }}"
                                                     class="btn btn-primary btn-sm">View</a></td>

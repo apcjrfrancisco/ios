@@ -36,7 +36,7 @@
                                             </a>
                                         </div>
                                         <div class="col-md-2 my-auto">
-                                            <label class="price">${{ $item->product->selling_price }} </label>
+                                            <label class="price"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->product->selling_price }} </label>
                                         </div>
                                         <div class="col-md-2 col-5 my-auto">
                                             <div class="remove">

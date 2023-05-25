@@ -91,8 +91,8 @@
                                     </td>
                                     <td>{{ $item->product->product_name }}</td>
                                     <td>{{ $item->quantity }}</td>
-                                    <td>{{ $item->price }}</td>
-                                    <td class="fw-bold">{{ $item->total_price }}</td>
+                                    <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->price }}</td>
+                                    <td class="fw-bold"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->total_price }}</td>
 
                                     @php
                                         $totalAmount += $item->total_price;
@@ -101,7 +101,7 @@
                             @endforeach
                             <tr>
                                 <td colspan="6" class="fw-bold">Total Amount: </td>
-                                <td class="text-center fw-bold">{{ $totalAmount }}</td>
+                                <td class="text-center fw-bold"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $totalAmount }}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -97,8 +97,8 @@
                                                                 <td> {{ $item->id }} </td>
                                                                 <td> {{ $item['product']['product_name'] }} </td>
                                                                 <td> {{ $item->buying_qty }} </td>
-                                                                <td> {{ $item->unit_price }} </td>
-                                                                <td> {{ $item->buying_price }} </td>
+                                                                <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->unit_price }} </td>
+                                                                <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->buying_price }} </td>
                                                             </tr>
                                                         @empty
                                                             <tr>

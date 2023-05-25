@@ -20,7 +20,8 @@
                         <div class="card-body">
 
                             <a class="btn btn-info btn-rounded btn-fw" style="float:right"
-                                href="{{ route('orders.report.pdf') }}" target="_blank"> <i class="fa fa-print"></i> All Orders</a>
+                                href="{{ route('orders.report.pdf') }}" target="_blank"> <i class="fa fa-print"></i> All
+                                Orders</a>
                             <a class="btn btn-success btn-rounded btn-fw" style="float:right"
                                 href="{{ route('orders.report.daily.pdf') }}" target="_blank"> <i class="fa fa-print"></i>
                                 Daily Orders
@@ -28,11 +29,11 @@
                             <a class="btn btn-warning btn-rounded btn-fw" style="float:right"
                                 href="{{ route('orders.report.weekly.pdf') }}" target="_blank"> <i class="fa fa-print"></i>
                                 Weekly Orders
-                            </a> 
+                            </a>
                             <a class="btn btn-primary btn-rounded btn-fw" style="float:right"
                                 href="{{ route('orders.report.monthly.pdf') }}" target="_blank"> <i class="fa fa-print"></i>
                                 Monthly Orders
-                            </a> 
+                            </a>
                             <a class="btn btn-danger btn-rounded btn-fw" style="float:right"
                                 href="{{ route('orders.report.yearly.pdf') }}" target="_blank"> <i class="fa fa-print"></i>
                                 Yearly Orders
@@ -74,7 +75,6 @@
                                 <tbody>
 
 
-
                                     @forelse ($orders as $item)
                                         @php
                                             $orderItem = App\Models\OrderItem::where('order_id', $item->id)->sum('total_price');
@@ -85,7 +85,8 @@
                                             <td> {{ $item->name }} </td>
                                             <td> {{ $item->payment_mode }} </td>
                                             <td> {{ $item->created_at->format('m/d/Y') }} </td>
-                                            <td> {{ $orderItem }} </td>
+                                            <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                                {{ $orderItem }} </td>
                                             <td> {{ $item->status_message }} </td>
                                             <td><a href="{{ url('admin/orders/' . $item->id) }}"
                                                     class="btn btn-primary btn-sm">View</a></td>
