@@ -3,14 +3,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 my-auto d-none d-sm-none d-md-block d-lg-block">
-                    <h5 class="brand-name"><img src="{{ asset('upload/tmlogo.png') }}" width="40px" alt=""> eTorrecamps</h5>
+                    <h5 class="brand-name"><img src="{{ asset('upload/tmlogo.png') }}" width="40px" alt="">
+                        eTorrecamps</h5>
                 </div>
-                <div class="col-md-5 my-auto">
+                <div class="col-md-5 my-auto" style="color:#2974f1;">
                     <form role="search">
-                        <div class="input-group">
-                            <input type="search" placeholder="Search your product" class="form-control" />
-                            <button class="btn bg-white" type="submit">
-                                <i class="fa fa-search"></i>
+                        <div class="input-group " style="background-color:#2974f1;">
+                            <input type="hidden" placeholder="Search your product" class="form-control" />
+                            <i class="fa fa-search"></i>
                             </button>
                         </div>
                     </form>
@@ -20,18 +20,21 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('cart') }}">
-                                <i class="fa fa-shopping-cart"></i> Cart (<livewire:frontend.cart.cart-count />)
+                                <i class="fa fa-shopping-cart"></i> Cart (
+                                <livewire:frontend.cart.cart-count />)
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('wishlist') }}">
-                                <i class="fa fa-heart"></i> Wishlist (<livewire:frontend.wishlist-count />)
+                                <i class="fa fa-heart"></i> Wishlist (
+                                <livewire:frontend.wishlist-count />)
                             </a>
                         </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}"><i class="fa-sharp fa-solid fa-door-open"></i> {{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}"><i
+                                            class="fa-sharp fa-solid fa-door-open"></i> {{ __('Login') }}</a>
                                 </li>
                             @endif
 
@@ -49,10 +52,13 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @if (Auth::user()->role_as == '1')
-                                    <li><a class="dropdown-item" href="{{ url('/admin/dashboard') }}"><i class="fas fa-gauge"></i> Go To Dashboard</a></li>
+                                        <li><a class="dropdown-item" href="{{ url('/admin/dashboard') }}"><i
+                                                    class="fas fa-gauge"></i> Go To Dashboard</a></li>
                                     @endif
-                                    <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fa fa-user"></i> Profile</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('user.orders') }}"><i class="fa fa-list"></i> My Orders</a>
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fa fa-user"></i>
+                                            Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('user.orders') }}"><i
+                                                class="fa fa-list"></i> My Orders</a>
                                     </li>
                                     <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> My Wishlist</a>
                                     </li>
@@ -65,7 +71,8 @@
                                             <i class="fa fa-sign-out"></i> {{ __('Logout') }}
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
                                             @csrf
                                         </form>
                                     </li>

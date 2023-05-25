@@ -31,6 +31,16 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
+    <style>
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Height of the footer*/
+            height: 40px;
+        }
+    </style>
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
