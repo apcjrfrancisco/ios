@@ -37,7 +37,6 @@
                                         <th>In</th>
                                         <th>Out</th>
                                         <th>Stock</th>
-
                                 </thead>
 
 
@@ -51,8 +50,8 @@
                                                 ->where('product_id', $item->id)
                                                 ->where('status', '1')
                                                 ->sum('buying_qty');
-
-                                            $out = ($in - $item->quantity) ;
+                                            
+                                            $out = $in - $item->quantity;
                                         @endphp
                                         <tr class="text-center">
                                             <td> {{ $key + 1 }} </td>
@@ -61,9 +60,15 @@
                                             <td> {{ $item['brand']['brand_name'] }} </td>
                                             <td> {{ $item['unit']['unit_name'] }} </td>
                                             <td> {{ $item->product_name }} </td>
-                                            <td> {{ $in }} </td>
-                                            <td> {{ $out }} </td>
-                                            <td> {{ $item->quantity }} </td>
+                                            <td> <span class="btn btn-success"> {{ $in }} </span></td>
+                                            <td> <span class="btn btn-danger"> {{ $out }} </span></td>
+                                            <td>
+                                                @if ($item->to_reorder > $item->quantity)
+                                                    <span class="btn btn-warning">{{ $item->quantity }}</span>
+                                                    @else
+                                                    <span class="btn btn-success">{{ $item->quantity }}</span>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
 

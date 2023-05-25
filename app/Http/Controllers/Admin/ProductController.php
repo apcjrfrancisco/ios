@@ -47,6 +47,7 @@ class ProductController extends Controller
             'product_image' => $save_url,
             'quantity' => '0',
             'selling_price' => $request->selling_price,
+            'to_reorder' => $request->to_reorder,
             'created_by' => Auth::user()->id,
             'created_at' => Carbon::now(),
         ]);
@@ -90,6 +91,7 @@ class ProductController extends Controller
                 'product_slug' => strtolower(str_replace(' ', '-', $request->product_name)),
                 'product_image' => $save_url,
                 'selling_price' => $request->selling_price,
+                'to_reorder' => $request->to_reorder,
                 'updated_by' => Auth::user()->id,
                 'updated_at' => Carbon::now(),
             ]);
@@ -109,6 +111,7 @@ class ProductController extends Controller
                 'product_name' => $request->product_name,
                 'product_slug' => strtolower(str_replace(' ', '-', $request->product_name)),
                 'selling_price' => $request->selling_price,
+                'to_reorder' => $request->to_reorder,
                 'updated_by' => Auth::user()->id,
                 'updated_at' => Carbon::now(),
             ]);

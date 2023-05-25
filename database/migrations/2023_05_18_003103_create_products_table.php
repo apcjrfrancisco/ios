@@ -25,6 +25,7 @@ return new class extends Migration
             $table->double('quantity')->default('0');
             $table->decimal('selling_price')->nullable();
             $table->tinyInteger('status')->default('1');
+            $table->string('to_reorder')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();

@@ -35,22 +35,31 @@
                                             <td>{{ $item->payment_mode }}</td>
                                             <td>{{ $item->created_at->format('m/d/Y') }}</td>
                                             <td>{{ $item->status_message }}</td>
-                                            <td><a href="{{ url('orders/'. $item->id) }}"
-                                                    class="btn btn-primary btn-sm">View</a></td>
-                                        </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="7">No Orders Found</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+                                            <td><a href="{{ url('orders/' . $item->id) }}"
+                                                    class="btn btn-primary btn-sm">View</a>
+                                                @if ($item->status_message == 'in progress')
+                                                    <form action="{{ url('orders/cancel/' . $item->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" name="order_status" value="cancelled" class="btn btn-danger btn-sm">Cancel</button>
+                                                    </form>
+                                                @endif
 
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="7">No Orders Found</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-    @endsection
+@endsection

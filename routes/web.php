@@ -69,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(OrderController::class)->group(function () {
         Route::get('/user/orders', 'Orders')->name('user.orders');
         Route::get('/orders/{id}', 'OrderShow')->name('orders.show');
+        Route::put('/orders/cancel/{id}', 'CancelOrder')->name('cancel.order');
     });
 
     //Profile
@@ -80,9 +81,11 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-Auth::routes();
+Auth::routes([
+    'verify' => true
+]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);

@@ -96,6 +96,14 @@
                                     </div>
                                 </div>
                                 <!-- end row -->
+                                 
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">To Re-order Stock </label>
+                                    <div class="form-group col-sm-2">
+                                        <input name="to_reorder" value="{{ $product->to_reorder }}" class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <!-- end row -->
 
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Product Image </label>
