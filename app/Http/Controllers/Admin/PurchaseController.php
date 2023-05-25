@@ -104,4 +104,14 @@ class PurchaseController extends Controller
             return redirect()->route('purchase')->with($notification);
         }
     }
+
+    public function PurchaseView(Request $request)
+    {
+        $purchase_no = $request->purchase_no;
+
+        $purchase = Purchase::where('purchase_no', $purchase_no)->get();
+
+        return view('backend.purchase.purchase_view', compact('purchase'));
+
+    }
 }

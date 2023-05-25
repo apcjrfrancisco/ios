@@ -23,6 +23,23 @@
                                 href="{{ route('purchase.add') }}">Add Purchase</a> <br>
                             <h4 class="card-title">All Purchases Data </h4>
 
+                            <form action="{{ route('purchase.view') }}" method="get">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Select Purchase No.</label>
+                                        <select name="purchase_no" class="form-select" id="purchase_no">
+                                            <option value="" disabled>Select a Purchase No.</option>
+                                            @foreach ($allData as $item)
+                                                <option value="{{ $item->purchase_no }}">{{ $item->purchase_no }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mt-4">
+                                        <input type="submit" class="btn btn-info waves-effect waves-light" value="Go">
+                                    </div>
+                                </div>
+                            </form> <br>
+
                             <table id="datatable" class="table table-bordered table-striped dt-responsive nowrap"
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>

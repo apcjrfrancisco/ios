@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-2">Orders</h4>
+                        <h4 class="mb-sm-2">Completed</h4>
 
                     </div>
                 </div>
@@ -19,7 +19,25 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">All Orders Data </h4>
+                            <a class="btn btn-info btn-rounded btn-fw" style="float:right"
+                                href="{{ route('orders.report.pdf') }}" target="_blank"> <i class="fa fa-print"></i> All Orders</a>
+                            <a class="btn btn-success btn-rounded btn-fw" style="float:right"
+                                href="{{ route('orders.report.daily.pdf') }}" target="_blank"> <i class="fa fa-print"></i>
+                                Daily Orders
+                            </a>
+                            <a class="btn btn-warning btn-rounded btn-fw" style="float:right"
+                                href="{{ route('orders.report.weekly.pdf') }}" target="_blank"> <i class="fa fa-print"></i>
+                                Weekly Orders
+                            </a> 
+                            <a class="btn btn-primary btn-rounded btn-fw" style="float:right"
+                                href="{{ route('orders.report.monthly.pdf') }}" target="_blank"> <i class="fa fa-print"></i>
+                                Monthly Orders
+                            </a> 
+                            <a class="btn btn-danger btn-rounded btn-fw" style="float:right"
+                                href="{{ route('orders.report.yearly.pdf') }}" target="_blank"> <i class="fa fa-print"></i>
+                                Yearly Orders
+                            </a> <br>
+                            <h4 class="card-title">Completed Orders Data </h4>
 
                             <form action="{{ route('filter.order') }}" method="GET">
                                 <div class="row">

@@ -146,6 +146,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
         Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
         Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
+        Route::get('/purchase/view', 'PurchaseView')->name('purchase.view');
         Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
         Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
     });
@@ -177,6 +178,13 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/invoice/{orderId}/generate', 'GenerateInvoice')->name('invoice.generate');
         Route::get('/invoice/{orderId}', 'ViewInvoice')->name('invoice.view');
         Route::get('/invoice/{orderId}/mail', 'MailInvoice')->name('invoice.mail');
+        Route::get('/print/orders/list', 'PrintOrdersList')->name('print.orders.list');
+        Route::get('/orders/report/pdf', 'OrdersReportPdf')->name('orders.report.pdf');
+        Route::get('/orders/report/daily/pdf', 'OrdersReportDailyPdf')->name('orders.report.daily.pdf');
+        Route::get('/orders/report/weekly/pdf', 'OrdersReportWeeklyPdf')->name('orders.report.weekly.pdf');
+        Route::get('/orders/report/monthly/pdf', 'OrdersReportMonthlyPdf')->name('orders.report.monthly.pdf');
+        Route::get('/orders/report/yearly/pdf', 'OrdersReportYearlyPdf')->name('orders.report.yearly.pdf');
+
     });
 
     //Setting

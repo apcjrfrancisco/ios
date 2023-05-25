@@ -118,4 +118,40 @@ class OrderController extends Controller
             return redirect('/admin/orders/' . $orderId)->with($notification);
         }
     }
+
+    public function PrintOrdersList()
+    {
+        $orders = Order::where('status_message', 'completed')->get();
+        return view('backend.orders.print_orders_list', compact('orders'));
+    }
+
+    public function OrdersReportPdf()
+    {
+        $orders = Order::where('status_message', 'completed')->get();
+        return view('backend.orders.print_orders_pdf', compact('orders'));
+    }
+
+    public function OrdersReportDailyPdf()
+    {
+        $orders = Order::whereDate('created_at',Carbon::today())->where('status_message', 'completed')->get();
+        return view('backend.orders.print_orders_daily_pdf', compact('orders'));
+    }
+
+    public function OrdersReportWeeklyPdf()
+    {
+        $orders = Order::whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->where('status_message', 'completed')->get();
+        return view('backend.orders.print_orders_weekly_pdf', compact('orders'));
+    }
+
+    public function OrdersReportMonthlyPdf()
+    {
+        $orders = Order::whereMonth('created_at',Carbon::now()->month)->where('status_message', 'completed')->get();
+        return view('backend.orders.print_orders_monthly_pdf', compact('orders'));
+    }
+
+    public function OrdersReportYearlyPdf()
+    {
+        $orders = Order::whereYear('created_at',Carbon::now()->year)->where('status_message', 'completed')->get();
+        return view('backend.orders.print_orders_yearly_pdf', compact('orders'));
+    }
 }
