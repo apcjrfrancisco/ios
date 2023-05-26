@@ -3,24 +3,25 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\DefaultController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\StockController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FrontendController;
-use App\Http\Controllers\Frontend\OrderController;
-use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -211,5 +212,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/product/wise/pdf', 'ProductWisePdf')->name('product.wise.pdf');
     });
 
+    //Notification
+    Route::controller(NotificationController::class)->group(function () {
+        Route::get('/notification/minimum', 'NotificationMinimum')->name('notification.minimum');
+        Route::get('/notification/minimum/mail', 'NotificationMinimumMail')->name('notification.minimum.mail');
+        
+    });
 
 });
