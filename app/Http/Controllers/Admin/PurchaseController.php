@@ -126,6 +126,7 @@ class PurchaseController extends Controller
     // {
     //     $purchase_no = $request->purchase_no;
     //     $purchase = Purchase::where('purchase_no', $purchase_no)->get();
-
+        
+        
     // }
 }

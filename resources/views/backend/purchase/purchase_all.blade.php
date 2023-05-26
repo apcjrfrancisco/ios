@@ -22,8 +22,8 @@
                             <a class="btn btn-info btn-rounded btn-fw" style="float:right"
                                 href="{{ route('purchase.add') }}">Add Purchase</a> <br>
                             <h4 class="card-title">All Purchases Data </h4>
-
-                            {{-- <form action="{{ route('purchase.view') }}" method="get">
+{{-- 
+                            <form action="{{ route('purchase.view') }}" method="get">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label for="">Select Purchase No.</label>
