@@ -52,5 +52,13 @@ class Product extends Model
         return $this->belongsTo(Brand::class,'brand_id', 'id');
     }
 
-    
+    /**
+     * Get the user that owns the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }

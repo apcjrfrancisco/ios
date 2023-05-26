@@ -30,6 +30,7 @@ class DashboardController extends Controller
     {
         try {
             $allData = Product::latest()->get();
+            $admin = User::where('id', Auth::user()->id)->where('role_as', '1')->get();
             foreach ($allData as $item) {
                 if ($item->to_reorder > $item->quantity && $item->quantity != 0) {
                     Mail::to("franciscoterence98@gmail.com")->send(new NotificationMinimumMailable($allData));

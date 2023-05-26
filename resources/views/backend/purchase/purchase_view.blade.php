@@ -7,12 +7,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Purchase Report</h4>
+                        <h4 class="mb-sm-0">Purchase Order</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);"> </a></li>
-                                <li class="breadcrumb-item active">Purchase Report</li>
+                                <li class="breadcrumb-item active">Purchase Order</li>
                             </ol>
                         </div>
 
@@ -39,17 +39,34 @@
 
                                     <div class="row">
                                         <div class="col-6 mt-4">
+                                            <strong>
+                                                <h4 class="fw-bold">From:</h4>
+                                            </strong>
                                             <address>
                                                 <strong>{{ $appSetting->company_name }}:</strong><br>
+                                                {{ $appSetting->company_phone }}<br>
                                                 {{ $appSetting->company_address }}<br>
                                                 {{ $appSetting->company_email }}
                                             </address>
                                         </div>
-                                        <div class="col-6 mt-4 text-end">
-                                            <address>
+                                        @foreach ($supplier as $item)
+                                            <div class="col-6 mt-4">
+                                                <strong>
+                                                    <h4 class="fw-bold">Supplier:</h4>
+                                                </strong>
+                                                <address>
+                                                    <strong>{{ $item['supplier']['supplier_name'] }}:</strong><br>
+                                                    {{ $item['supplier']['supplier_phone'] }}<br>
+                                                    {{ $item['supplier']['supplier_address1'] }},
+                                                    {{ $item['supplier']['supplier_address2'] }},
+                                                    {{ $item['supplier']['supplier_city'] }},
+                                                    {{ $item['supplier']['supplier_province'] }},
+                                                    {{ $item['supplier']['supplier_zipcode'] }}<br>
+                                                    {{ $item['supplier']['supplier_email'] }}
+                                                </address>
+                                            </div>
+                                        @endforeach
 
-                                            </address>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -97,15 +114,25 @@
                                                                 <td> {{ $item->id }} </td>
                                                                 <td> {{ $item['product']['product_name'] }} </td>
                                                                 <td> {{ $item->buying_qty }} </td>
-                                                                <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->unit_price }} </td>
-                                                                <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->buying_price }} </td>
+                                                                <td><span
+                                                                        style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                                                    {{ $item->unit_price }} </td>
+                                                                <td><span
+                                                                        style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                                                    {{ $item->buying_price }} </td>
                                                             </tr>
                                                         @empty
                                                             <tr>
                                                                 <td colspan="8">No Purchases Available</td>
                                                             </tr>
                                                         @endforelse
-
+                                                        <tr>
+                                                            <td colspan="8" style="font-size:30px">
+                                                                <strong> Total Amount: <span
+                                                                        style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                                                    {{ $total }} </strong>
+                                                            </td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>

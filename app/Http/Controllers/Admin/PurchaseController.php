@@ -111,7 +111,11 @@ class PurchaseController extends Controller
 
         $purchase = Purchase::where('purchase_no', $purchase_no)->get();
 
-        return view('backend.purchase.purchase_view', compact('purchase'));
+        $supplier = Purchase::where('purchase_no', $purchase_no)->limit(1)->get();
+
+        $total = Purchase::where('purchase_no', $purchase_no)->sum('buying_price');
+
+        return view('backend.purchase.purchase_view', compact('purchase', 'total', 'supplier'));
 
     }
 }

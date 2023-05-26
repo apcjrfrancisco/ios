@@ -23,7 +23,7 @@
                                 href="{{ route('purchase.add') }}">Add Purchase</a> <br>
                             <h4 class="card-title">All Purchases Data </h4>
 
-                            <form action="{{ route('purchase.view') }}" method="get">
+                            <form action="{{ route('purchase.view') }}" target="_blank" method="get">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label for="">Select Purchase No.</label>
