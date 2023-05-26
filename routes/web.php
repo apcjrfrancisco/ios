@@ -150,8 +150,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/purchase/view', 'PurchaseView')->name('purchase.view');
         Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
         Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
-
-        // Route::post('/purchase/reorder', 'PurchaseReOrder')->name('purchase.reorder');
     });
 
     //Defaults
