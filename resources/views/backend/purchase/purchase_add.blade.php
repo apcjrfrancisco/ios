@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 @section('admin')
+    @php
+        $random = Illuminate\Support\Str::random(10);
+    @endphp
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <div class="page-content">
@@ -25,8 +28,8 @@
                                 <div class="col-md-4">
                                     <div class="md-3">
                                         <label class="col-form-label">Purchase No.</label>
-                                        <input class="form-control example-date-input" type="text" name="purchase_no"
-                                            id="purchase_no">
+                                        <input class="form-control example-date-input" type="text" readonly
+                                            value="TM - {{ $random }}" name="purchase_no" id="purchase_no">
                                     </div>
                                 </div> <!-- end div -->
 
@@ -194,27 +197,45 @@
                 var product_name = $('#product_id').find('option:selected').text();
 
                 if (date == '') {
-                    $.notify("Date is required", {globalPosition: 'top right', className:'error'});
+                    $.notify("Date is required", {
+                        globalPosition: 'top right',
+                        className: 'error'
+                    });
                     return false;
                 }
                 if (purchase_no == '') {
-                    $.notify("Purchase No. is required", {globalPosition: 'top right', className:'error'});
+                    $.notify("Date is required", {
+                        globalPosition: 'top right',
+                        className: 'error'
+                    });
                     return false;
                 }
                 if (supplier_id == '') {
-                    $.notify("Supplier is required", {globalPosition: 'top right', className:'error'});
+                    $.notify("Supplier is required", {
+                        globalPosition: 'top right',
+                        className: 'error'
+                    });
                     return false;
                 }
                 if (category_id == '') {
-                    $.notify("Category is required", {globalPosition: 'top right', className:'error'});
+                    $.notify("Category is required", {
+                        globalPosition: 'top right',
+                        className: 'error'
+                    });
                     return false;
                 }
                 if (brand_id == '') {
-                    $.notify("Brand is required", {globalPosition: 'top right', className:'error'});
+                    $.notify("Brand is required", {
+                        globalPosition: 'top right',
+                        className: 'error'
+                    });
                     return false;
                 }
                 if (product_id == '') {
-                    $.notify("Product is required", {globalPosition: 'top right', className:'error'});
+                    $.notify("Product is required", {
+                        globalPosition: 'top right',
+                        className: 'error'
+                    });
                     return false;
                 }
 
@@ -236,12 +257,12 @@
 
             });
 
-            $(document).on("click", ".removeeventmore", function(event){
+            $(document).on("click", ".removeeventmore", function(event) {
                 $(this).closest(".delete_add_more_item").remove();
                 totalAmountPrice();
             });
 
-            $(document).on('keyup click', '.unit_price, .buying_qty', function(){
+            $(document).on('keyup click', '.unit_price, .buying_qty', function() {
                 var unit_price = $(this).closest("tr").find("input.unit_price").val();
                 var qty = $(this).closest("tr").find("input.buying_qty").val();
                 var total = unit_price * qty;
@@ -251,7 +272,7 @@
 
             function totalAmountPrice() {
                 var sum = 0;
-                $(".buying_price").each(function(){
+                $(".buying_price").each(function() {
                     var value = $(this).val();
                     if (!isNaN(value) && value.length != 0) {
                         sum += parseFloat(value);

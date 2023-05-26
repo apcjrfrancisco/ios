@@ -60,8 +60,7 @@ class PurchaseController extends Controller
                 $purchase->save();
             }
 
-            if ($purchase->status == 0) {
-            }
+           
         }
 
         $notification = array(
@@ -122,4 +121,11 @@ class PurchaseController extends Controller
 
         return view('backend.purchase.purchase_view', compact('purchase', 'total', 'supplier'));
     }
+
+    // public function PurchaseReOrder(Request $request)
+    // {
+    //     $purchase_no = $request->purchase_no;
+    //     $purchase = Purchase::where('purchase_no', $purchase_no)->get();
+
+    // }
 }
