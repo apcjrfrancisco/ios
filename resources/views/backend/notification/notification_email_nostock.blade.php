@@ -24,22 +24,22 @@
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
         }
 
-        strong{
-            color: yellow;
+        strong {
+            color: red;
         }
     </style>
 
-    <title>Needs Restock</title>
+    <title>No Stock</title>
 </head>
 
 <body>
     <div>
-        <img src="{{ $message->embed(public_path().'/upload/restock.png') }}" class="center" alt="">
+        <img src="{{ $message->embed(public_path() . '/upload/nostock.png') }}" class="center" alt="">
     </div>
     <div>
         @foreach ($allData as $item)
-            @if ($item->to_reorder > $item->quantity)
-                <h1>{{ $item->product_name }} needs to <strong>Restock!</strong></h1>
+            @if ($item->quantity == '0')
+                <h1>{{ $item->product_name }} has <strong>NO STOCK!</strong></h1>
             @endif
         @endforeach
     </div>

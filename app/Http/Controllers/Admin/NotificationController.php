@@ -12,22 +12,11 @@ class NotificationController extends Controller
 {
     public function NotificationMinimum()
     {
-        $sendmail = $this->NotificationMinimumMail();
         return view('backend.notification.notification_email');
     }
 
-    public function NotificationMinimumMail()
+    public function NotificationNoStock()
     {
-        try {
-            $allData = Product::latest()->get();
-
-            foreach ($allData as $item) {
-                if ($item->to_reorder > $item->quantity) {
-                    Mail::to("franciscoterence98@gmail.com")->send(new NotificationMinimumMailable($allData));
-                }
-            }
-        } catch (\Exception $e) {
-            
-        }
+        return view('backend.notification.notification_email_nostock');
     }
 }

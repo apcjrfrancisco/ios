@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -31,10 +32,39 @@ class UserController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'User Created',  
+            'message' => 'User Created',
             'alert-type' => 'success'
         );
-        return redirect()->route('user.all')->with($notification);
+        return redirect()->route('user')->with($notification);
+    }
+
+    public function UserEdit($id, Request $request)
+    {
+        if (User::where('id', Auth::user()->id)->where('role_as', '0')) {
+            User::findOrFail($id)->update([
+                'role_as' => '1',
+            ]);
+            $notification = array(
+                'message' => 'User Updated',
+                'alert-type' => 'info'
+            );
+            return redirect()->route('user')->with($notification);
+        }
+    }
+
+    public function UserUserEdit($id, Request $request)
+    {
+        if (User::where('id', Auth::user()->id)->where('role_as', '1')) {
+
+            User::findOrFail($id)->update([
+                'role_as' => '0',
+            ]);
+            $notification = array(
+                'message' => 'User Updated',
+                'alert-type' => 'info'
+            );
+            return redirect()->route('user')->with($notification);
+        }
     }
 
     public function UserDelete($id)
@@ -42,9 +72,9 @@ class UserController extends Controller
         User::findOrFail($id)->delete();
 
         $notification = array(
-            'message' => 'User Deleted',  
+            'message' => 'User Deleted',
             'alert-type' => 'info'
         );
-        return redirect()->route('user.all')->with($notification);
+        return redirect()->route('user')->with($notification);
     }
 }

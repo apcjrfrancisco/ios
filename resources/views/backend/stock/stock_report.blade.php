@@ -63,11 +63,14 @@
                                             <td> <span class="btn btn-success"> {{ $in }} </span></td>
                                             <td> <span class="btn btn-danger"> {{ $out }} </span></td>
                                             <td>
-                                                @if ($item->to_reorder > $item->quantity)
+                                                @if ($item->to_reorder > $item->quantity && $item->quantity != 0)
                                                     <span class="btn btn-warning">{{ $item->quantity }}</span>
-                                                    @else
+                                                @elseif ($item->quantity == 0)
+                                                    <span class="btn btn-danger">{{ $item->quantity }}</span>
+                                                @else
                                                     <span class="btn btn-success">{{ $item->quantity }}</span>
                                                 @endif
+
                                             </td>
                                         </tr>
                                     @endforeach

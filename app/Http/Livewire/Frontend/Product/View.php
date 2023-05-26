@@ -93,7 +93,7 @@ class View extends Component
                     ]);
                 } else {
                     if ($this->product->quantity > 0) {
-                        if ($this->product->quantity > $this->quantityCount) {
+                        if ($this->product->quantity >= $this->quantityCount) {
                             // Insert to Cart
                             Cart::insert([
                                 'user_id' => Auth::user()->id,

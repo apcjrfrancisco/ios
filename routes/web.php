@@ -46,7 +46,6 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/categories/{category_slug}', 'Products')->name('products');
     Route::get('/categories/{category_slug}/{product_slug}', 'ProductView')->name('productView');
     Route::get('/thank-you', 'ThankYou')->name('thank-you');
-    
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -90,6 +89,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::get('/notification/minimum/mail', [DashboardController::class, 'NotificationMinimumMail']);
 
 
     //Supplier
@@ -185,7 +185,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/orders/report/weekly/pdf', 'OrdersReportWeeklyPdf')->name('orders.report.weekly.pdf');
         Route::get('/orders/report/monthly/pdf', 'OrdersReportMonthlyPdf')->name('orders.report.monthly.pdf');
         Route::get('/orders/report/yearly/pdf', 'OrdersReportYearlyPdf')->name('orders.report.yearly.pdf');
-
     });
 
     //Setting
@@ -200,6 +199,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/user', 'UserAll')->name('user');
         Route::get('/user/add', 'UserAdd')->name('user.add');
         Route::post('/user/store', 'UserStore')->name('user.store');
+        Route::get('/user/edit/{id}', 'UserEdit')->name('user.edit');
+        Route::get('/user/edit/user/{id}', 'UserUserEdit')->name('user.edit.user');
         Route::get('/user/delete/{id}', 'UserDelete')->name('user.delete');
     });
 
@@ -215,8 +216,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     //Notification
     Route::controller(NotificationController::class)->group(function () {
         Route::get('/notification/minimum', 'NotificationMinimum')->name('notification.minimum');
-        Route::get('/notification/minimum/mail', 'NotificationMinimumMail')->name('notification.minimum.mail');
-        
-    });
+        Route::get('/notification/nostock', 'NotificationNoStock')->name('notification.nostock');
+        // Route::get('/notification/minimum/mail', 'NotificationMinimumMail')->name('notification.minimum.mail');
 
+    });
 });

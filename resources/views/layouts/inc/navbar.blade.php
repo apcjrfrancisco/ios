@@ -28,8 +28,8 @@
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
                     <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
                     @foreach ($allData as $item)
-                        @if ($item->to_reorder > $item->quantity)
-                            <a class="dropdown-item">
+                        @if ($item->to_reorder > $item->quantity && $item->quantity != 0)
+                            <a class="dropdown-item" href="{{ route('purchase') }}">
                                 <div class="item-thumbnail">
                                     <div class="item-icon bg-warning">
                                         <i class="mdi mdi-alert mx-0"></i>
@@ -39,8 +39,9 @@
                                     <h6 class="font-weight-normal">{{ $item->product_name }} needs to Re-Order</h6>
                                 </div>
                             </a>
-                        @elseif ($item->quantity == '0')
-                            <a class="dropdown-item">
+                        @endif
+                        @if ($item->quantity == '0')
+                            <a class="dropdown-item" href="{{ route('purchase') }}">
                                 <div class="item-thumbnail">
                                     <div class="item-icon bg-danger">
                                         <i class="mdi mdi-close-octagon mx-0"></i>

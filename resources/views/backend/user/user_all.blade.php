@@ -44,9 +44,11 @@
                                             <td>{{ $item->email }}</td>
                                             <td>
                                                 @if ($item->role_as == '1')
-                                                    <span class="btn btn-success">Admin</span>
+                                                    <a href="{{ route('user.edit.user', $item->id) }}"><span
+                                                            class="btn btn-success">Admin</span></a>
                                                 @else
-                                                    <span class="btn btn-primary">User</span>
+                                                    <a href="{{ route('user.edit', $item->id) }}"><span
+                                                            class="btn btn-primary">User</span></a>
                                                 @endif
                                             </td>
                                             <td>
