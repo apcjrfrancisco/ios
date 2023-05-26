@@ -10,7 +10,9 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Mail\OrderCancelMailable;
 use App\Mail\InvoiceOrderMailable;
+use App\Mail\OrderCompleteMailable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
@@ -65,6 +67,21 @@ class OrderController extends Controller
             if ($order->status_message == 'cancelled') {
                 foreach ($this->orderItem as $item) {
                     $item->product()->where('id', $item->product_id)->increment('quantity', $item->quantity);
+                }
+                try {
+                    Mail::to("$order->email")->send(new OrderCancelMailable($order));
+                    
+                } catch (\Exception $e) {
+                    
+                }
+            }
+
+            if ($order->status_message == 'completed') {
+                try {
+                    Mail::to("$order->email")->send(new OrderCompleteMailable($order));
+                    
+                } catch (\Exception $e) {
+                    
                 }
             }
 

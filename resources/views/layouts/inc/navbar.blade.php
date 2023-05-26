@@ -4,6 +4,11 @@
         ->orderBy('brand_id', 'ASC')
         ->get();
 @endphp
+@php
+    $orders = App\Models\Order::latest()
+        ->limit(5)
+        ->get();
+@endphp
 
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="navbar-brand-wrapper d-flex justify-content-center">
@@ -52,6 +57,18 @@
                                 </div>
                             </a>
                         @endif
+                    @endforeach
+                    @foreach ($orders as $item)
+                        <a class="dropdown-item" href="{{ route('purchase') }}">
+                            <div class="item-thumbnail">
+                                <div class="item-icon bg-success">
+                                    <i class="mdi mdi-cart-arrow-down mx-0"></i>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h6 class="font-weight-normal">{{ $item->user->name }} Ordered!</h6>
+                            </div>
+                        </a>
                     @endforeach
 
                 </div>
