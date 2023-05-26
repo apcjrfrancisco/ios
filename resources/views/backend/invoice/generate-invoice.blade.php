@@ -193,6 +193,7 @@
                     <td class="fw-bold"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->total_price }}</td>
                     @php
                         $totalAmount += $item->total_price;
+                        $grandTotal = $totalAmount + $order->del_fee;
                         $vat = $totalAmount * 0.12;
                         $without_vat = $totalAmount - ($totalAmount * 0.12);
                     @endphp
@@ -207,8 +208,12 @@
                 <td colspan="1" class="total-heading text-center"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $vat }} </td>
             </tr>
             <tr>
+                <td colspan="5" class="total-heading">Delivery Fee: </td>
+                <td colspan="1" class="total-heading text-center"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $order->del_fee }}</td>
+            </tr>
+            <tr>
                 <td colspan="5" class="total-heading">Total Amount: </td>
-                <td colspan="1" class="total-heading text-center"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $totalAmount }}</td>
+                <td colspan="1" class="total-heading text-center"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $grandTotal }}</td>
             </tr>
         </tbody>
     </table>

@@ -14,6 +14,7 @@ use App\Mail\OrderCancelMailable;
 use App\Mail\InvoiceOrderMailable;
 use App\Mail\OrderCompleteMailable;
 use App\Http\Controllers\Controller;
+use App\Mail\OrderDeliveryMailable;
 use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
@@ -60,6 +61,7 @@ class OrderController extends Controller
 
         if ($order) {
             $order->update([
+                'del_fee' => $request->del_fee,
                 'status_message' => $request->order_status,
                 'updated_at' => Carbon::now(),
             ]);
@@ -70,18 +72,21 @@ class OrderController extends Controller
                 }
                 try {
                     Mail::to("$order->email")->send(new OrderCancelMailable($order));
-                    
                 } catch (\Exception $e) {
-                    
                 }
             }
 
             if ($order->status_message == 'completed') {
                 try {
                     Mail::to("$order->email")->send(new OrderCompleteMailable($order));
-                    
                 } catch (\Exception $e) {
-                    
+                }
+            }
+
+            if ($order->status_message == 'out for delivery') {
+                try {
+                    Mail::to("$order->email")->send(new OrderDeliveryMailable($order));
+                } catch (\Exception $e) {
                 }
             }
 
@@ -150,25 +155,25 @@ class OrderController extends Controller
 
     public function OrdersReportDailyPdf()
     {
-        $orders = Order::whereDate('created_at',Carbon::today())->where('status_message', 'completed')->get();
+        $orders = Order::whereDate('created_at', Carbon::today())->where('status_message', 'completed')->get();
         return view('backend.orders.print_orders_daily_pdf', compact('orders'));
     }
 
     public function OrdersReportWeeklyPdf()
     {
-        $orders = Order::whereBetween('created_at',[Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->where('status_message', 'completed')->get();
+        $orders = Order::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('status_message', 'completed')->get();
         return view('backend.orders.print_orders_weekly_pdf', compact('orders'));
     }
 
     public function OrdersReportMonthlyPdf()
     {
-        $orders = Order::whereMonth('created_at',Carbon::now()->month)->where('status_message', 'completed')->get();
+        $orders = Order::whereMonth('created_at', Carbon::now()->month)->where('status_message', 'completed')->get();
         return view('backend.orders.print_orders_monthly_pdf', compact('orders'));
     }
 
     public function OrdersReportYearlyPdf()
     {
-        $orders = Order::whereYear('created_at',Carbon::now()->year)->where('status_message', 'completed')->get();
+        $orders = Order::whereYear('created_at', Carbon::now()->year)->where('status_message', 'completed')->get();
         return view('backend.orders.print_orders_yearly_pdf', compact('orders'));
     }
 }

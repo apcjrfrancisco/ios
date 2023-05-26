@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('zip_code');
             $table->string('status_message');
             $table->string('payment_mode');
+            $table->decimal('del_fee');
             $table->timestamps();
         });
     }

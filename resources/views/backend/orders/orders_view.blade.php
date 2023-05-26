@@ -91,8 +91,10 @@
                                     </td>
                                     <td>{{ $item->product->product_name }}</td>
                                     <td>{{ $item->quantity }}</td>
-                                    <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->price }}</td>
-                                    <td class="fw-bold"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->total_price }}</td>
+                                    <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                        {{ $item->price }}</td>
+                                    <td class="fw-bold"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                        {{ $item->total_price }}</td>
 
                                     @php
                                         $totalAmount += $item->total_price;
@@ -101,7 +103,9 @@
                             @endforeach
                             <tr>
                                 <td colspan="6" class="fw-bold">Total Amount: </td>
-                                <td class="text-center fw-bold"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $totalAmount }}</td>
+                                <td class="text-center fw-bold"><span
+                                        style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $totalAmount }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -113,7 +117,9 @@
                     <h4>Order Process</h4>
                     <hr>
 
+                    <div class="row">
 
+                    </div>
 
 
                     <div class="row">
@@ -184,6 +190,18 @@
                                     @csrf
                                     @method('PUT')
 
+
+                                    <div class="col-md-5">
+                                        <label for="">Delivery Fee</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="{{ $order->del_fee ?? '' }}"
+                                                name="del_fee">
+                                        </div>
+                                    </div>
+
+
+
+
                                     <label for="">Update Status</label>
                                     <div class="input-group">
                                         <select name="order_status" class="form-select" id="">
@@ -219,6 +237,19 @@
                                     <span class="text-uppercase text-success">{{ $order->status_message }}</span>
                                 @endif
                             </h4>
+                            <br>
+                            @if ($order->del_fee != null)
+                                <h4>Delivery Fee:
+                                    <span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span><span
+                                        class="text-uppercase text-success"> {{ $order->del_fee }}</span>
+                                </h4>
+                            @else
+                                <h4>Delivery Fee:
+                                    <span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span><span
+                                        class="text-uppercase text-success"> 0</span>
+                                </h4>
+                            @endif
+
                         </div>
                     </div>
                 </div>

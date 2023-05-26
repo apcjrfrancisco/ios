@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Unit;
 use App\Models\Brand;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use App\Mail\InvoiceOrderMailable;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class PurchaseController extends Controller
 {
@@ -32,7 +34,7 @@ class PurchaseController extends Controller
     public function PurchaseStore(Request $request)
     {
         if ($request->category_id == null) {
-            
+
             $notification = array(
                 'message' => 'Please Select Category',
                 'alert-type' => 'error'
@@ -41,7 +43,7 @@ class PurchaseController extends Controller
             return redirect()->back()->with($notification);
         } else {
             $count_category = count($request->category_id);
-            for ($i=0; $i < $count_category; $i++) { 
+            for ($i = 0; $i < $count_category; $i++) {
                 $purchase = new Purchase();
                 $purchase->date = date('Y-m-d', strtotime($request->date[$i]));
                 $purchase->purchase_no = $request->purchase_no[$i];
@@ -56,6 +58,9 @@ class PurchaseController extends Controller
                 $purchase->created_by = Auth::user()->id;
                 $purchase->status = '0';
                 $purchase->save();
+            }
+
+            if ($purchase->status == 0) {
             }
         }
 
@@ -89,7 +94,7 @@ class PurchaseController extends Controller
     {
         $purchase = Purchase::findOrFail($id);
         $product = Product::where('id', $purchase->product_id)->first();
-        $purchase_qty = ((float)($purchase->buying_qty))+ ((float)($product->quantity));
+        $purchase_qty = ((float)($purchase->buying_qty)) + ((float)($product->quantity));
         $product->quantity = $purchase_qty;
 
         if ($product->save()) {
@@ -100,7 +105,7 @@ class PurchaseController extends Controller
                 'message' => 'Purchase Approved',
                 'alert-type' => 'success'
             );
-    
+
             return redirect()->route('purchase')->with($notification);
         }
     }
@@ -116,6 +121,5 @@ class PurchaseController extends Controller
         $total = Purchase::where('purchase_no', $purchase_no)->sum('buying_price');
 
         return view('backend.purchase.purchase_view', compact('purchase', 'total', 'supplier'));
-
     }
 }
