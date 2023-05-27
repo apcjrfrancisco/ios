@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function index()
     {
         $sendmailrestock = $this->NotificationMinimumMail();
-        $orders = Order::orderBy('id', 'desc')->get();
+        $orders = Order::orderBy('id', 'desc')->limit(5)->get();
         $orderComplete = Order::where('status_message', 'completed')->get();
         $orderCompleteCount = Order::where('status_message', 'completed')->count();
         $orderCount = Order::count();

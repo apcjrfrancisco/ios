@@ -12,7 +12,7 @@
 
                         <h4 class="text-primary">
                             <i class="fa fa-shopping-cart text-dark"></i> My Order Details
-                            <a href="{{ route('orders') }}" class="btn btn-danger btn-sm float-end">Back</a>
+                            <a href="{{ route('user.orders') }}" class="btn btn-danger btn-sm float-end">Back</a>
                         </h4>
                         <hr>
 

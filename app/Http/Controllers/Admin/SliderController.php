@@ -43,7 +43,7 @@ class SliderController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('slider.all')->with($notification);
+        return redirect()->route('slider')->with($notification);
     }
 
     public function SliderEdit($id)
@@ -76,7 +76,7 @@ class SliderController extends Controller
                 'alert-type' => 'info'
             );
     
-            return redirect()->route('slider.all')->with($notification);
+            return redirect()->route('slider')->with($notification);
         } else {
 
             Slider::findOrFail($slider_id)->update([
@@ -90,7 +90,7 @@ class SliderController extends Controller
                 'alert-type' => 'info'
             );
     
-            return redirect()->route('slider.all')->with($notification);
+            return redirect()->route('slider')->with($notification);
         }
     }
 
@@ -107,6 +107,6 @@ class SliderController extends Controller
             'alert-type' => 'info'
         );
 
-        return redirect()->route('slider.all')->with($notification);
+        return redirect()->route('slider')->with($notification);
     }
 }
