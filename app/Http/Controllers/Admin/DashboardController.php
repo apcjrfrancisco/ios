@@ -33,10 +33,10 @@ class DashboardController extends Controller
             $admin = User::where('id', Auth::user()->id)->where('role_as', '1')->get();
             foreach ($allData as $item) {
                 if ($item->to_reorder > $item->quantity && $item->quantity != 0) {
-                    Mail::to("franciscoterence98@gmail.com")->send(new NotificationMinimumMailable($allData));
+                    Mail::to("torrecampsm@gmail.com")->send(new NotificationMinimumMailable($allData));
                 }
                 if ($item->quantity == 0) {
-                    Mail::to("franciscoterence98@gmail.com")->send(new NotificationNoStockMailable($allData));
+                    Mail::to("torrecampsm@gmail.com")->send(new NotificationNoStockMailable($allData));
                 }
             }
         } catch (\Exception $e) {
