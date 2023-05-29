@@ -34,7 +34,7 @@ class OrderController extends Controller
 
     public function Orders()
     {
-        $orders = Order::latest()->get();
+        $orders = Order::orderBy('created_at', 'desc')->get();
         return view('backend.orders.orders_all', compact('orders'));
     }
 
@@ -143,7 +143,22 @@ class OrderController extends Controller
 
     public function PrintOrdersList()
     {
-        $orders = Order::where('status_message', 'completed')->get();
+        $orders = Order::where('status_message', 'completed')->orderBy('id', 'desc')->get();
+        foreach ($orders as $key) {
+            $orderItem = OrderItem::where('order_id', $key->id)->sum('total_price');
+        }
+
+        return view('backend.orders.print_orders_list', compact('orders', 'orderItem'));
+    }
+
+    public function FilterOrderList(Request $request)
+    {
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+
+        $orders = Order::whereDate('created_at', '>=', $start_date)
+            ->whereDate('created_at', '<=', $end_date)->get();
+
         return view('backend.orders.print_orders_list', compact('orders'));
     }
 

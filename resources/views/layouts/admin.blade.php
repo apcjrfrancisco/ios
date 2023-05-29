@@ -48,7 +48,7 @@
 
 </head>
 
-<body class="sidebar-icon-only">
+<body>
 
     <div class="container-scroller">
         @include('layouts.inc.navbar')

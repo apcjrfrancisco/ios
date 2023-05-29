@@ -6,8 +6,10 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Mail\OrderCancelMailable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -52,6 +54,10 @@ class OrderController extends Controller
             if ($order->status_message == 'cancelled') {
                 foreach ($this->orderItem as $item) {
                     $item->product()->where('id', $item->product_id)->increment('quantity', $item->quantity);
+                }
+                try {
+                    Mail::to("$order->email")->send(new OrderCancelMailable($order));
+                } catch (\Exception $e) {
                 }
             }
             return redirect()->back();

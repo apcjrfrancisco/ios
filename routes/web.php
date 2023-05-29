@@ -180,6 +180,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/invoice/{orderId}', 'ViewInvoice')->name('invoice.view');
         Route::get('/invoice/{orderId}/mail', 'MailInvoice')->name('invoice.mail');
         Route::get('/print/orders/list', 'PrintOrdersList')->name('print.orders.list');
+        Route::get('/filter/list', 'FilterOrderList')->name('filter.order.list');
         Route::get('/orders/report/pdf', 'OrdersReportPdf')->name('orders.report.pdf');
         Route::get('/orders/report/daily/pdf', 'OrdersReportDailyPdf')->name('orders.report.daily.pdf');
         Route::get('/orders/report/weekly/pdf', 'OrdersReportWeeklyPdf')->name('orders.report.weekly.pdf');

@@ -40,7 +40,7 @@
                             </a> <br>
                             <h4 class="card-title">Completed Orders Data </h4>
 
-                            <form action="{{ route('filter.order') }}" method="GET">
+                            <form action="{{ route('filter.order.list') }}" method="GET">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label for="">Start Date:</label>
@@ -76,9 +76,7 @@
 
 
                                     @forelse ($orders as $item)
-                                        @php
-                                            $orderItem = App\Models\OrderItem::where('order_id', $item->id)->sum('total_price');
-                                        @endphp
+                                       
                                         <tr class="text-center">
                                             <td> {{ $item->id }} </td>
                                             <td> {{ $item->tracking_no }} </td>
