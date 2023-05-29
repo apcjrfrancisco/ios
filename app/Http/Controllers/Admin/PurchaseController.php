@@ -11,14 +11,17 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Mail\InvoiceOrderMailable;
 use App\Http\Controllers\Controller;
+use App\Models\PurchaseId;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class PurchaseController extends Controller
 {
     public function PurchaseAll()
     {
-        $allData = Purchase::orderBy('date', 'desc')->orderBy('id', 'desc')->get();
+        $allData = PurchaseId::orderBy('date', 'desc')->orderBy('id', 'desc')->get();
         return view('backend.purchase.purchase_all', compact('allData'));
     }
 
@@ -42,23 +45,35 @@ class PurchaseController extends Controller
 
             return redirect()->back()->with($notification);
         } else {
-            $count_category = count($request->category_id);
-            for ($i = 0; $i < $count_category; $i++) {
-                $purchase = new Purchase();
-                $purchase->date = date('Y-m-d', strtotime($request->date[$i]));
-                $purchase->purchase_no = $request->purchase_no;
-                $purchase->supplier_id = $request->supplier_id[$i];
-                $purchase->category_id = $request->category_id[$i];
-                $purchase->brand_id = $request->brand_id[$i];
-                $purchase->product_id = $request->product_id[$i];
-                $purchase->buying_qty = $request->buying_qty[$i];
-                $purchase->unit_price = $request->unit_price[$i];
-                $purchase->buying_price = $request->buying_price[$i];
+            $purchase = new PurchaseId();
+            $purchase->purchase_no = $request->purchase_no;
+            $purchase->date = date('Y-m-d', strtotime($request->date));
+            $purchase->status = '0';
+            $purchase->created_by = Auth::user()->id;
+            $purchase->created_at = Carbon::now();
 
-                $purchase->created_by = Auth::user()->id;
-                $purchase->status = '0';
-                $purchase->save();
-            }
+            DB::transaction(function () use ($request, $purchase) {
+
+                if ($purchase->save()) {
+                    $count_category = count($request->category_id);
+                    for ($i = 0; $i < $count_category; $i++) {
+                        $purchase_details = new Purchase();
+                        $purchase_details->date = date('Y-m-d', strtotime($request->date));
+                        $purchase_details->purchase_no = $purchase->id;
+                        $purchase_details->supplier_id = $request->supplier_id[$i];
+                        $purchase_details->category_id = $request->category_id[$i];
+                        $purchase_details->brand_id = $request->brand_id[$i];
+                        $purchase_details->product_id = $request->product_id[$i];
+                        $purchase_details->buying_qty = $request->buying_qty[$i];
+                        $purchase_details->unit_price = $request->unit_price[$i];
+                        $purchase_details->buying_price = $request->buying_price[$i];
+                        $purchase_details->status = '1';
+                        $purchase_details->created_by = Auth::user()->id;
+                        $purchase_details->created_at = Carbon::now();
+                        $purchase_details->save();
+                    }
+                }
+            });
         }
 
         $notification = array(
@@ -66,58 +81,67 @@ class PurchaseController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('purchase')->with($notification);
+        return redirect()->route('purchase.pending')->with($notification);
     }
 
     public function PurchaseDelete($id)
     {
-        Purchase::findOrFail($id)->delete();
+        $purchase = PurchaseId::findOrFail($id);
+        $purchase->delete();
+        Purchase::where('purchase_no', $purchase->id)->delete();
 
         $notification = array(
             'message' => 'Purchase Deleted',
             'alert-type' => 'info'
         );
 
-        return redirect()->back()->with($notification);
+        return redirect()->route('purchase')->with($notification);
     }
 
     public function PurchasePending()
     {
-        $allData = Purchase::orderBy('date', 'desc')->orderBy('id', 'desc')->where('status', '0')->get();
+        $allData = PurchaseId::orderBy('date', 'desc')->orderBy('id', 'desc')->where('status', '0')->get();
         return view('backend.purchase.purchase_pending', compact('allData'));
     }
 
-    public function PurchaseApprove($id)
+    public function PurchaseApproval($id)
     {
-        $purchase = Purchase::findOrFail($id);
-        $product = Product::where('id', $purchase->product_id)->first();
-        $purchase_qty = ((float)($purchase->buying_qty)) + ((float)($product->quantity));
-        $product->quantity = $purchase_qty;
+        $purchase = PurchaseId::with('purchase_details')->findOrFail($id);
+        return view('backend.purchase.purchase_approval', compact('purchase'));
+    }
 
-        if ($product->save()) {
-            Purchase::findOrFail($id)->update([
-                'status' => '1',
-            ]);
-            $notification = array(
-                'message' => 'Purchase Approved',
-                'alert-type' => 'success'
-            );
+    public function PurchaseApprove(Request $request, $id)
+    {
+        $purchase = PurchaseId::findOrFail($id);
+        $purchase->updated_by = Auth::user()->id;
+        $purchase->status = '1';
 
-            return redirect()->route('purchase')->with($notification);
-        }
+        DB::transaction(function () use ($request, $purchase, $id) {
+
+            foreach ($request->buying_qty as $key => $val) {
+                $purchase_details = Purchase::where('id', $key)->first();
+
+                $purchase_details->status = '1';
+                $purchase_details->updated_by = Auth::user()->id;
+                $purchase_details->save();
+
+                $product = Product::where('id', $purchase_details->product_id)->first();
+                $product->quantity = ((float)$product->quantity) + ((float)$request->buying_qty[$key]);
+                $product->save();
+            }
+            $purchase->save();
+        });
+
+        $notification = array(
+            'message' => 'Purchase Approved',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('purchase')->with($notification);
     }
 
     public function PurchaseView(Request $request)
     {
-        $purchase_no = $request->purchase_no;
-
-        $purchase = Purchase::where('purchase_no', $purchase_no)->get();
-
-        $supplier = Purchase::where('purchase_no', $purchase_no)->limit(1)->get();
-
-        $total = Purchase::where('purchase_no', $purchase_no)->sum('buying_price');
-
-        return view('backend.purchase.purchase_view', compact('purchase', 'total', 'supplier'));
     }
 
     // public function PurchaseReorder($id,Request $request)

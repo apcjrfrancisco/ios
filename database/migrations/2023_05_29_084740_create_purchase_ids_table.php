@@ -13,18 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('purchases', function (Blueprint $table) {
+        Schema::create('purchase_ids', function (Blueprint $table) {
             $table->id();
-            $table->integer('supplier_id');
-            $table->integer('category_id');
-            $table->integer('brand_id');
-            $table->integer('product_id');
-            $table->string('purchase_no');
-            $table->date('date');
-            $table->double('buying_qty');
-            $table->decimal('unit_price');
-            $table->decimal('buying_price');
-            $table->tinyInteger('status')->default('1');
+            $table->string('purchase_no')->nullable();
+            $table->date('date')->nullable();
+            $table->tinyInteger('status')->default('0')->comment('0=Pending, 1=Approved');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
@@ -38,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchases');
+        Schema::dropIfExists('purchase_ids');
     }
 };

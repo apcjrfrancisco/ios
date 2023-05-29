@@ -149,8 +149,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
         Route::get('/purchase/view', 'PurchaseView')->name('purchase.view');
         Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
-        Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
-        // Route::get('/purchase/reorder/{id}', 'PurchaseReorder')->name('purchase.reorder');
+        Route::get('/purchase/approval/{id}', 'PurchaseApproval')->name('purchase.approval');
+        Route::post('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
     });
 
     //Defaults

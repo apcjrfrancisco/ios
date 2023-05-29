@@ -33,7 +33,7 @@ class UnitController extends Controller
             'message' => 'Unit Created',  
             'alert-type' => 'success'
         );
-        return redirect()->route('unit.all')->with($notification);
+        return redirect()->route('unit')->with($notification);
     }
 
     public function UnitEdit($id)

@@ -144,8 +144,8 @@
     <script id="document-template" type="text/x-handlebars-template">
 
         <tr class="delete_add_more_item text-center" id="delete_add_more_item">
-            <input type="hidden" name="date[]" value="@{{date}}">
-            <input type="hidden" name="purchase_no[]" value="@{{purchase_no}}">
+            <input type="hidden" name="date" value="@{{date}}">
+            <input type="hidden" name="purchase_no" value="@{{purchase_no}}">
             <input type="hidden" name="supplier_id[]" value="@{{supplier_id}}">
 
             <td>

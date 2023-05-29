@@ -145,10 +145,9 @@ class OrderController extends Controller
     {
         $orders = Order::where('status_message', 'completed')->orderBy('id', 'desc')->get();
         foreach ($orders as $key) {
-            $orderItem = OrderItem::where('order_id', $key->id)->sum('total_price');
         }
 
-        return view('backend.orders.print_orders_list', compact('orders', 'orderItem'));
+        return view('backend.orders.print_orders_list', compact('orders'));
     }
 
     public function FilterOrderList(Request $request)

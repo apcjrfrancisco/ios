@@ -76,7 +76,10 @@
 
 
                                     @forelse ($orders as $item)
-                                       
+                                        @php
+                                            $orderItem = App\Models\OrderItem::where('order_id', $key->id)->sum('total_price');
+                                            
+                                        @endphp
                                         <tr class="text-center">
                                             <td> {{ $item->id }} </td>
                                             <td> {{ $item->tracking_no }} </td>

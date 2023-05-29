@@ -48,10 +48,7 @@
                                         <th>Purchase No.</th>
                                         <th>Date</th>
                                         <th>Supplier</th>
-                                        <th>Category</th>
-                                        <th>Brand</th>
-                                        <th>Quantity</th>
-                                        <th>Product Name</th>
+                                        <th>Amount</th>
                                         <th>Status</th>
                                         <th width="10%">Action</th>
 
@@ -65,11 +62,8 @@
                                             <td> {{ $key + 1 }} </td>
                                             <td> {{ $item->purchase_no }} </td>
                                             <td> {{ $item->date }} </td>
-                                            <td> {{ $item['supplier']['supplier_name'] }} </td>
-                                            <td> {{ $item['category']['category_name'] }} </td>
-                                            <td> {{ $item['brand']['brand_name'] }} </td>
-                                            <td> {{ $item->buying_qty }} </td>
-                                            <td> {{ $item['product']['product_name'] }} </td>
+                                            <td> {{ $item->purchase->supplier->supplier_name }} </td>
+                                            <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->purchase->buying_price }} </td>
                                             @if ($item->status == '0')
                                                 <td> <span class="btn btn-warning">Pending</span> </td>
                                             @elseif ($item->status == '1')
