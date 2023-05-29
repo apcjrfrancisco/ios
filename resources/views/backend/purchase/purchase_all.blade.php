@@ -56,14 +56,20 @@
 
 
                                 <tbody>
-
+                                    @php
+                                        $totalAmount = 0;
+                                    @endphp
                                     @foreach ($allData as $key => $item)
                                         <tr class="text-center">
+                                            @php
+                                                $totalAmount = App\Models\Purchase::where('purchase_no', $item->id)->sum('buying_price');
+                                            @endphp
                                             <td> {{ $key + 1 }} </td>
                                             <td> {{ $item->purchase_no }} </td>
                                             <td> {{ $item->date }} </td>
                                             <td> {{ $item->purchase->supplier->supplier_name }} </td>
-                                            <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->purchase->buying_price }} </td>
+                                            <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                                {{ $totalAmount }} </td>
                                             @if ($item->status == '0')
                                                 <td> <span class="btn btn-warning">Pending</span> </td>
                                             @elseif ($item->status == '1')

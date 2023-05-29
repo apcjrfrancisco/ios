@@ -118,9 +118,9 @@
                                     </tbody>
 
                                 </table> <br>
-
-                                <button type="submit" class="btn btn-info">Approve Purchase</button>
-
+                                @if ($purchase->status != '1')
+                                    <button type="submit" class="btn btn-info">Approve Purchase</button>
+                                @endif
                             </form>
 
                         </div>

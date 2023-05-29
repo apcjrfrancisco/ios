@@ -7,14 +7,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Purchase Order</h4>
-
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);"> </a></li>
-                                <li class="breadcrumb-item active">Purchase Order</li>
-                            </ol>
-                        </div>
+                        <h4 class="mb-sm-2">Purchase Order</h4>
 
                     </div>
                 </div>
@@ -25,6 +18,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <h4>Purchase No.: #{{ $purchase->purchase_no }} -
+                                {{ date('M' . ' ' . 'd' . ', ' . 'Y', strtotime($purchase->date)) }}</h4>
 
                             <div class="row">
                                 <div class="col-12">
@@ -49,109 +44,85 @@
                                                 {{ $appSetting->company_email }}
                                             </address>
                                         </div>
-                                        @foreach ($supplier as $item)
-                                            <div class="col-6 mt-4">
-                                                <strong>
-                                                    <h4 class="fw-bold">Supplier:</h4>
-                                                </strong>
-                                                <address>
-                                                    <strong>{{ $item['supplier']['supplier_name'] }}:</strong><br>
-                                                    {{ $item['supplier']['supplier_phone'] }}<br>
-                                                    {{ $item['supplier']['supplier_address1'] }},
-                                                    {{ $item['supplier']['supplier_address2'] }},
-                                                    {{ $item['supplier']['supplier_city'] }},
-                                                    {{ $item['supplier']['supplier_province'] }},
-                                                    {{ $item['supplier']['supplier_zipcode'] }}<br>
-                                                    {{ $item['supplier']['supplier_email'] }}
-                                                </address>
-                                            </div>
-                                        @endforeach
-
+                                        <div class="col-6 mt-4">
+                                            <strong>
+                                                <h4 class="fw-bold">Supplier:</h4>
+                                            </strong>
+                                            <address>
+                                                <strong>{{ $purchase['purchase']['supplier']['supplier_name'] }}:</strong><br>
+                                                {{ $purchase['purchase']['supplier']['supplier_phone'] }}<br>
+                                                {{ $purchase['purchase']['supplier']['supplier_address1'] }},
+                                                {{ $purchase['purchase']['supplier']['supplier_address2'] }},
+                                                {{ $purchase['purchase']['supplier']['supplier_city'] }},
+                                                {{ $purchase['purchase']['supplier']['supplier_province'] }},
+                                                {{ $purchase['purchase']['supplier']['supplier_zipcode'] }}<br>
+                                                {{ $purchase['purchase']['supplier']['supplier_email'] }}
+                                            </address>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
 
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <div>
-                                        <div class="p-2">
+                            <table class="table table-striped" width="100%" border="1">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Sl</th>
+                                        <th>Brand</th>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total Price</th>
+                                    </tr>
+                                </thead>
 
-                                        </div>
+                                @php
+                                    $totalAmount = '0';
+                                @endphp
 
-                                    </div>
+                                <tbody>
+                                    @foreach ($purchase['purchase_details'] as $key => $details)
+                                        @php
+                                            $totalAmount += $details->buying_price;
+                                        @endphp
+                                        <tr class="text-center">
 
-                                </div>
-                            </div> <!-- end row -->
+                                            <input type="hidden" name="date" value="{{ $details->date }}">
+                                            <input type="hidden" name="supplier_id[]" value="{{ $details->supplier_id }}">
+                                            <input type="hidden" name="category_id[]" value="{{ $details->category_id }}">
+                                            <input type="hidden" name="product_id[]" value="{{ $details->product_id }}">
+                                            <input type="hidden" name="brand_id[]" value="{{ $details->brand_id }}">
+                                            <input type="hidden" name="buying_qty[{{ $details->id }}]"
+                                                value="{{ $details->buying_qty }}">
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <div>
-                                        <div class="p-2">
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $details['brand']['brand_name'] }}</td>
+                                            <td>{{ $details['product']['product_name'] }}</td>
+                                            <td>{{ $details->buying_qty }}</td>
+                                            <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                                {{ $details->unit_price }}</td>
+                                            <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                                {{ $details->buying_price }}</td>
+                                        </tr>
+                                    @endforeach
+                                    <tr>
+                                        <td colspan="5">Total Amount</td>
+                                        <td class="text-center"><span
+                                                style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
+                                            {{ $totalAmount }}</td>
+                                    </tr>
+                                </tbody>
 
-                                        </div>
-                                        <div class="">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <td><strong>Sl </strong></td>
-                                                            <td class="text-center"><strong>Product Name </strong></td>
-                                                            <td class="text-center"><strong>Quantity </strong>
-                                                            </td>
-                                                            <td class="text-center"><strong>Price</strong>
-                                                            </td>
-                                                            <td class="text-center"><strong>Total Price</strong>
-                                                            </td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- foreach ($order->lineItems as $line) or some such thing here -->
-
-                                                        @forelse ($purchase as $item)
-                                                            <tr class="text-center">
-                                                                <td> {{ $item->id }} </td>
-                                                                <td> {{ $item['product']['product_name'] }} </td>
-                                                                <td> {{ $item->buying_qty }} </td>
-                                                                <td><span
-                                                                        style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                                                    {{ $item->unit_price }} </td>
-                                                                <td><span
-                                                                        style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                                                    {{ $item->buying_price }} </td>
-                                                            </tr>
-                                                        @empty
-                                                            <tr>
-                                                                <td colspan="8">No Purchases Available</td>
-                                                            </tr>
-                                                        @endforelse
-                                                        <tr>
-                                                            <td colspan="8" style="font-size:30px">
-                                                                <strong> Total Amount: <span
-                                                                        style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                                                    {{ $total }} </strong>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            @php
-                                                $date = new DateTime('now', new DateTimeZone('Asia/Manila'));
-                                            @endphp
-                                            <i>Printing Time : {{ $date->format('F j, Y, g:i a') }}</i>
+                            </table> <br>
 
 
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div> <!-- end row -->
                         </div>
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->
+
+
 
         </div> <!-- container-fluid -->
     </div>
@@ -159,6 +130,7 @@
         <div class="float-end">
             <button onclick="printDiv('printMe')" class="btn btn-success waves-effect waves-light"><i
                     class="fa fa-print"></i></button>
+                    <a href="{{ route('purchase.reorder', $purchase->id) }}">Re Order</a>
         </div>
     </div>
 @endsection

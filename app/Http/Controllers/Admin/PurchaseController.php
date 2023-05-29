@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Unit;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\Supplier;
+use App\Models\PurchaseId;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Mail\InvoiceOrderMailable;
-use App\Http\Controllers\Controller;
-use App\Models\PurchaseId;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class PurchaseController extends Controller
@@ -142,10 +143,45 @@ class PurchaseController extends Controller
 
     public function PurchaseView(Request $request)
     {
+        $purchase_no = $request->purchase_no;
+
+        $purchase = PurchaseId::where('purchase_no', $purchase_no)->first();
+
+        $purchase_details = Purchase::where('purchase_no', $purchase->id)->get();
+
+
+        return view('backend.purchase.purchase_view', compact('purchase', 'purchase_details'));
     }
 
-    // public function PurchaseReorder($id,Request $request)
-    // {
-    //     $id = $request->purchase_no;
-    // }
+
+    public function PurchaseReorder($id, Request $request)
+    {
+        $purchase = PurchaseId::findOrFail($id);
+        $newPurchase = $purchase->replicate();
+
+        $newPurchase->date = Carbon::now();
+        $newPurchase->purchase_no = 'TM - ' . Str::random(10);
+        $newPurchase->status = '0';
+        $newPurchase->created_by = Auth::user()->id;
+        $newPurchase->created_at = Carbon::now();
+
+        if ($newPurchase->save()) {
+            foreach ($purchase->purchase_details as $value) {
+                $newPurchaseDetails = $value->replicate();
+                $newPurchaseDetails->date = Carbon::now();
+                $newPurchaseDetails->purchase_no = $newPurchase->id;
+                $newPurchaseDetails->status = '1';
+                $newPurchaseDetails->created_by = Auth::user()->id;
+                $newPurchaseDetails->created_at = Carbon::now();
+                $newPurchase->purchase_details()->save($newPurchaseDetails);
+            }
+        }
+
+        $notification = array(
+            'message' => 'Purchase Re Ordered',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('purchase')->with($notification);
+    }
 }
