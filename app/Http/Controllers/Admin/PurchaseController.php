@@ -46,7 +46,7 @@ class PurchaseController extends Controller
             for ($i = 0; $i < $count_category; $i++) {
                 $purchase = new Purchase();
                 $purchase->date = date('Y-m-d', strtotime($request->date[$i]));
-                $purchase->purchase_no = $request->purchase_no[$i];
+                $purchase->purchase_no = $request->purchase_no;
                 $purchase->supplier_id = $request->supplier_id[$i];
                 $purchase->category_id = $request->category_id[$i];
                 $purchase->brand_id = $request->brand_id[$i];
@@ -120,5 +120,8 @@ class PurchaseController extends Controller
         return view('backend.purchase.purchase_view', compact('purchase', 'total', 'supplier'));
     }
 
-    
+    // public function PurchaseReorder($id,Request $request)
+    // {
+    //     $id = $request->purchase_no;
+    // }
 }
