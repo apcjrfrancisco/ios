@@ -77,7 +77,7 @@
 
                                     @forelse ($orders as $item)
                                         @php
-                                            $orderItem = App\Models\OrderItem::where('order_id', $key->id)->sum('total_price');
+                                            $orderItem = App\Models\OrderItem::where('order_id', $item->id)->sum('total_price');
                                             
                                         @endphp
                                         <tr class="text-center">
