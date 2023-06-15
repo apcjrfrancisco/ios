@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -23,7 +24,19 @@ class DashboardController extends Controller
         $orderComplete = Order::where('status_message', 'completed')->get();
         $orderCompleteCount = Order::where('status_message', 'completed')->count();
         $orderCount = Order::count();
-        return view('admin.dashboard', compact('orders', 'orderComplete', 'orderCompleteCount', 'orderCount', 'sendmailrestock'));
+        $sales = DB::table('order_items')
+            ->leftJoin('products', 'products.id', '=', 'order_items.product_id')
+            ->selectRaw('products.id, sum(order_items.quantity) total')
+            ->groupBy('products.id')
+            ->orderBy('total', 'desc')
+            ->take(10)
+            ->get();
+        
+        $customer = Order::with('user')->addSelect(DB::raw('count(id) as purchase_total, user_id'))
+        ->groupBy('user_id')->take(10)
+        ->orderBy('purchase_total', 'DESC')->get();
+
+        return view('admin.dashboard', compact('orders', 'orderComplete', 'orderCompleteCount', 'orderCount', 'sendmailrestock', 'sales', 'customer'));
     }
 
     public function NotificationMinimumMail()

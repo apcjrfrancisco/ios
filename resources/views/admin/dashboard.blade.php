@@ -33,7 +33,7 @@
                                     class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
                                     <i class="mdi mdi-currency-usd me-3 icon-lg text-danger"></i>
                                     <div class="d-flex flex-column justify-content-around">
-                                        <small class="mb-1 text-muted">Total Sales</small>
+                                        <small class="mb-1 text-muted">Revenue</small>
                                         @php
                                             $total_amount = 0;
                                             $revenue = 0;
@@ -58,7 +58,7 @@
                                     class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
                                     <i class="mdi mdi-eye me-3 icon-lg text-success"></i>
                                     <div class="d-flex flex-column justify-content-around">
-                                        <small class="mb-1 text-muted">Revenue</small>
+                                        <small class="mb-1 text-muted">Profit</small>
                                         <h5 class="me-2 mb-0"><span
                                                 style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
                                             {{ $revenue }}</h5>
@@ -84,6 +84,80 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Most Sold Products</h4>
+                    <br>
+                    <table class="table table-bordered table-striped dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr class="text-center">
+                                <th>No. </th>
+                                <th>Product Name</th>
+
+                        </thead>
+
+                        <tbody>
+
+
+
+                            @foreach ($sales as $key => $item)
+                                @php
+                                    $product = App\Models\Product::where('id',$item->id)->first();
+                                @endphp
+                                <tr class="text-center">
+                                    <td> {{ $key + 1 }} </td>
+                                    <td> {{ $product->product_name }} </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Most Orders</h4>
+                    <br>
+                    <table class="table table-bordered table-striped dt-responsive nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr class="text-center">
+                                <th>No. </th>
+                                <th>Customer Name</th>
+
+                        </thead>
+
+                        <tbody>
+
+
+
+                            @foreach ($customer as $key => $item)
+                                @php
+                                    $users = App\Models\User::where('id',$item->customer_id)->first();
+                                @endphp
+                                <tr class="text-center">
+                                    <td> {{ $key + 1 }} </td>
+                                    <td> {{ $item['user']['name'] }} </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>

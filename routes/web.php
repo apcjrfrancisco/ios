@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ChartController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Frontend\OrderController;
@@ -100,6 +101,13 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/supplier/edit/{id}', 'SupplierEdit')->name('supplier.edit');
         Route::post('/supplier/update', 'SupplierUpdate')->name('supplier.update');
         Route::get('/supplier/delete/{id}', 'SupplierDelete')->name('supplier.delete');
+    });
+
+    //Charts
+    Route::controller(ChartController::class)->group(function() {
+
+        Route::get('/charts', 'ChartsAll')->name('charts');
+
     });
 
     //Unit
@@ -208,7 +216,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/user/delete/{id}', 'UserDelete')->name('user.delete');
     });
 
-    //Users
+    //Stock
     Route::controller(StockController::class)->group(function () {
         Route::get('/stock/report', 'StockReport')->name('stock.report');
         Route::get('/stock/report/pdf', 'StockReportPdf')->name('stock.report.pdf');

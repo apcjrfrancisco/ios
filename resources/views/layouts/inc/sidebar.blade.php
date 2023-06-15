@@ -7,6 +7,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('charts') }}">
+                <i class="mdi mdi-chart-bar menu-icon"></i>
+                <span class="menu-title">Charts</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('supplier') }}">
                 <i class="fas fa-user-friends menu-icon"></i>
                 <span class="menu-title">Manage Suppliers</span>

@@ -102,6 +102,8 @@
     <!-- App js -->
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
+    <script src="{{ asset('backend/assets/js/sample-chart.js') }}"></script>
+
     <!-- Datatable init js -->
     <script src="{{ asset('backend/assets/js/pages/datatables.init.js') }}"></script>
 
