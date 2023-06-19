@@ -31,7 +31,6 @@
                             <div class="d-flex flex-wrap justify-content-xl-between">
                                 <div
                                     class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                    <i class="mdi mdi-currency-usd me-3 icon-lg text-danger"></i>
                                     <div class="d-flex flex-column justify-content-around">
                                         <small class="mb-1 text-muted">Revenue</small>
                                         @php
@@ -50,23 +49,21 @@
                                         @endforelse
                                         <h5 class="me-2 mb-0">
                                             <span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                            {{ $total_amount }}
+                                            {{ Str::currency($total_amount) }}
                                         </h5>
                                     </div>
                                 </div>
                                 <div
                                     class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                    <i class="mdi mdi-eye me-3 icon-lg text-success"></i>
                                     <div class="d-flex flex-column justify-content-around">
                                         <small class="mb-1 text-muted">Profit</small>
                                         <h5 class="me-2 mb-0"><span
                                                 style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                            {{ $revenue }}</h5>
+                                            {{ Str::currency($revenue) }}</h5>
                                     </div>
                                 </div>
                                 <div
                                     class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                    <i class="mdi mdi-download me-3 icon-lg text-warning"></i>
                                     <div class="d-flex flex-column justify-content-around">
                                         <small class="mb-1 text-muted">Orders Completed</small>
                                         <h5 class="me-2 mb-0">{{ $orderCompleteCount }}</h5>
@@ -74,7 +71,6 @@
                                 </div>
                                 <div
                                     class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                    <i class="mdi mdi-flag me-3 icon-lg text-danger"></i>
                                     <div class="d-flex flex-column justify-content-around">
                                         <small class="mb-1 text-muted">Total Orders</small>
                                         <h5 class="me-2 mb-0">{{ $orderCount }}</h5>
@@ -196,7 +192,7 @@
                                     <td> {{ $item->payment_mode }} </td>
                                     <td> {{ $item->created_at->format('m/d/Y') }} </td>
                                     <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                        {{ $orderItem }} </td>
+                                        {{ Str::currency($orderItem) }} </td>
                                     <td> {{ $item->status_message }} </td>
                                     <td><a href="{{ url('admin/orders/' . $item->id) }}"
                                             class="btn btn-primary btn-sm">View</a></td>

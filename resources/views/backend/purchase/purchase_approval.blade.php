@@ -104,16 +104,16 @@
                                                 <td>{{ $details['product']['quantity'] }}</td>
                                                 <td>{{ $details->buying_qty }}</td>
                                                 <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                                    {{ $details->unit_price }}</td>
+                                                    {{ Str::currency($details->unit_price) }}</td>
                                                 <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                                    {{ $details->buying_price }}</td>
+                                                    {{ Str::currency($details->buying_price) }}</td>
                                             </tr>
                                         @endforeach
                                         <tr>
                                             <td colspan="7">Total Amount</td>
                                             <td class="text-center"><span
                                                     style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                                {{ $totalAmount }}</td>
+                                                {{ Str::currency($totalAmount) }}</td>
                                         </tr>
                                     </tbody>
 

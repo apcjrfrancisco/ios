@@ -26,7 +26,7 @@
                             Home / {{ $product->category->category_name }} / {{ $product->product_name }}
                         </p>
                         <div>
-                            <span class="selling-price"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $product->selling_price }}</span> <br>
+                            <span class="selling-price"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ Str::currency($product->selling_price) }}</span> <br>
                         </div>
                         <div class="mt-2">
                             <div class="input-group">

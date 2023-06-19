@@ -92,7 +92,7 @@
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Selling Price </label>
                                     <div class="form-group col-sm-2">
-                                        <input name="selling_price" value="{{ $product->selling_price }}" class="form-control" type="text">
+                                        <input name="selling_price" value="{{ Str::currency($product->selling_price) }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <!-- end row -->

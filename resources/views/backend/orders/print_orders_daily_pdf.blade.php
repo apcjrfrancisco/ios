@@ -113,7 +113,7 @@
                                                                 <td> {{ $item->created_at->format('m/d/Y') }} </td>
                                                                 <td><span
                                                                         style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                                                    {{ $orderItem }} </td>
+                                                                    {{ Str::currency($orderItem) }} </td>
                                                             </tr>
 
                                                         @empty
@@ -125,7 +125,7 @@
                                                             <td colspan="8" style="font-size:30px">
                                                                 <strong> Total Amount: <span
                                                                         style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                                                    {{ $total_amount }} </strong>
+                                                                    {{ Str::currency($total_amount) }} </strong>
                                                             </td>
                                                         </tr>
                                                     </tbody>

@@ -92,9 +92,9 @@
                                     <td>{{ $item->product->product_name }}</td>
                                     <td>{{ $item->quantity }}</td>
                                     <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                        {{ $item->price }}</td>
+                                        {{ Str::currency($item->price) }}</td>
                                     <td class="fw-bold"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                        {{ $item->total_price }}</td>
+                                        {{ Str::currency($item->total_price) }}</td>
 
                                     @php
                                         $totalAmount += $item->total_price;
@@ -104,7 +104,7 @@
                             <tr>
                                 <td colspan="6" class="fw-bold">Total Amount: </td>
                                 <td class="text-center fw-bold"><span
-                                        style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $totalAmount }}
+                                        style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ Str::currency($totalAmount) }}
                                 </td>
                             </tr>
                         </tbody>
@@ -241,7 +241,7 @@
                             @if ($order->del_fee != null)
                                 <h4>Delivery Fee:
                                     <span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span><span
-                                        class="text-uppercase text-success"> {{ $order->del_fee }}</span>
+                                        class="text-uppercase text-success"> {{ Str::currency($order->del_fee) }}</span>
                                 </h4>
                             @else
                                 <h4>Delivery Fee:

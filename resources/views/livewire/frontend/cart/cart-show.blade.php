@@ -50,7 +50,7 @@
                                             </a>
                                         </div>
                                         <div class="col-md-1 my-auto">
-                                            <label class="price"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->product->selling_price }} </label>
+                                            <label class="price"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ Str::currency($item->product->selling_price) }} </label>
                                         </div>
                                         <div class="col-md-2 col-7 my-auto">
                                             <div class="quantity">
@@ -67,7 +67,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-1 my-auto">
-                                            <label class="price"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->product->selling_price * $item->quantity }}
+                                            <label class="price"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ Str::currency($item->product->selling_price * $item->quantity) }}
                                             </label>
                                             @php
                                                 $totalPrice += $item->product->selling_price * $item->quantity
@@ -109,7 +109,7 @@
                 <div class="col-md-4">
                     <div class="shadow-sm bg-white p-3">
                         <h4>
-                            Total: <span class="float-end"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $totalPrice }}</span>
+                            Total: <span class="float-end"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ Str::currency($totalPrice) }}</span>
                         </h4>
                         <hr>
                         <a href="{{ route('checkout') }}" class="btn btn-warning w-100">Checkout</a>

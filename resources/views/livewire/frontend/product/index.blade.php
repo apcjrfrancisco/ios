@@ -38,7 +38,7 @@
                                     </a>
                                 </h5>
                                 <div>
-                                    <span class="selling-price"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ $item->selling_price }}</span>
+                                    <span class="selling-price"><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ Str::currency($item->selling_price) }}</span>
                                 </div>
                             </div>
                         </div>

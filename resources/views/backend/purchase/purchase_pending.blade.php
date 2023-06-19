@@ -52,7 +52,7 @@
                                             <td> {{ $item->date }} </td>
                                             <td> {{ $item->purchase->supplier->supplier_name }} </td>
                                             <td><span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
-                                                {{ $totalAmount }} </td>
+                                                {{ Str::currency($totalAmount) }} </td>
                                             @if ($item->status == '0')
                                                 <td> <span class="btn btn-warning">Pending</span> </td>
                                             @elseif ($item->status == '1')
