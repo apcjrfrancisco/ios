@@ -88,7 +88,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4>Most Sold Products</h4>
+                    <h4>Top 10 Most Sold Products</h4>
                     <br>
                     <table class="table table-bordered table-striped dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -125,7 +125,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4>Most Orders</h4>
+                    <h4>Top 10 Most Orders</h4>
                     <br>
                     <table class="table table-bordered table-striped dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">

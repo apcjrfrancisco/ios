@@ -5,63 +5,56 @@
 
 
 <div class="row">
-    <div class="col-md-6">
+    {{-- <div class="col-md-6">
         <div id="totalSold" style="width: 900px; height: 500px;"></div>
+    </div> --}}
+    <div class="col-md-6">
+        <div id="ProductAmount" style="width: 800px; height: 500px;"></div>
     </div>
     <div class="col-md-6">
-        <div id="ProductAmount" style="width: 900px; height: 500px;"></div>
+        <canvas id="monthly" width="800" height="500"></canvas>
     </div>
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-    google.charts.load('current', {
-        'packages': ['corechart']
-    });
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
-
+      function drawChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Product Name', 'Total Sold'],
-            <?php echo $chartTotalSold; ?>
+            ['Day', 'Sale'],
+          <?php echo $chartDaily; ?>
         ]);
 
         var options = {
-            title: 'Best Sold Products',
-            is3D: true,
+          chart: {
+            title: 'Daily Sales',
+            subtitle: '7 Days (in Philippine Peso)',
+          },
+          bars: 'vertical' // Required for Material Bar Charts.
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('totalSold'));
+        var chart = new google.charts.Bar(document.getElementById('ProductAmount'));
 
-        chart.draw(data, options);
-    }
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
 </script>
 
-<script type="text/javascript">
-    google.charts.load('current', {
-        'packages': ['corechart']
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    
+    var ctx = document.getElementById('monthly').getContext('2d');
+    var monthlyChart = new Chart(ctx,{
+        type:'line',
+        data:{
+            labels: {!! json_encode($monthlylabels) !!},
+            datasets:{!! json_encode($monthlydatasets) !!}
+        },
     });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Product', 'Amount'],
-            <?php echo $chartAmountSold; ?>
-        ]);
-
-        var options = {
-            title: 'Amount Sold Per Product',
-            curveType: 'function',
-            legend: {
-                position: 'bottom'
-            }
-        };
-
-        var chart = new google.visualization.BarChart(document.getElementById('ProductAmount'));
-
-        chart.draw(data, options);
-    }
-</script>
+    
+    </script>
 
 @endsection
