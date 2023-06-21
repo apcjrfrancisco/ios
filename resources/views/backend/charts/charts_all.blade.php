@@ -27,6 +27,8 @@
           <?php echo $chartDaily; ?>
         ]);
 
+        
+        
         var options = {
           chart: {
             title: 'Daily Sales',

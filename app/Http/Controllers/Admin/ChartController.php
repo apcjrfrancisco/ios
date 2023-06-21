@@ -51,7 +51,7 @@ class ChartController extends Controller
 
         $monthlylabels = [];
         $data = [];
-        $colors = ['#FF6384', '#36A2EB', '#FFCE56', '#8BC34A', '#FF5722', '#009688', '#795548', '#9C27B0', '2196F3', '#FF9800', '#CDDC39', '607D8B'];
+        $colors = ['#FF6384', '#36A2EB', '#FFCE56', '#8BC34A', '#FF5722', '#009688', '#795548', '#9C27B0', '#2196F3', '#FF9800', '#CDDC39', '607D8B'];
 
         for ($i = 1; $i < 12; $i++) {
             $month = date('F', mktime(0, 0, 0, $i, 1));
