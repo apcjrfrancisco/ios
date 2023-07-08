@@ -50,10 +50,18 @@
             </a>
             <div class="collapse" id="reports">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('purchase') }}"> All Purchases </a>
+                    @if (Auth::user()->role_as == '2')
+                    <li style="display:none;" class="nav-item"> <a class="nav-link" href="{{ route('purchase') }}"> All Purchases </a>
                     </li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('purchase.pending') }}"> Pending Purchases
+                    <li style="display:none;" class="nav-item"> <a class="nav-link" href="{{ route('purchase.pending') }}"> Pending Purchases
                         </a></li>
+                        @else
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('purchase') }}"> All Purchases </a>
+                        </li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('purchase.pending') }}"> Pending Purchases
+                            </a></li>
+                    @endif
+                    
                     <li class="nav-item"> <a class="nav-link" href="{{ route('orders') }}"> All Orders </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('print.orders.list') }}"> Order Report </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('stock.report') }}"> Stock Report </a></li>
@@ -81,17 +89,20 @@
                 <span class="menu-title">Go To eTorrecamps</span>
             </a>
         </li>
+        @if (Auth::user()->role_as == '2')
+        <li style="display: none;" class="nav-item">
+            <a class="nav-link" href="{{ route('user') }}">
+                <i class="fas fa-user-check menu-icon"></i>
+                <span class="menu-title">Users</span>
+            </a>
+        </li>
+        @else
         <li class="nav-item">
             <a class="nav-link" href="{{ route('user') }}">
                 <i class="fas fa-user-check menu-icon"></i>
                 <span class="menu-title">Users</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="documentation/documentation.html">
-                <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                <span class="menu-title">Documentation</span>
-            </a>
-        </li>
+        @endif
     </ul>
 </nav>

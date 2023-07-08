@@ -38,6 +38,13 @@ class LoginController extends Controller
                 'alert-type' => 'success'
             );
             return redirect('admin/dashboard')->with($notification);
+        } elseif(Auth::user()->role_as == '2') {
+
+            $notification = array(
+                'message' => 'Welcome Employee',  
+                'alert-type' => 'success'
+            );
+            return redirect('admin/dashboard')->with($notification);
         } else
         {
             $notification = array(

@@ -46,6 +46,9 @@
                                                 @if ($item->role_as == '1')
                                                     <a href="{{ route('user.edit.user', $item->id) }}"><span
                                                             class="btn btn-success">Admin</span></a>
+                                                @elseif ($item->role_as == '2')
+                                                    <a href="{{ route('user.edit.user', $item->id) }}"><span
+                                                            class="btn btn-warning">Employee</span></a>
                                                 @else
                                                     <a href="{{ route('user.edit', $item->id) }}"><span
                                                             class="btn btn-primary">User</span></a>

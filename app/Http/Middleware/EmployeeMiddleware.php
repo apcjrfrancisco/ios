@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminMiddleware
+class EmployeeMiddleware
 {
     /**
      * Handle an incoming request.
@@ -25,13 +25,6 @@ class AdminMiddleware
             );
 
             return redirect()->route('home')->with($notification);
-        } elseif (Auth::user()->role_as == '2') {
-            $notification = array (
-                'message' => 'You are not authorized to access this page.',
-                'alert-type' => 'warning',
-            );
-
-            return redirect('admin/dashboard')->with($notification);
         }
         return $next($request);
     }
