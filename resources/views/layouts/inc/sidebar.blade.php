@@ -51,7 +51,7 @@
             <div class="collapse" id="reports">
                 <ul class="nav flex-column sub-menu">
                     @if (Auth::user()->role_as == '2')
-                        <li style="display:none;" class="nav-item"> <a class="nav-link" href="{{ route('purchase') }}">
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('purchase') }}">
                                 All Purchases </a>
                         </li>
                         <li style="display:none;" class="nav-item"> <a class="nav-link"

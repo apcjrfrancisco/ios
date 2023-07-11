@@ -149,7 +149,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
     //Purchase
     Route::controller(PurchaseController::class)->group(function () {
-        Route::get('/purchase', 'PurchaseAll')->name('purchase');
+        // Route::get('/purchase', 'PurchaseAll')->name('purchase');
         Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
         Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
         Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
@@ -232,6 +232,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 });
 Route::prefix('admin')->middleware(['auth', 'isEmployee'])->group(function () {
 
+    //Purchases
+    Route::controller(PurchaseController::class)->group(function () {
+        Route::get('/purchase', 'PurchaseAll')->name('purchase');
+    });
+
     //Return/Refund
     Route::controller(ReturnController::class)->group(function (){
         Route::get('/return/request', 'AdminReturnRequest')->name('admin.return.request');
@@ -240,7 +245,7 @@ Route::prefix('admin')->middleware(['auth', 'isEmployee'])->group(function () {
     });
 
     Route::get('dashboard', [DashboardController::class, 'index']);
-    Route::get('/notification/minimum/mail', [DashboardController::class, 'NotificationMinimumMail']);
+    // Route::get('/notification/minimum/mail', [DashboardController::class, 'NotificationMinimumMail']);
     //Charts
     Route::controller(ChartController::class)->group(function () {
         Route::get('/charts', 'ChartsAll')->name('charts');
