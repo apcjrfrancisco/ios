@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /** to-do: change code causes problems when installing the app**/
+        /** Find way to run this without using boot**/
         if (! App::runningInConsole()) {
             // your code
             if(Footer::get()->isEmpty()){
