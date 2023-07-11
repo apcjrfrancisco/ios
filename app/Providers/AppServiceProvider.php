@@ -30,7 +30,19 @@ class AppServiceProvider extends ServiceProvider
         /** to-do: change code causes problems when installing the app**/
         if (! App::runningInConsole()) {
             // your code
-            $websiteSetting = Footer::first();   
+            if(Footer::get()->isEmpty()){
+                Footer::create([
+                    'company_name' => env('COMPANY_NAME', ''),
+                    'company_description' => env('COMPANY_DESCRIPTION', ''),
+                    'company_address' => env('COMPANY_ADDRESS', ''),
+                    'company_phone' => env('COMPANY_PHONE', ''),
+                    'company_email' => env('COMPANY_ADDRESS', ''),
+                    'company_facebook' => env('COMPANY_EMAIL', ''),
+                    'created_by' => env('CREATED_BY', 0),
+                    'updated_by' => env('UPDATED_BY', 0),
+                ]);
+            }
+            $websiteSetting = Footer::first();
         }
         else {
             $websiteSetting = null;
