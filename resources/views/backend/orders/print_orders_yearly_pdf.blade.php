@@ -100,10 +100,10 @@
                                                         @forelse ($orders as $item)
                                                             @php
                                                                 $orderItem = App\Models\OrderItem::where('order_id', $item->id)->sum('total_price');
-                                                                $orderItemId = App\Models\OrderItem::where('order_id', $item->id)->first();
-                                                                $total_amount += $orderItemId->quantity * $orderItemId->price;
+                                                                $total_amount += $orderItem;
                                                             @endphp
                                                             <tr class="text-center">
+                                                                
                                                                 <td> {{ $item->id }} </td>
                                                                 <td> {{ $item->tracking_no }} </td>
                                                                 <td> {{ $item->name }} </td>

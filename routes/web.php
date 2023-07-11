@@ -22,6 +22,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\ReturnController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 
 /*
@@ -69,8 +70,10 @@ Route::middleware(['auth'])->group(function () {
     //UserOrders
     Route::controller(OrderController::class)->group(function () {
         Route::get('/user/orders', 'Orders')->name('user.orders');
+        Route::get('/completed/order/list', 'CompletedOrderList')->name('completed.order.list');
         Route::get('/orders/{id}', 'OrderShow')->name('orders.show');
         Route::put('/orders/cancel/{id}', 'CancelOrder')->name('cancel.order');
+        Route::get('request/return/{id}', 'RequestReturn');
     });
 
     //Profile
@@ -226,6 +229,13 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
 });
 Route::prefix('admin')->middleware(['auth', 'isEmployee'])->group(function () {
+
+    //Return/Refund
+    Route::controller(ReturnController::class)->group(function (){
+        Route::get('/return/request', 'AdminReturnRequest')->name('admin.return.request');
+        Route::get('/approve/return/{id}', 'ApproveReturn');
+        Route::get('/all/return', 'AdminAllReturn')->name('admin.all.return');
+    });
 
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::get('/notification/minimum/mail', [DashboardController::class, 'NotificationMinimumMail']);
