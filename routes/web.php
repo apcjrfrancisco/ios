@@ -48,6 +48,8 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/categories/{category_slug}', 'Products')->name('products');
     Route::get('/categories/{category_slug}/{product_slug}', 'ProductView')->name('productView');
     Route::get('/thank-you', 'ThankYou')->name('thank-you');
+    Route::get('/terms', 'TermsService')->name('terms');
+    Route::get('/privacy', 'PrivacyPolicy')->name('privacy');
 });
 
 Route::middleware(['auth'])->group(function () {

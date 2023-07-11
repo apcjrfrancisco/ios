@@ -54,4 +54,15 @@ class FrontendController extends Controller
     {
         return view('frontend.thank-you');
     }
+
+    public function TermsService()
+    {
+        return view('auth.termsprivacy.terms');
+    }
+    
+    public function PrivacyPolicy()
+    {
+        return view('auth.termsprivacy.privacy');
+    }
+
 }
