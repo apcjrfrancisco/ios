@@ -89,13 +89,12 @@ Auth::routes([
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index']);
-    Route::get('/notification/minimum/mail', [DashboardController::class, 'NotificationMinimumMail']);
-
+    // Route::get('dashboard', [DashboardController::class, 'index']);
+    // Route::get('/notification/minimum/mail', [DashboardController::class, 'NotificationMinimumMail']);
 
     //Supplier
     Route::controller(SupplierController::class)->group(function () {
-        Route::get('/supplier', 'SupplierAll')->name('supplier');
+        // Route::get('/supplier', 'SupplierAll')->name('supplier');
         Route::get('/supplier/add', 'SupplierAdd')->name('supplier.add');
         Route::post('/supplier/store', 'SupplierStore')->name('supplier.store');
         Route::get('/supplier/edit/{id}', 'SupplierEdit')->name('supplier.edit');
@@ -103,16 +102,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/supplier/delete/{id}', 'SupplierDelete')->name('supplier.delete');
     });
 
-    //Charts
-    Route::controller(ChartController::class)->group(function() {
-
-        Route::get('/charts', 'ChartsAll')->name('charts');
-
-    });
 
     //Unit
     Route::controller(UnitController::class)->group(function () {
-        Route::get('/unit', 'UnitAll')->name('unit');
+        // Route::get('/unit', 'UnitAll')->name('unit');
         Route::get('/unit/add', 'UnitAdd')->name('unit.add');
         Route::post('/unit/store', 'UnitStore')->name('unit.store');
         Route::get('/unit/edit/{id}', 'UnitEdit')->name('unit.edit');
@@ -122,7 +115,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     //Category
     Route::controller(CategoryController::class)->group(function () {
-        Route::get('/category', 'CategoryAll')->name('category');
+        // Route::get('/category', 'CategoryAll')->name('category');
         Route::get('/category/add', 'CategoryAdd')->name('category.add');
         Route::post('/category/store', 'CategoryStore')->name('category.store');
         Route::get('/category/edit/{id}', 'CategoryEdit')->name('category.edit');
@@ -132,7 +125,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     //Brands
     Route::controller(BrandController::class)->group(function () {
-        Route::get('/brand', 'BrandAll')->name('brand');
+        // Route::get('/brand', 'BrandAll')->name('brand');
         Route::get('/brand/add', 'BrandAdd')->name('brand.add');
         Route::post('/brand/store', 'BrandStore')->name('brand.store');
         Route::get('/brand/edit/{id}', 'BrandEdit')->name('brand.edit');
@@ -142,7 +135,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     //Products
     Route::controller(ProductController::class)->group(function () {
-        Route::get('/product', 'ProductAll')->name('product');
+        // Route::get('/product', 'ProductAll')->name('product');
         Route::get('/product/add', 'ProductAdd')->name('product.add');
         Route::post('/product/store', 'ProductStore')->name('product.store');
         Route::get('/product/edit/{id}', 'ProductEdit')->name('product.edit');
@@ -160,7 +153,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/purchase/approval/{id}', 'PurchaseApproval')->name('purchase.approval');
         Route::post('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
         Route::get('/purchase/reorder/{id}', 'PurchaseReorder')->name('purchase.reorder');
-
     });
 
     //Defaults
@@ -169,6 +161,102 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/get-category', 'GetCategory')->name('get-category');
         Route::get('/get-product', 'GetProduct')->name('get-product');
         Route::get('/get-product-category', 'GetProductCategory')->name('get-product-category');
+    });
+
+    // //Slider
+    // Route::controller(SliderController::class)->group(function () {
+    //     Route::get('/slider', 'SliderAll')->name('slider');
+    //     Route::get('/slider/add', 'SliderAdd')->name('slider.add');
+    //     Route::post('/slider/store', 'SliderStore')->name('slider.store');
+    //     Route::get('/slider/edit/{id}', 'SliderEdit')->name('slider.edit');
+    //     Route::post('/slider/update', 'SliderUpdate')->name('slider.update');
+    //     Route::get('/slider/delete/{id}', 'SliderDelete')->name('slider.delete');
+    // });
+
+    // //Orders
+    // Route::controller(AdminOrderController::class)->group(function () {
+    //     Route::get('/orders', 'Orders')->name('orders');
+    //     Route::get('/orders/{orderId}', 'OrderShow')->name('orders.view');
+    //     Route::get('/filter', 'FilterOrder')->name('filter.order');
+    //     Route::put('/orders/{orderId}', 'UpdateOrderStatus')->name('order.status');
+    //     Route::get('/invoice/{orderId}/generate', 'GenerateInvoice')->name('invoice.generate');
+    //     Route::get('/invoice/{orderId}', 'ViewInvoice')->name('invoice.view');
+    //     Route::get('/invoice/{orderId}/mail', 'MailInvoice')->name('invoice.mail');
+    //     Route::get('/print/orders/list', 'PrintOrdersList')->name('print.orders.list');
+    //     Route::get('/filter/list', 'FilterOrderList')->name('filter.order.list');
+    //     Route::get('/orders/report/pdf', 'OrdersReportPdf')->name('orders.report.pdf');
+    //     Route::get('/orders/report/daily/pdf', 'OrdersReportDailyPdf')->name('orders.report.daily.pdf');
+    //     Route::get('/orders/report/weekly/pdf', 'OrdersReportWeeklyPdf')->name('orders.report.weekly.pdf');
+    //     Route::get('/orders/report/monthly/pdf', 'OrdersReportMonthlyPdf')->name('orders.report.monthly.pdf');
+    //     Route::get('/orders/report/yearly/pdf', 'OrdersReportYearlyPdf')->name('orders.report.yearly.pdf');
+    // });
+
+    // //Setting
+    // Route::controller(SettingController::class)->group(function () {
+    //     Route::get('/footer/setting', 'FooterSetting')->name('footer.setting');
+    //     Route::get('/footer/add/{id}', 'FooterAdd')->name('footer.add');
+    //     Route::post('/footer/store', 'FooterStore')->name('footer.store');
+    // });
+
+    //Users
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user', 'UserAll')->name('user');
+        Route::get('/user/add', 'UserAdd')->name('user.add');
+        Route::post('/user/store', 'UserStore')->name('user.store');
+        Route::get('/user/edit/{id}', 'UserEdit')->name('user.edit');
+        Route::get('/user/edit/user/{id}', 'UserUserEdit')->name('user.edit.user');
+        Route::get('/user/delete/{id}', 'UserDelete')->name('user.delete');
+    });
+
+    // //Stock
+    // Route::controller(StockController::class)->group(function () {
+    //     Route::get('/stock/report', 'StockReport')->name('stock.report');
+    //     Route::get('/stock/report/pdf', 'StockReportPdf')->name('stock.report.pdf');
+    //     Route::get('/stock/supplier/wise', 'StockSupplierWise')->name('stock.supplier.wise');
+    //     Route::get('/supplier/wise/pdf', 'SupplierWisePdf')->name('supplier.wise.pdf');
+    //     Route::get('/product/wise/pdf', 'ProductWisePdf')->name('product.wise.pdf');
+    // });
+
+    //Notification
+    Route::controller(NotificationController::class)->group(function () {
+        Route::get('/notification/minimum', 'NotificationMinimum')->name('notification.minimum');
+        Route::get('/notification/nostock', 'NotificationNoStock')->name('notification.nostock');
+        // Route::get('/notification/minimum/mail', 'NotificationMinimumMail')->name('notification.minimum.mail');
+
+    });
+});
+Route::prefix('admin')->middleware(['auth', 'isEmployee'])->group(function () {
+
+    Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::get('/notification/minimum/mail', [DashboardController::class, 'NotificationMinimumMail']);
+    //Charts
+    Route::controller(ChartController::class)->group(function () {
+        Route::get('/charts', 'ChartsAll')->name('charts');
+    });
+
+    //Supplier
+    Route::controller(SupplierController::class)->group(function () {
+        Route::get('/supplier', 'SupplierAll')->name('supplier');
+    });
+
+    //Unit
+    Route::controller(UnitController::class)->group(function () {
+        Route::get('/unit', 'UnitAll')->name('unit');
+    });
+
+    //Category
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/category', 'CategoryAll')->name('category');
+    });
+
+    //Brands
+    Route::controller(BrandController::class)->group(function () {
+        Route::get('/brand', 'BrandAll')->name('brand');
+    });
+
+    //Products
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/product', 'ProductAll')->name('product');
     });
 
     //Slider
@@ -206,16 +294,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('/footer/store', 'FooterStore')->name('footer.store');
     });
 
-    //Users
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/user', 'UserAll')->name('user');
-        Route::get('/user/add', 'UserAdd')->name('user.add');
-        Route::post('/user/store', 'UserStore')->name('user.store');
-        Route::get('/user/edit/{id}', 'UserEdit')->name('user.edit');
-        Route::get('/user/edit/user/{id}', 'UserUserEdit')->name('user.edit.user');
-        Route::get('/user/delete/{id}', 'UserDelete')->name('user.delete');
-    });
-
     //Stock
     Route::controller(StockController::class)->group(function () {
         Route::get('/stock/report', 'StockReport')->name('stock.report');
@@ -223,13 +301,5 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/stock/supplier/wise', 'StockSupplierWise')->name('stock.supplier.wise');
         Route::get('/supplier/wise/pdf', 'SupplierWisePdf')->name('supplier.wise.pdf');
         Route::get('/product/wise/pdf', 'ProductWisePdf')->name('product.wise.pdf');
-    });
-
-    //Notification
-    Route::controller(NotificationController::class)->group(function () {
-        Route::get('/notification/minimum', 'NotificationMinimum')->name('notification.minimum');
-        Route::get('/notification/nostock', 'NotificationNoStock')->name('notification.nostock');
-        // Route::get('/notification/minimum/mail', 'NotificationMinimumMail')->name('notification.minimum.mail');
-
     });
 });
