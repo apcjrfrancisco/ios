@@ -6,12 +6,12 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('charts') }}">
                 <i class="mdi mdi-chart-bar menu-icon"></i>
                 <span class="menu-title">Charts</span>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a class="nav-link" href="{{ route('supplier') }}">
                 <i class="fas fa-user-friends menu-icon"></i>
@@ -54,7 +54,7 @@
                         <li class="nav-item"> <a class="nav-link" href="{{ route('purchase') }}">
                                 All Purchases </a>
                         </li>
-                        <li style="display:none;" class="nav-item"> <a class="nav-link"
+                        <li class="nav-item"> <a class="nav-link"
                                 href="{{ route('purchase.pending') }}"> Pending Purchases
                             </a></li>
                     @else

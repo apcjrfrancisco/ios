@@ -42,7 +42,7 @@ class UserController extends Controller
     {
         if (User::where('id', Auth::user()->id)->where('role_as', '0')) {
             User::findOrFail($id)->update([
-                'role_as' => '1',
+                'role_as' => '2',
             ]);
             $notification = array(
                 'message' => 'User Updated',
@@ -54,7 +54,7 @@ class UserController extends Controller
 
     public function UserUserEdit($id, Request $request)
     {
-        if (User::where('id', Auth::user()->id)->where('role_as', '1')) {
+        if (User::where('id', Auth::user()->id)->where('role_as', '2')) {
 
             User::findOrFail($id)->update([
                 'role_as' => '0',

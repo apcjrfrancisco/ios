@@ -32,6 +32,7 @@
                                         <th>Brand</th>
                                         <th>Unit</th>
                                         <th>Product Name</th>
+                                        <th>Selling Price</th>
                                         <th>Product Slug</th>
                                         <th>Product Image</th>
                                         <th width="10%">Action</th>
@@ -49,6 +50,7 @@
                                             <td> {{ $item['brand']['brand_name'] }} </td>
                                             <td> {{ $item['unit']['unit_name'] }} </td>
                                             <td> {{ $item->product_name }} </td>
+                                            <td> <span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span> {{ Str::currency($item->selling_price) }} </td>
                                             <td> {{ $item->product_slug }} </td>
                                             <td> <img src="{{ asset($item->product_image) }}" style="width: 120px; height:120px;"> </td>
                                             <td>

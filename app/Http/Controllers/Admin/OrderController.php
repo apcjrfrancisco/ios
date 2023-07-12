@@ -34,7 +34,7 @@ class OrderController extends Controller
 
     public function Orders()
     {
-        $orders = Order::where('return_order',0)->orderBy('created_at', 'desc')->get();
+        $orders = Order::where('return_order',0)->orderBy('id', 'desc')->get();
         return view('backend.orders.orders_all', compact('orders'));
     }
 

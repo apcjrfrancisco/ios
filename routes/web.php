@@ -150,23 +150,23 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     //Purchase
     Route::controller(PurchaseController::class)->group(function () {
         // Route::get('/purchase', 'PurchaseAll')->name('purchase');
-        Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
-        Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
-        Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
+        // Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
+        // Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
+        // Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
         Route::get('/purchase/view', 'PurchaseView')->name('purchase.view');
-        Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
+        // Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
         Route::get('/purchase/approval/{id}', 'PurchaseApproval')->name('purchase.approval');
         Route::post('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
         Route::get('/purchase/reorder/{id}', 'PurchaseReorder')->name('purchase.reorder');
     });
 
-    //Defaults
-    Route::controller(DefaultController::class)->group(function () {
-        Route::get('/get-brand', 'GetBrand')->name('get-brand');
-        Route::get('/get-category', 'GetCategory')->name('get-category');
-        Route::get('/get-product', 'GetProduct')->name('get-product');
-        Route::get('/get-product-category', 'GetProductCategory')->name('get-product-category');
-    });
+    // //Defaults
+    // Route::controller(DefaultController::class)->group(function () {
+    //     Route::get('/get-brand', 'GetBrand')->name('get-brand');
+    //     Route::get('/get-category', 'GetCategory')->name('get-category');
+    //     Route::get('/get-product', 'GetProduct')->name('get-product');
+    //     Route::get('/get-product-category', 'GetProductCategory')->name('get-product-category');
+    // });
 
     // //Slider
     // Route::controller(SliderController::class)->group(function () {
@@ -235,6 +235,18 @@ Route::prefix('admin')->middleware(['auth', 'isEmployee'])->group(function () {
     //Purchases
     Route::controller(PurchaseController::class)->group(function () {
         Route::get('/purchase', 'PurchaseAll')->name('purchase');
+        Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
+        Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
+        Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
+        Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
+    });
+
+    //Defaults
+    Route::controller(DefaultController::class)->group(function () {
+        Route::get('/get-brand', 'GetBrand')->name('get-brand');
+        Route::get('/get-category', 'GetCategory')->name('get-category');
+        Route::get('/get-product', 'GetProduct')->name('get-product');
+        Route::get('/get-product-category', 'GetProductCategory')->name('get-product-category');
     });
 
     //Return/Refund
