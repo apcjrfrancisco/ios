@@ -51,15 +51,23 @@
 
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @if (Auth::user()->role_as == '1' || '2')
-                                        <li><a class="dropdown-item" href="{{ url('/admin/dashboard') }}"><i
-                                                    class="fas fa-gauge"></i> Go To Dashboard</a></li>
+                                    @if (Auth::user()->role_as !== '1' || '2')
+                                       
+                                    @else
+                                    <li><a class="dropdown-item" href="{{ url('/admin/dashboard') }}"><i
+                                        class="fas fa-gauge"></i> Go To Dashboard</a></li>
                                     @endif
                                     <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fa fa-user"></i>
                                             Profile</a></li>
                                     <li><a class="dropdown-item" href="{{ route('user.orders') }}"><i
                                                 class="fa fa-list"></i> My Orders</a>
                                     </li>
+                                    <li><a class="dropdown-item" href="{{ route('completed.order.list') }}"><i
+                                                class="fa fa-repeat"></i> Return Orders</a>
+                                    </li>
+                                    {{-- <li><a class="dropdown-item" href="{{ route('user.orders') }}"><i
+                                                class="fa fa-times-circle"></i> Canceled Orders</a>
+                                    </li> --}}
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

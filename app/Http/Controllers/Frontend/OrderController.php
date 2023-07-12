@@ -7,6 +7,7 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Mail\OrderCancelMailable;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -64,5 +65,26 @@ class OrderController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+
+    public function CompletedOrderList()
+    {
+        $order = DB::table('orders')->where('user_id', Auth::user()->id)->where('status_message', 'completed')->orderBy('id', 'desc')->limit(5)->get();
+
+        return view('frontend.orders.completed_order_view', compact('order'));
+    }
+
+    public function RequestReturn($id)
+    {
+        DB::table('orders')->where('id', $id)->update([
+            'return_order' => 1
+        ]);
+
+        $notification = array(
+            'message' => 'Return Request Sent',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
     }
 }

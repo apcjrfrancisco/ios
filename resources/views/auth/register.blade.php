@@ -49,6 +49,14 @@
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
                                 </div>
+                                <div class="form-group">
+                                    <input type="checkbox" id="terms_privacy" name="terms_privacy"> <span>I agree to the <a href="{{ url('/terms') }}">Terms of Service</a> and <a href="{{ url('/privacy') }}">Privacy Policy</a></span>
+                                    @error('terms_privacy')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                                 <div class="mt-3">
                                     <button type="submit"
                                         class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">

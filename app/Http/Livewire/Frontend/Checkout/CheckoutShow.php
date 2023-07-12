@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Frontend\Checkout;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Product;
 use Livewire\Component;
 use App\Models\OrderItem;
 use Illuminate\Support\Str;
@@ -11,6 +12,8 @@ use Illuminate\Support\Carbon;
 use App\Mail\PlaceOrderMailable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\NotificationMinimumMailable;
+use App\Mail\NotificationNoStockMailable;
 
 class CheckoutShow extends Component
 {
@@ -72,6 +75,7 @@ class CheckoutShow extends Component
 
     public function codOrder()
     {
+        // $sendmailrestock = $this->NotificationMinimumMail();
         $this->payment_mode = 'Cash on Delivery';
         $codOrder = $this->placeOrder();
 
@@ -85,6 +89,18 @@ class CheckoutShow extends Component
                 //Mail Sent
             } catch (\Exception $e) {
                 // Something went wrong
+            }
+            try {
+                $allData = Product::latest()->get();
+                foreach ($allData as $item) {
+                    if ($item->to_reorder > $item->quantity && $item->quantity != 0) {
+                        Mail::to("torrecampsm@gmail.com")->send(new NotificationMinimumMailable($allData));
+                    }
+                    if ($item->quantity == 0) {
+                        Mail::to("torrecampsm@gmail.com")->send(new NotificationNoStockMailable($allData));
+                    }
+                }
+            } catch (\Exception $e) {
             }
 
             $this->dispatchBrowserEvent('message', [

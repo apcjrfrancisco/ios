@@ -17,7 +17,7 @@ class FrontendController extends Controller
 
     public function Categories()
     {
-        $categories = Category::latest()->get();
+        $categories = Category::orderBy('id', 'asc')->get();
         return view('frontend.collections.category.index', compact('categories'));
     }
 
@@ -54,4 +54,15 @@ class FrontendController extends Controller
     {
         return view('frontend.thank-you');
     }
+
+    public function TermsService()
+    {
+        return view('auth.termsprivacy.terms');
+    }
+    
+    public function PrivacyPolicy()
+    {
+        return view('auth.termsprivacy.privacy');
+    }
+
 }

@@ -11,7 +11,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <a href="{{ route('user.all') }}" class="btn btn-danger text-white" style="float:right;">Back</a>
+                            <a href="{{ route('user') }}" class="btn btn-danger text-white" style="float:right;">Back</a>
                             <h4 class="card-title">Add User 
                             </h4> <br>
 
@@ -48,7 +48,7 @@
                                         <select name="role_as" class="form-control" id="">
                                             <option value="" disabled>Select Role</option>
                                             <option value="0">User</option>
-                                            <option value="1">Admin</option>
+                                            <option value="2">Employee</option>
                                         </select>
                                     </div>
                                 </div>

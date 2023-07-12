@@ -22,6 +22,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\ReturnController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 
 /*
@@ -47,6 +48,8 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/categories/{category_slug}', 'Products')->name('products');
     Route::get('/categories/{category_slug}/{product_slug}', 'ProductView')->name('productView');
     Route::get('/thank-you', 'ThankYou')->name('thank-you');
+    Route::get('/terms', 'TermsService')->name('terms');
+    Route::get('/privacy', 'PrivacyPolicy')->name('privacy');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -69,8 +72,10 @@ Route::middleware(['auth'])->group(function () {
     //UserOrders
     Route::controller(OrderController::class)->group(function () {
         Route::get('/user/orders', 'Orders')->name('user.orders');
+        Route::get('/completed/order/list', 'CompletedOrderList')->name('completed.order.list');
         Route::get('/orders/{id}', 'OrderShow')->name('orders.show');
         Route::put('/orders/cancel/{id}', 'CancelOrder')->name('cancel.order');
+        Route::get('request/return/{id}', 'RequestReturn');
     });
 
     //Profile
@@ -144,24 +149,24 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
     //Purchase
     Route::controller(PurchaseController::class)->group(function () {
-        Route::get('/purchase', 'PurchaseAll')->name('purchase');
-        Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
-        Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
-        Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
+        // Route::get('/purchase', 'PurchaseAll')->name('purchase');
+        // Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
+        // Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
+        // Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
         Route::get('/purchase/view', 'PurchaseView')->name('purchase.view');
-        Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
+        // Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
         Route::get('/purchase/approval/{id}', 'PurchaseApproval')->name('purchase.approval');
         Route::post('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
         Route::get('/purchase/reorder/{id}', 'PurchaseReorder')->name('purchase.reorder');
     });
 
-    //Defaults
-    Route::controller(DefaultController::class)->group(function () {
-        Route::get('/get-brand', 'GetBrand')->name('get-brand');
-        Route::get('/get-category', 'GetCategory')->name('get-category');
-        Route::get('/get-product', 'GetProduct')->name('get-product');
-        Route::get('/get-product-category', 'GetProductCategory')->name('get-product-category');
-    });
+    // //Defaults
+    // Route::controller(DefaultController::class)->group(function () {
+    //     Route::get('/get-brand', 'GetBrand')->name('get-brand');
+    //     Route::get('/get-category', 'GetCategory')->name('get-category');
+    //     Route::get('/get-product', 'GetProduct')->name('get-product');
+    //     Route::get('/get-product-category', 'GetProductCategory')->name('get-product-category');
+    // });
 
     // //Slider
     // Route::controller(SliderController::class)->group(function () {
@@ -227,8 +232,32 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 });
 Route::prefix('admin')->middleware(['auth', 'isEmployee'])->group(function () {
 
+    //Purchases
+    Route::controller(PurchaseController::class)->group(function () {
+        Route::get('/purchase', 'PurchaseAll')->name('purchase');
+        Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
+        Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
+        Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
+        Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
+    });
+
+    //Defaults
+    Route::controller(DefaultController::class)->group(function () {
+        Route::get('/get-brand', 'GetBrand')->name('get-brand');
+        Route::get('/get-category', 'GetCategory')->name('get-category');
+        Route::get('/get-product', 'GetProduct')->name('get-product');
+        Route::get('/get-product-category', 'GetProductCategory')->name('get-product-category');
+    });
+
+    //Return/Refund
+    Route::controller(ReturnController::class)->group(function (){
+        Route::get('/return/request', 'AdminReturnRequest')->name('admin.return.request');
+        Route::get('/approve/return/{id}', 'ApproveReturn');
+        Route::get('/all/return', 'AdminAllReturn')->name('admin.all.return');
+    });
+
     Route::get('dashboard', [DashboardController::class, 'index']);
-    Route::get('/notification/minimum/mail', [DashboardController::class, 'NotificationMinimumMail']);
+    // Route::get('/notification/minimum/mail', [DashboardController::class, 'NotificationMinimumMail']);
     //Charts
     Route::controller(ChartController::class)->group(function () {
         Route::get('/charts', 'ChartsAll')->name('charts');
