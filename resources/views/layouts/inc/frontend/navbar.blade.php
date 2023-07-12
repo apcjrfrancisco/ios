@@ -65,9 +65,9 @@
                                     <li><a class="dropdown-item" href="{{ route('completed.order.list') }}"><i
                                                 class="fa fa-repeat"></i> Return Orders</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('user.orders') }}"><i
+                                    {{-- <li><a class="dropdown-item" href="{{ route('user.orders') }}"><i
                                                 class="fa fa-times-circle"></i> Canceled Orders</a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

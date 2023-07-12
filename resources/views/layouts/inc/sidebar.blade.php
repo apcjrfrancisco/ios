@@ -77,7 +77,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <i class="fa-solid fa-gear menu-icon"></i>
+                <i class="fa-solid fa-repeat menu-icon"></i>
                 <span class="menu-title">Return Orders</span>
                 <i class="menu-arrow"></i>
             </a>

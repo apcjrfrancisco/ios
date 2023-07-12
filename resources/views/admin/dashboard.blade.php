@@ -96,20 +96,21 @@
                             <tr class="text-center">
                                 <th>No. </th>
                                 <th>Product Name</th>
+                                <th>Quantity Sold</th>
 
                         </thead>
 
                         <tbody>
 
-
-
                             @foreach ($sales as $key => $item)
                                 @php
-                                    $product = App\Models\Product::where('id',$item->id)->first();
+                                    $product = App\Models\Product::where('id', $item->id)->first();
+                                    $total = App\Models\OrderItem::where('product_id', $product->id)->sum('quantity');
                                 @endphp
                                 <tr class="text-center">
                                     <td> {{ $key + 1 }} </td>
                                     <td> {{ $product->product_name }} </td>
+                                    <td> {{ $total }} </td>
                                 </tr>
                             @endforeach
 
@@ -120,7 +121,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -142,7 +143,7 @@
 
                             @foreach ($customer as $key => $item)
                                 @php
-                                    $users = App\Models\User::where('id',$item->customer_id)->first();
+                                    $users = App\Models\User::where('id', $item->customer_id)->first();
                                 @endphp
                                 <tr class="text-center">
                                     <td> {{ $key + 1 }} </td>

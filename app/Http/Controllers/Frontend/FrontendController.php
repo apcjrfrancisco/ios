@@ -17,7 +17,7 @@ class FrontendController extends Controller
 
     public function Categories()
     {
-        $categories = Category::latest()->get();
+        $categories = Category::orderBy('id', 'asc')->get();
         return view('frontend.collections.category.index', compact('categories'));
     }
 
