@@ -11,7 +11,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">Add Brand </h4>
+                            <h4 class="card-title">Add Brand</h4>
 
                             <form method="post" action="{{ route('brand.store') }}" enctype="multipart/form-data"
                                 id="myForm">
