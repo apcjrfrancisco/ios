@@ -52,7 +52,7 @@
 
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @if (Auth::user()->role_as !== '1' || '2')
+                                    @if (Auth::user()->role_as == '0')
                                     @else
                                         <li><a class="dropdown-item" href="{{ url('/admin/dashboard') }}"><i
                                                     class="fas fa-gauge"></i> Go To Dashboard</a></li>

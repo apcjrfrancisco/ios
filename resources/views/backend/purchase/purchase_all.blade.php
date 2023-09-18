@@ -20,7 +20,7 @@
                         <div class="card-body">
 
                             <a class="btn btn-info btn-rounded btn-fw" style="float:right"
-                                href="{{ route('purchase.add') }}">Add Purchase</a> <br>
+                                href="{{ route('purchase.add') }}"><i class="fas fa-plus-circle"></i> Add Purchase</a> <br>
                             <h4 class="card-title">All Purchases Data </h4>
 
                             <form action="{{ route('purchase.view') }}" target="_blank" method="get">

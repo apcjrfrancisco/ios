@@ -36,7 +36,7 @@
                                 <div class="col-md-4">
                                     <div class="md-3">
                                         <label class="col-form-label">Supplier</label>
-                                        <select id="supplier_id" name="supplier_id" class="form-select"
+                                        <select id="supplier_id" name="supplier_id" class="form-select select2"
                                             aria-label="Default select example">
                                             <option selected="">Open this select menu</option>
                                             @foreach ($supplier as $item)
@@ -49,7 +49,7 @@
                                 <div class="col-md-4">
                                     <div class="md-3">
                                         <label class="col-form-label">Category</label>
-                                        <select id="category_id" name="category_id" class="form-select"
+                                        <select id="category_id" name="category_id" class="form-select select2"
                                             aria-label="Default select example">
                                             <option selected="">Open this select menu</option>
                                         </select>
@@ -59,7 +59,7 @@
                                 <div class="col-md-4">
                                     <div class="md-3">
                                         <label class="col-form-label">Brand</label>
-                                        <select id="brand_id" name="brand_id" class="form-select"
+                                        <select id="brand_id" name="brand_id" class="form-select select2"
                                             aria-label="Default select example">
                                             <option selected="">Open this select menu</option>
                                         </select>
@@ -69,7 +69,7 @@
                                 <div class="col-md-4">
                                     <div class="md-3">
                                         <label class="col-form-label">Product Name</label>
-                                        <select id="product_id" name="product_id" class="form-select"
+                                        <select id="product_id" name="product_id" class="form-select select2"
                                             aria-label="Default select example">
                                             <option selected="">Open this select menu</option>
                                         </select>

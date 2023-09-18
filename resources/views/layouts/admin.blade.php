@@ -18,6 +18,8 @@
     <link href="{{ asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}"
         rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" href="{{ asset('backend/assets/select2/css/select2.min.css') }}" type="text/css">
+
     <!-- Responsive datatable examples -->
     <link href="{{ asset('backend/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
         rel="stylesheet" type="text/css" />
@@ -110,6 +112,10 @@
     <script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
 
     <script src="{{ asset('admin/js/jquery.cookie.js') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('backend/assets/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/select2/js/form-advanced.init.js') }}"></script>
+    
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
