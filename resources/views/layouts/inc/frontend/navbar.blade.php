@@ -6,11 +6,12 @@
                     <h5 class="brand-name"><img src="{{ asset('upload/tmlogo.png') }}" width="40px" alt="">
                         eTorrecamps</h5>
                 </div>
-                <div class="col-md-5 my-auto" style="color:#2974f1;">
-                    <form role="search">
-                        <div class="input-group " style="background-color:#2974f1;">
-                            <input type="hidden" placeholder="Search your product" class="form-control" />
-                            <i class="fa fa-search"></i>
+                <div class="col-md-5 my-auto">
+                    <form action="{{ url('search') }}" method="GET" role="search">
+                        <div class="input-group">
+                            <input type="search" name="search" value="{{ Request::get('search') }}" placeholder="Search your product" class="form-control" />
+                            <button class="btn bg-white" type="submit">
+                                <i class="fa fa-search"></i>
                             </button>
                         </div>
                     </form>
@@ -52,10 +53,9 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @if (Auth::user()->role_as !== '1' || '2')
-                                       
                                     @else
-                                    <li><a class="dropdown-item" href="{{ url('/admin/dashboard') }}"><i
-                                        class="fas fa-gauge"></i> Go To Dashboard</a></li>
+                                        <li><a class="dropdown-item" href="{{ url('/admin/dashboard') }}"><i
+                                                    class="fas fa-gauge"></i> Go To Dashboard</a></li>
                                     @endif
                                     <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fa fa-user"></i>
                                             Profile</a></li>

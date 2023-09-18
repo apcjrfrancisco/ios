@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Slider;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class FrontendController extends Controller
 {
@@ -13,6 +14,18 @@ class FrontendController extends Controller
     {
         $sliders = Slider::where('status', '0')->get();
         return view('frontend.index', compact('sliders'));
+    }
+
+    public function searchProducts(Request $request)
+    {
+        if($request->search){
+            $searchProducts = Product::where('product_name','LIKE','%'.$request->search.'%')->latest()->paginate(10);
+            return view('frontend.pages.search', compact('searchProducts'));
+        } else {
+            
+            return redirect()->back()->with('message', 'Empty Search');
+
+        }
     }
 
     public function Categories()

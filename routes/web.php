@@ -50,6 +50,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/thank-you', 'ThankYou')->name('thank-you');
     Route::get('/terms', 'TermsService')->name('terms');
     Route::get('/privacy', 'PrivacyPolicy')->name('privacy');
+    Route::get('search', 'searchProducts');
 });
 
 Route::middleware(['auth'])->group(function () {
