@@ -19,6 +19,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('customer') }}">
+                <i class="fas fa-address-book menu-icon"></i>
+                <span class="menu-title">Walk-In Customers</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('unit') }}">
                 <i class="far fa-clipboard menu-icon"></i>
                 <span class="menu-title">Manage Units</span>
@@ -72,6 +78,7 @@
                     </li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('stock.supplier.wise') }}"> Supplier /
                             Product Wise </a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('invoice') }}"> All Invoice </a></li> --}}
                 </ul>
             </div>
         </li>

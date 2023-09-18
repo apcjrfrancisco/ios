@@ -5,14 +5,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ChartController;
 use App\Http\Controllers\Admin\StockController;
+use App\Http\Controllers\Admin\ReturnController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\DefaultController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ChartController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Frontend\OrderController;
@@ -22,7 +25,6 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-use App\Http\Controllers\Admin\ReturnController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
 
 /*
@@ -108,6 +110,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/supplier/delete/{id}', 'SupplierDelete')->name('supplier.delete');
     });
 
+    
 
     //Unit
     Route::controller(UnitController::class)->group(function () {
@@ -159,6 +162,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/purchase/approval/{id}', 'PurchaseApproval')->name('purchase.approval');
         Route::post('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
         Route::get('/purchase/reorder/{id}', 'PurchaseReorder')->name('purchase.reorder');
+    });
+    //Invoice
+    Route::controller(InvoiceController::class)->group(function () {
+        Route::get('/invoice', 'InvoiceAll')->name('invoice');
+        
     });
 
     // //Defaults
@@ -241,6 +249,18 @@ Route::prefix('admin')->middleware(['auth', 'isEmployee'])->group(function () {
         Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
         Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
     });
+
+    //Customer
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('/customer', 'CustomerAll')->name('customer');
+        Route::get('/customer/add', 'CustomerAdd')->name('customer.add');
+        Route::post('/customer/store', 'CustomerStore')->name('customer.store');
+        Route::get('/customer/edit/{id}', 'CustomerEdit')->name('customer.edit');
+        Route::post('/customer/update', 'CustomerUpdate')->name('customer.update');
+        Route::get('/customer/delete/{id}', 'CustomerDelete')->name('customer.delete');
+        
+    });
+
 
     //Defaults
     Route::controller(DefaultController::class)->group(function () {
