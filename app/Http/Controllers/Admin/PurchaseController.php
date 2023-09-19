@@ -32,7 +32,8 @@ class PurchaseController extends Controller
         $category = Category::all();
         $unit = Unit::all();
         $brand = Brand::all();
-        return view('backend.purchase.purchase_add', compact('supplier', 'category', 'unit', 'brand'));
+        $date = date('Y-m-d');
+        return view('backend.purchase.purchase_add', compact('supplier', 'category', 'unit', 'brand', 'date'));
     }
 
     public function PurchaseStore(Request $request)

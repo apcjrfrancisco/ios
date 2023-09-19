@@ -163,11 +163,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
         Route::get('/purchase/reorder/{id}', 'PurchaseReorder')->name('purchase.reorder');
     });
-    //Invoice
-    Route::controller(InvoiceController::class)->group(function () {
-        Route::get('/invoice', 'InvoiceAll')->name('invoice');
-        
-    });
+    
 
     // //Defaults
     // Route::controller(DefaultController::class)->group(function () {
@@ -250,6 +246,13 @@ Route::prefix('admin')->middleware(['auth', 'isEmployee'])->group(function () {
         Route::get('/purchase/pending', 'PurchasePending')->name('purchase.pending');
     });
 
+    //Invoice
+    Route::controller(InvoiceController::class)->group(function () {
+        Route::get('/invoice', 'InvoiceAll')->name('invoice');
+        Route::get('/invoice/add', 'InvoiceAdd')->name('invoice.add');
+        
+    });
+
     //Customer
     Route::controller(CustomerController::class)->group(function () {
         Route::get('/customer', 'CustomerAll')->name('customer');
@@ -268,6 +271,7 @@ Route::prefix('admin')->middleware(['auth', 'isEmployee'])->group(function () {
         Route::get('/get-category', 'GetCategory')->name('get-category');
         Route::get('/get-product', 'GetProduct')->name('get-product');
         Route::get('/get-product-category', 'GetProductCategory')->name('get-product-category');
+        Route::get('/check-product', 'GetStock')->name('check-product-stock');
     });
 
     //Return/Refund

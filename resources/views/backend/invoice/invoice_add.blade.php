@@ -17,46 +17,40 @@
 
                             <div class="row">
 
-                                <div class="col-md-4">
+
+                                <div class="col-md-1">
+                                    <div class="md-3">
+                                        <label class="col-form-label">Invoice No.</label>
+                                        <input class="form-control example-date-input" type="text" readonly
+                                            value="TM - {{ $invoice_no }}" name="invoice_no" id="invoice_no">
+                                    </div>
+                                </div> <!-- end div -->
+
+                                <div class="col-md-2">
                                     <div class="md-3">
                                         <label class="col-form-label">Date</label>
-                                        <input class="form-control example-date-input" value="{{ $date }}" type="date" name="date"
+                                        <input class="form-control example-date-input" type="date" value="{{ $date }}" name="date"
                                             id="date">
                                     </div>
                                 </div> <!-- end div -->
 
-                                <div class="col-md-4">
-                                    <div class="md-3">
-                                        <label class="col-form-label">Purchase No.</label>
-                                        <input class="form-control example-date-input" type="text" readonly
-                                            value="TM - {{ $random }}" name="purchase_no" id="purchase_no">
-                                    </div>
-                                </div> <!-- end div -->
 
-                                <div class="col-md-4">
+
+
+                                <div class="col-md-3">
                                     <div class="md-3">
-                                        <label class="col-form-label">Supplier</label>
-                                        <select id="supplier_id" name="supplier_id" class="form-select select2"
+                                        <label class="col-form-label">Category</label>
+                                        <select id="category_id" name="category_id" class="form-select select2"
                                             aria-label="Default select example">
-                                            <option selected="">Open this select menu</option>
-                                            @foreach ($supplier as $item)
-                                                <option value="{{ $item->id }}">{{ $item->supplier_name }}</option>
+                                            <option selected="">Select Category</option>
+                                            @foreach ($category as $item)
+                                                <option value="{{ $item->id }}">{{ $item->category_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div> <!-- end div -->
 
-                                <div class="col-md-4">
-                                    <div class="md-3">
-                                        <label class="col-form-label">Category</label>
-                                        <select id="category_id" name="category_id" class="form-select select2"
-                                            aria-label="Default select example">
-                                            <option selected="">Open this select menu</option>
-                                        </select>
-                                    </div>
-                                </div> <!-- end div -->
-
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="md-3">
                                         <label class="col-form-label">Brand</label>
                                         <select id="brand_id" name="brand_id" class="form-select select2"
@@ -66,13 +60,21 @@
                                     </div>
                                 </div> <!-- end div -->
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="md-3">
                                         <label class="col-form-label">Product Name</label>
                                         <select id="product_id" name="product_id" class="form-select select2"
                                             aria-label="Default select example">
                                             <option selected="">Open this select menu</option>
                                         </select>
+                                    </div>
+                                </div> <!-- end div -->
+
+                                <div class="col-md-1">
+                                    <div class="md-3">
+                                        <label class="col-form-label">Stock</label>
+                                        <input class="form-control example-date-input" type="text" readonly
+                                            name="current_stock_qty" id="current_stock_qty">
                                     </div>
                                 </div> <!-- end div -->
 
@@ -146,7 +148,7 @@
         <tr class="delete_add_more_item text-center" id="delete_add_more_item">
             <input type="hidden" name="date" value="@{{date}}">
             <input type="hidden" name="purchase_no" value="@{{purchase_no}}">
-            <input type="hidden" name="supplier_id[]" value="@{{supplier_id}}">
+            
 
             <td>
                 <input type="hidden" name="category_id[]" value="@{{category_id}}">
@@ -188,7 +190,6 @@
             $(document).on("click", ".addeventmore", function() {
                 var date = $('#date').val();
                 var purchase_no = $('#purchase_no').val();
-                var supplier_id = $('#supplier_id').val();
                 var category_id = $('#category_id').val();
                 var category_name = $('#category_id').find('option:selected').text();
                 var brand_id = $('#brand_id').val();
@@ -205,13 +206,6 @@
                 }
                 if (purchase_no == '') {
                     $.notify("Date is required", {
-                        globalPosition: 'top right',
-                        className: 'error'
-                    });
-                    return false;
-                }
-                if (supplier_id == '') {
-                    $.notify("Supplier is required", {
                         globalPosition: 'top right',
                         className: 'error'
                     });
@@ -284,29 +278,6 @@
         });
     </script>
 
-    <script type="text/javascript">
-        $(function() {
-            $(document).on('change', '#supplier_id', function() {
-                var supplier_id = $(this).val();
-                $.ajax({
-                    url: "{{ route('get-category') }}",
-                    type: "GET",
-                    data: {
-                        supplier_id: supplier_id
-                    },
-                    success: function(data) {
-                        var html = '<option value="">Select Category</option>';
-                        $.each(data, function(key, v) {
-                            html += '<option value=" ' + v.category_id + ' "> ' + v
-                                .category.category_name +
-                                '</option>';
-                        });
-                        $('#category_id').html(html);
-                    }
-                })
-            });
-        });
-    </script>
 
     <script type="text/javascript">
         $(function() {
@@ -354,4 +325,23 @@
             });
         });
     </script>
+
+    <script type="text/javascript">
+        $(function() {
+            $(document).on('change', '#product_id', function() {
+                var product_id = $(this).val();
+                $.ajax({
+                    url: "{{ route('check-product-stock') }}",
+                    type: "GET",
+                    data: {
+                        product_id: product_id
+                    },
+                    success: function(data) {
+                        $('#current_stock_qty').val(data);
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection

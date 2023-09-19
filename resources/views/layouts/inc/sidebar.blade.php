@@ -78,7 +78,7 @@
                     </li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('stock.supplier.wise') }}"> Supplier /
                             Product Wise </a></li>
-                    {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('invoice') }}"> All Invoice </a></li> --}}
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('invoice') }}"> All Invoice </a></li>
                 </ul>
             </div>
         </li>
