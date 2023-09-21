@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-2">Walk-in Invoice All</h4>
+                        <h4 class="mb-sm-2">Pending Walk-in Invoice All</h4>
 
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                             <a class="btn btn-info btn-rounded btn-fw" style="float:right"
                                 href="{{ route('invoice.add') }}"><i class="fas fa-plus-circle"></i> Add Walk-in Invoice</a>
                             <br>
-                            <h4 class="card-title">All Walk-in Invoices Data </h4>
+                            <h4 class="card-title">All Walk-in Pending Invoices Data </h4>
 
                             {{-- <form action="{{ route('purchase.view') }}" target="_blank" method="get">
                                 <div class="row">
@@ -50,6 +50,8 @@
                                         <th>Invoice No.</th>
                                         <th>Customer Name</th>
                                         <th width="10%">Amount</th>
+                                        <th width="10%">Status</th>
+                                        <th width="10%">Action</th>
 
                                 </thead>
 
@@ -59,10 +61,25 @@
                                         <tr class="text-center">
                                             <td> {{ $key + 1 }} </td>
                                             <td> {{ $item->date }} </td>
-                                            <td> TM-INV-{{ $item->invoice_no }} </td>
+                                            <td> #{{ $item->invoice_no }} </td>
                                             <td> {{ $item['payments']['customer']['customer_name'] }} </td>
                                             <td> <span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
                                                 {{ Str::currency($item['payments']['total_amount']) }} </td>
+                                            @if ($item->status == '0')
+                                                <td> <span class="btn btn-warning">Pending</span> </td>
+                                            @elseif ($item->status == '1')
+                                                <td> <span class="btn btn-success">Approved</span> </td>
+                                            @endif
+                                            <td> @if ($item->status == '0')
+                                                <a href="{{ route('invoice.approve', $item->id) }}"
+                                                    class="btn btn-info sm" title="Approved Data"> <i
+                                                        class="far fa-check-circle"></i>
+                                                </a>
+                                                <a href="{{ route('invoice.delete', $item->id) }}"
+                                                    class="btn btn-danger sm" title="Delete Data" id="delete"> <i
+                                                        class="far fa-trash-alt"></i>
+                                                </a>
+                                            @endif </td>
 
                                         </tr>
                                     @endforeach

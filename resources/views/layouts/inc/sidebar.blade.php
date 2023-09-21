@@ -78,7 +78,6 @@
                     </li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('stock.supplier.wise') }}"> Supplier /
                             Product Wise </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('invoice') }}"> All Invoice </a></li>
                 </ul>
             </div>
         </li>
@@ -92,6 +91,20 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('admin.return.request') }}">Return Requests</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('admin.all.return') }}">All Requests</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                <i class="fas fa-receipt menu-icon"></i>
+                <span class="menu-title">Walk-in Invoices</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('invoice') }}"> All Invoice </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('invoice.pending.list') }}"> Invoice Approvals </a></li>
                     </li>
                 </ul>
             </div>

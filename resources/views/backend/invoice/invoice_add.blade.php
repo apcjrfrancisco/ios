@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('admin')
     @php
-        $random = Illuminate\Support\Str::random(10);
+        $random = Illuminate\Support\Str::random(5);
     @endphp
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -13,24 +13,25 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">Add Purchase Page </h4><br><br>
+                            <h4 class="card-title">Add Walk-in Invoice Page </h4><br><br>
 
                             <div class="row">
 
 
-                                <div class="col-md-1">
+                                <div class="col-md-2">
                                     <div class="md-3">
-                                        <label class="col-form-label">Invoice No.</label>
-                                        <input class="form-control example-date-input" type="text" readonly
-                                            value="TM - {{ $invoice_no }}" name="invoice_no" id="invoice_no">
+                                        <label for="example-text-input" class="form-label">Invoice No.</label>
+                                        <input class="form-control example-date-input" name="invoice_no" type="text"
+                                            value="{{ $invoice_no }}" id="invoice_no" readonly
+                                            style="background-color:#ddd">
                                     </div>
                                 </div> <!-- end div -->
 
                                 <div class="col-md-2">
                                     <div class="md-3">
                                         <label class="col-form-label">Date</label>
-                                        <input class="form-control example-date-input" type="date" value="{{ $date }}" name="date"
-                                            id="date">
+                                        <input class="form-control example-date-input" type="date"
+                                            value="{{ $date }}" name="date" id="date">
                                     </div>
                                 </div> <!-- end div -->
 
@@ -92,19 +93,18 @@
 
                         <div class="card-body">
 
-                            <form action="{{ route('purchase.store') }}" method="post">
+                            <form action="{{ route('invoice.store') }}" method="post">
                                 @csrf
-
                                 <table class="table-sm table-bordered" width="100%" style="border-color: #ddd">
                                     <thead>
                                         <tr class="text-center">
                                             <th>Category</th>
                                             <th>Brand</th>
                                             <th>Product Name</th>
-                                            <th>Quantity</th>
-                                            <th>Unit Price</th>
+                                            <th width="7%">Quantity</th>
+                                            <th width="10%">Unit Price</th>
                                             <th width="15%">Total Price</th>
-                                            <th>Action</th>
+                                            <th width="7%">Action</th>
                                         </tr>
                                     </thead>
 
@@ -113,8 +113,17 @@
                                     </tbody>
 
                                     <tbody>
+
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="5"> Discount </td>
+                                            <td>
+                                                <input type="text" name="discount_amount" placeholder="Discount Amount"
+                                                    id="discount_amount" class="form-control discount_amount">
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="5">Grand Total</td>
                                             <td>
                                                 <input type="text" name="estimated_amount" value="0"
                                                     id="estimated_amount" class="form-control estimated_amount" readonly
@@ -126,8 +135,51 @@
 
                                 </table> <br>
 
+                                <div class="row">
+                                    <div class="form-group col-md-3">
+                                        <label for="">Payment Status</label>
+                                        <select name="paid_status" id="paid_status" class="form-select">
+                                            <option value="" disabled>Select Status</option>
+                                            <option value="full_payment">Full Payment</option>
+                                            <option value="full_due">Full Due</option>
+                                            <option value="partial_payment">Partial Payment</option>
+                                        </select>
+                                        <br>
+                                        <input type="text" name="paid_amount" class="form-control paid_amount"
+                                            placeholder="Enter Payment" style="display: none">
+                                    </div>
+
+                                    <div class="form-group col-md-9">
+                                        <label for="">Customer Name</label>
+                                        <select name="customer_id" id="customer_id" class="form-select">
+                                            <option value="">Select Customer</option>
+                                            @foreach ($customer as $item)
+                                                <option value="{{ $item->id }}">{{ $item->customer_name }} -
+                                                    {{ $item->customer_phone }}</option>
+                                            @endforeach
+                                            <option value="0">New Customer</option>
+                                        </select>
+                                    </div>
+
+                                </div><br>
+
+                                <div class="row new_customer" style="display: none">
+                                    <div class="form-group col-md-4">
+                                        <input type="text" name="customer_name" id="customer_name"
+                                            class="form-control" placeholder="Customer Name">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <input type="text" name="customer_phone" id="customer_phone"
+                                            class="form-control" placeholder="Customer Phone">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <input type="email" name="customer_email" id="customer_email"
+                                            class="form-control" placeholder="Customer Email">
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-info" id="storeButton">Add Purchase</button>
+                                    <button type="submit" class="btn btn-info" id="storeButton">Add Invoice</button>
                                 </div>
 
                             </form>
@@ -147,7 +199,7 @@
 
         <tr class="delete_add_more_item text-center" id="delete_add_more_item">
             <input type="hidden" name="date" value="@{{date}}">
-            <input type="hidden" name="purchase_no" value="@{{purchase_no}}">
+            <input type="hidden" name="invoice_no" value="@{{invoice_no}}">
             
 
             <td>
@@ -166,7 +218,7 @@
             </td>
 
             <td>
-                <input type="number" min="1" class="form-control buying_qty text-right" name="buying_qty[]" value="">
+                <input type="number" min="1" class="form-control selling_qty text-right" name="selling_qty[]" value="">
             </td>
 
             <td>
@@ -174,7 +226,7 @@
             </td>
 
             <td>
-                <input type="text" class="form-control buying_price text-right" name="buying_price[]" value="0" readonly>
+                <input type="text" class="form-control price text-right" name="price[]" value="0" readonly>
             </td>
 
             <td>
@@ -189,7 +241,7 @@
         $(document).ready(function() {
             $(document).on("click", ".addeventmore", function() {
                 var date = $('#date').val();
-                var purchase_no = $('#purchase_no').val();
+                var invoice_no = $('#invoice_no').val();
                 var category_id = $('#category_id').val();
                 var category_name = $('#category_id').find('option:selected').text();
                 var brand_id = $('#brand_id').val();
@@ -198,13 +250,6 @@
                 var product_name = $('#product_id').find('option:selected').text();
 
                 if (date == '') {
-                    $.notify("Date is required", {
-                        globalPosition: 'top right',
-                        className: 'error'
-                    });
-                    return false;
-                }
-                if (purchase_no == '') {
                     $.notify("Date is required", {
                         globalPosition: 'top right',
                         className: 'error'
@@ -237,14 +282,14 @@
                 var template = Handlebars.compile(source);
                 var data = {
                     date: date,
-                    purchase_no: purchase_no,
-                    supplier_id: supplier_id,
+                    invoice_no: invoice_no,
                     category_id: category_id,
                     category_name: category_name,
                     brand_id: brand_id,
                     brand_name: brand_name,
                     product_id: product_id,
                     product_name: product_name
+
                 };
                 var html = template(data);
                 $('#addRow').append(html);
@@ -256,22 +301,32 @@
                 totalAmountPrice();
             });
 
-            $(document).on('keyup click', '.unit_price, .buying_qty', function() {
+            $(document).on('keyup click', '.unit_price, .selling_qty', function() {
                 var unit_price = $(this).closest("tr").find("input.unit_price").val();
-                var qty = $(this).closest("tr").find("input.buying_qty").val();
+                var qty = $(this).closest("tr").find("input.selling_qty").val();
                 var total = unit_price * qty;
-                $(this).closest("tr").find("input.buying_price").val(total);
+                $(this).closest("tr").find("input.price").val(total);
+                $('#discount_amount').trigger('keyup');
+            });
+
+            $(document).on('keyup', '#discount_amount', function() {
                 totalAmountPrice();
             });
 
             function totalAmountPrice() {
                 var sum = 0;
-                $(".buying_price").each(function() {
+                $(".price").each(function() {
                     var value = $(this).val();
                     if (!isNaN(value) && value.length != 0) {
                         sum += parseFloat(value);
                     }
                 });
+
+                var discount_amount = parseFloat($('#discount_amount').val());
+                if (!isNaN(discount_amount) && discount_amount.length != 0) {
+                    sum -= parseFloat(discount_amount);
+                }
+
                 $('#estimated_amount').val(sum);
             }
 
@@ -344,4 +399,23 @@
         });
     </script>
 
+    <script type="text/javascript">
+        $(document).on('change', '#paid_status', function() {
+            var paid_status = $(this).val();
+            if (paid_status == 'partial_payment') {
+                $('.paid_amount').show();
+            } else {
+                $('.paid_amount').hide();
+            }
+        });
+
+        $(document).on('change', '#customer_id', function() {
+            var customer_id = $(this).val();
+            if (customer_id == '0') {
+                $('.new_customer').show();
+            } else {
+                $('.new_customer').hide();
+            }
+        });
+    </script>
 @endsection
