@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\ReturnController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\DefaultController;
+use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
@@ -120,6 +121,16 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/unit/edit/{id}', 'UnitEdit')->name('unit.edit');
         Route::post('/unit/update', 'UnitUpdate')->name('unit.update');
         Route::get('/unit/delete/{id}', 'UnitDelete')->name('unit.delete');
+    });
+
+    //Expenses
+    Route::controller(ExpenseController::class)->group(function () {
+        Route::get('/expenses', 'ExpensesAll')->name('expenses');
+        Route::get('/expenses/add', 'ExpensesAdd')->name('expenses.add');
+        Route::post('/expenses/store', 'ExpensesStore')->name('expenses.store');
+        Route::get('/expenses/edit/{id}', 'ExpensesEdit')->name('expenses.edit');
+        Route::post('/expenses/update', 'ExpensesUpdate')->name('expenses.update');
+        Route::get('/expenses/delete/{id}', 'ExpensesDelete')->name('expenses.delete');
     });
 
     //Category

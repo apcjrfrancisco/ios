@@ -31,6 +31,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('expenses') }}">
+                <i class="far fa-clipboard menu-icon"></i>
+                <span class="menu-title">Manage Expenses</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('category') }}">
                 <i class="fas fa-sitemap menu-icon"></i>
                 <span class="menu-title">Manage Categories</span>

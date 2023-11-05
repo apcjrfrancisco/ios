@@ -21,7 +21,7 @@ class InvoiceController extends Controller
 {
     public function InvoiceAll()
     {
-        $allData = Invoice::orderBy('date', 'desc')->orderBy('id', 'desc')->where('status', '1')->get();
+        $allData = Invoice::orderBy('date', 'desc')->orderBy('id', 'desc')->get();
         return view('backend.invoice.invoice_all', compact('allData'));
     }
 
@@ -198,6 +198,6 @@ class InvoiceController extends Controller
             'message' => 'Invoice Approved!',
             'alert-type' => 'success'
         );
-        return redirect()->route('invoice.pending.list')->with($notification);
+        return redirect()->route('invoice')->with($notification);
     }
 }

@@ -49,6 +49,7 @@
                                         <th>Date</th>
                                         <th>Invoice No.</th>
                                         <th>Customer Name</th>
+                                        <th>Status</th>
                                         <th width="10%">Amount</th>
 
                                 </thead>
@@ -59,8 +60,13 @@
                                         <tr class="text-center">
                                             <td> {{ $key + 1 }} </td>
                                             <td> {{ $item->date }} </td>
-                                            <td> TM-INV-{{ $item->invoice_no }} </td>
+                                            <td> #{{ $item->invoice_no }} </td>
                                             <td> {{ $item['payments']['customer']['customer_name'] }} </td>
+                                            @if ($item->status == '0')
+                                                <td> <span class="btn btn-warning">Pending</span> </td>
+                                            @elseif ($item->status == '1')
+                                                <td> <span class="btn btn-success">Approved</span> </td>
+                                            @endif
                                             <td> <span style="font-family: DejaVu Sans; sans-serif;">&#8369;</span>
                                                 {{ Str::currency($item['payments']['total_amount']) }} </td>
 

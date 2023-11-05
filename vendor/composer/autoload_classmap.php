@@ -70,6 +70,7 @@ return array(
     'App\\Models\\Cart' => $baseDir . '/app/Models/Cart.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Customer' => $baseDir . '/app/Models/Customer.php',
+    'App\\Models\\Expense' => $baseDir . '/app/Models/Expense.php',
     'App\\Models\\Footer' => $baseDir . '/app/Models/Footer.php',
     'App\\Models\\Invoice' => $baseDir . '/app/Models/Invoice.php',
     'App\\Models\\InvoiceDetail' => $baseDir . '/app/Models/InvoiceDetail.php',
